@@ -1140,6 +1140,28 @@ section {
   padding: 0;
 }
 
+.card, .portfolio_card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover, .portfolio_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Hover */
+.btn-primary {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: #127bb8;
+}
+
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: 2px solid #149ddd;
+  outline-offset: 2px;
+}
+
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
@@ -1221,6 +1243,19 @@ section {
   background: #fff;
   text-align: center;
   padding: 15px;
+}
+
+.sent-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+}
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .contact .php-email-form .loading:before {
