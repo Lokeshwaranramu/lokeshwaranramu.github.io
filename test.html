@@ -172,10 +172,9 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Fira Code", "SF Pro Display", -apple-system,
-          BlinkMacSystemFont, "Courier New", monospace; /* Coding font first, then fallbacks */
+        font-family: "Fira Code", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Courier New", monospace; /* Coding font first, then fallbacks */
       }
-
+      
       body {
         background: #000000;
         color: #ffffff;
@@ -184,6 +183,7 @@
         cursor: default;
         position: relative;
       }
+      
       body *:hover,
       h1:hover,
       h2:hover,
@@ -214,7 +214,7 @@
       .footer-bottom p:hover {
         cursor: text;
       }
-
+      
       body::before {
         content: "";
         position: fixed;
@@ -222,24 +222,21 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(
-          circle,
-          rgba(0, 113, 227, 0.05),
-          transparent
-        );
+        background: radial-gradient(circle, rgba(0, 113, 227, 0.05), transparent);
         z-index: -1;
       }
-
+      
       /* Custom Cursor */
       .custom-cursor:hover {
         cursor: text !important; /* Overrides the existing custom cursor SVG */
       }
+      
       .contact input,
       .contact textarea,
       .contact button {
         font-family: "Fira Code", monospace; /* Explicitly apply to form elements */
       }
-
+      
       /* Navbar */
       nav {
         position: fixed;
@@ -256,7 +253,7 @@
         justify-content: space-between;
         align-items: center;
       }
-
+      
       .nav-toggle {
         display: none;
         font-size: 1.5rem;
@@ -264,11 +261,11 @@
         cursor: pointer;
         transition: color 0.3s ease;
       }
-
+      
       .nav-toggle:hover {
         color: #0071e3;
       }
-
+      
       .nav-menu {
         display: flex;
         justify-content: center;
@@ -277,11 +274,11 @@
         margin: 0;
         padding: 0;
       }
-
+      
       .nav-menu li {
         margin: 0 20px;
       }
-
+      
       .nav-menu li a {
         color: #f5f5f5;
         text-decoration: none;
@@ -289,18 +286,18 @@
         font-weight: 400;
         transition: color 0.3s, transform 0.3s;
       }
-
+      
       .nav-menu li a:hover {
         color: #0071e3;
         transform: scale(1.1);
       }
-
+      
       /* Mobile/Tablet View */
       @media (max-width: 768px) {
         .nav-toggle {
           display: block;
         }
-
+      
         .nav-menu {
           display: none;
           flex-direction: column;
@@ -316,22 +313,22 @@
           opacity: 0;
           transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
+      
         .nav-menu.active {
           display: flex;
           transform: translateY(0);
           opacity: 1;
         }
-
+      
         .nav-menu li {
           margin: 15px 0;
         }
-
+      
         .nav-menu li a {
           font-size: 1.2rem;
         }
       }
-
+      
       /* Header Section */
       .header {
         padding: clamp(80px, 15vw, 100px) 20px;
@@ -340,7 +337,7 @@
         position: relative;
         overflow: hidden;
       }
-
+      
       .header::before {
         content: "";
         position: absolute;
@@ -348,14 +345,10 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(
-          circle,
-          rgba(0, 113, 227, 0.1),
-          transparent
-        );
+        background: radial-gradient(circle, rgba(0, 113, 227, 0.1), transparent);
         opacity: 0.5;
       }
-
+      
       .header .profile-photo {
         width: clamp(100px, 20vw, 150px);
         height: clamp(100px, 20vw, 150px);
@@ -367,7 +360,7 @@
         z-index: 1;
         overflow: hidden;
       }
-
+      
       .header .profile-photo img {
         width: 100%;
         height: 100%;
@@ -375,7 +368,7 @@
         border-radius: 50%;
         border: 3px solid #ffffff;
       }
-
+      
       .header h1 {
         font-size: clamp(2.5rem, 8vw, 4rem);
         font-weight: 700;
@@ -384,7 +377,7 @@
         opacity: 0;
         text-shadow: 0 2px 10px rgba(0, 113, 227, 0.3);
       }
-
+      
       .header .subtitle {
         font-size: clamp(1rem, 3vw, 1.5rem);
         color: #ffffff;
@@ -392,7 +385,7 @@
         animation: fadeInUp 1.2s ease-out 0.8s forwards;
         opacity: 0;
       }
-
+      
       /* General Section Styling */
       section {
         padding: clamp(60px, 15vw, 120px) 20px;
@@ -400,7 +393,7 @@
         position: relative;
         overflow: hidden;
       }
-
+      
       section h2 {
         font-size: clamp(2rem, 6vw, 3rem);
         font-weight: 600;
@@ -411,7 +404,7 @@
         position: relative;
         text-shadow: 0 2px 10px rgba(0, 113, 227, 0.3);
       }
-
+      
       section h2::after {
         content: "";
         position: absolute;
@@ -422,12 +415,12 @@
         left: 50%;
         transform: translateX(-50%);
       }
-
+      
       /* About Section */
       .about {
         background: #1d1d1f;
       }
-
+      
       .about p {
         max-width: 80%;
         margin: 0 auto;
@@ -436,21 +429,17 @@
         opacity: 0;
         transition: opacity 0.5s ease, transform 0.5s ease;
         transform: translateY(40px);
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       /* Details Section */
       .details {
         background: #000000;
       }
-
+      
       .details-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -458,15 +447,11 @@
         max-width: 80%;
         margin: 0 auto;
       }
-
+      
       .detail-item {
-        width: 350px;
+        width: 430px;
         padding: 20px;
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         border-radius: 15px;
         font-size: clamp(0.9rem, 2vw, 1.1rem);
         color: #86868b;
@@ -478,22 +463,22 @@
         gap: 14px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .detail-item i {
         color: #0071e3;
         font-size: 1.2rem;
         transition: transform 0.3s ease;
       }
-
+      
       .detail-item:hover i {
         transform: scale(1.2);
       }
-
+      
       /* Certifications Section */
       .certifications {
         background: #1d1d1f;
       }
-
+      
       .certifications-grid {
         display: flex;
         flex-wrap: wrap;
@@ -502,14 +487,10 @@
         margin: 0 auto;
         justify-content: center;
       }
-
+      
       .cert-card {
         flex: 0 1 220px;
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 25px;
         border-radius: 15px;
         position: relative;
@@ -520,11 +501,11 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         height: 200px;
       }
-
+      
       .cert-card:hover {
         transform: rotateY(180deg);
       }
-
+      
       .cert-card .front,
       .cert-card .back {
         position: absolute;
@@ -538,26 +519,26 @@
         top: 0;
         left: 0;
       }
-
+      
       .cert-card .front img {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain; /* Ensures image fits without distortion */
         border-radius: 10px;
       }
-
+      
       .cert-card .back {
         transform: rotateY(180deg);
         background: linear-gradient(135deg, #0071e3, #005bb5);
         color: #ffffff;
         font-size: clamp(1rem, 2vw, 1.2rem);
       }
-
+      
       .cert-card .back i {
         font-size: 2rem;
         animation: pulse 1.5s infinite;
       }
-
+      
       /* Loading Overlay */
       .loading-overlay {
         position: fixed;
@@ -574,70 +555,34 @@
         visibility: hidden;
         transition: opacity 0.3s ease;
       }
-
+      
       .loading-overlay.active {
         opacity: 1;
         visibility: visible;
       }
-
+      
       /* Salesforce Loader */
       .salesforce-loader {
         width: 80px;
         height: 80px;
         position: relative;
       }
-
+      
       .salesforce-loader .cloud {
         width: 100%;
         height: 100%;
         animation: float 2s ease-in-out infinite; /* Cloud floats up and down */
       }
-
+      
       .salesforce-loader .pulse {
         animation: pulse 1.5s ease-in-out infinite; /* White dot pulses */
       }
-
-      /* Animations */
-      @keyframes float {
-        0% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.5);
-          opacity: 0.7;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      /* Ensure it doesn’t interfere with other elements */
-      .header,
-      .contact,
-      .footer {
-        position: relative;
-        z-index: 1;
-      }
-
+      
       /* Skills Section */
       .skills {
         background: #000000;
       }
-
+      
       .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -645,13 +590,9 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-
+      
       .skill-card {
-        background: linear-gradient(
-          135deg,
-          rgba(29, 29, 31, 0.3),
-          rgba(0, 113, 227, 0.1)
-        );
+        background: linear-gradient(135deg, rgba(29, 29, 31, 0.3), rgba(0, 113, 227, 0.1));
         padding: 25px;
         border-radius: 15px;
         font-size: clamp(0.9rem, 2vw, 1.1rem);
@@ -666,7 +607,7 @@
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .skill-card::before {
         content: "";
         position: absolute;
@@ -674,155 +615,106 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 113, 227, 0.2),
-          transparent
-        );
+        background: linear-gradient(135deg, rgba(0, 113, 227, 0.2), transparent);
         opacity: 0;
         transition: opacity 0.4s ease;
       }
-
+      
       .skill-card:hover::before {
         opacity: 1;
       }
-
+      
       .skill-card:hover {
         transform: rotate(5deg);
         box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
       }
-
+      
       .skill-card i {
         color: #0071e3;
         font-size: 1.2rem;
         animation: pulse 2s infinite;
       }
-
+      
       /* Experience Section */
       .experience {
         background: #1d1d1f;
       }
-
+      
       .timeline {
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px 0;
         display: grid;
-        grid-template-columns: repeat(
-          2,
-          1fr
-        ); /* Two columns for large screens */
+        grid-template-columns: repeat(2, 1fr); /* Two columns for large screens */
         gap: 40px;
         position: relative;
       }
-
+      
       .exp-card {
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 20px;
         border-radius: 15px;
         position: relative;
         opacity: 0; /* Start invisible */
-        transform: translateY(40px); /* Start slightly below */
         transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.4s ease; /* Smooth transition */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         text-align: left;
       }
-
+      
       /* Differentiate animation based on column */
       .exp-card:nth-child(odd) {
         transform: translateX(-100px) translateY(40px); /* Left column slides in from left */
       }
-
+      
       .exp-card:nth-child(even) {
         transform: translateX(100px) translateY(40px); /* Right column slides in from right */
       }
-
+      
       /* When visible, animate to final position */
       .exp-card.visible {
         opacity: 1;
         transform: translateX(0) translateY(0); /* Slide and fade into place */
       }
-
+      
       .exp-card:hover {
         transform: translateY(-10px); /* Keep hover effect */
         box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
       }
-
+      
       .exp-card h3 {
         font-size: clamp(1.1rem, 2.5vw, 1.3rem);
         color: #ffffff;
         margin-bottom: 10px;
       }
-
+      
       .exp-card .date {
         font-size: clamp(0.9rem, 2vw, 1rem);
         color: #0071e3;
         margin-bottom: 10px;
       }
-
+      
       .exp-card .company {
         font-size: clamp(0.9rem, 2vw, 1rem);
         color: #86868b;
         margin-bottom: 10px;
       }
-
+      
       .exp-card ul {
         list-style: none;
         font-size: clamp(0.8rem, 1.8vw, 0.9rem);
         color: #f5f5f5;
         padding-left: 0;
       }
-
+      
       .exp-card ul li {
         margin: 5px 0;
       }
-
-      /* Mobile View (1 column) */
-      @media (max-width: 768px) {
-        .timeline {
-          grid-template-columns: 1fr; /* Single column for mobile */
-          gap: 20px;
-        }
-
-        .exp-card {
-          margin: 0;
-          width: 100%;
-        }
-
-        /* Reset animation for mobile to a simpler fade-up */
-        .exp-card:nth-child(odd),
-        .exp-card:nth-child(even) {
-          transform: translateY(40px); /* All cards slide up on mobile */
-        }
-
-        .exp-card.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Mobile View (1 column) */
-      @media (max-width: 768px) {
-        .timeline {
-          grid-template-columns: 1fr; /* Single column for mobile */
-          gap: 20px; /* Reduced gap for tighter spacing */
-        }
-
-        .exp-card {
-          margin: 0; /* Remove any leftover margins */
-          width: 100%; /* Full width on mobile */
-        }
-      }
-
+      
       /* Projects Section */
       .projects {
         background: #000000;
       }
-
+      
       .project-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -830,13 +722,9 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-
+      
       .project-card {
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 30px;
         border-radius: 20px;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -846,7 +734,7 @@
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .project-card::before {
         content: "";
         position: absolute;
@@ -854,19 +742,15 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 113, 227, 0.2),
-          transparent
-        );
+        background: linear-gradient(135deg, rgba(0, 113, 227, 0.2), transparent);
         opacity: 0;
         transition: opacity 0.4s ease;
       }
-
+      
       .project-card:hover::before {
         opacity: 1;
       }
-
+      
       .project-card h3 {
         color: #ffffff;
         font-weight: 500;
@@ -877,21 +761,21 @@
         align-items: center;
         gap: 10px;
       }
-
+      
       .project-card h3 i {
         color: #0071e3;
         font-size: 1.2rem;
         transition: transform 0.4s ease;
       }
-
+      
       .project-card h3:hover {
         color: #0071e3;
       }
-
+      
       .project-card h3:hover i {
         transform: scale(1.2);
       }
-
+      
       .project-card p {
         color: #86868b;
         font-size: clamp(0.9rem, 2vw, 1rem);
@@ -899,12 +783,12 @@
         transform: translateY(20px);
         transition: opacity 0.5s ease, transform 0.5s ease;
       }
-
+      
       .project-card:hover h3 + p {
         opacity: 1;
         transform: translateY(0);
       }
-
+      
       .project-card.merge-orgs:hover {
         transform: scale(1.05) rotate(2deg);
         box-shadow: 0 20px 40px rgba(0, 113, 227, 0.3);
@@ -953,12 +837,12 @@
         transform: translateX(10px) rotate(1deg);
         box-shadow: 0 20px 40px rgba(0, 113, 227, 0.3);
       }
-
+      
       /* Resume Section */
       .resume {
         background: #1d1d1f;
       }
-
+      
       .resume-btn {
         padding: 12px 30px;
         background: linear-gradient(135deg, #0071e3, #005bb5);
@@ -975,21 +859,21 @@
         gap: 10px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .resume-btn i {
         font-size: 1.2rem;
       }
-
+      
       .resume-btn:hover {
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
       }
-
+      
       /* Courses Section */
       .courses {
         background: #000000;
       }
-
+      
       .courses-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -997,13 +881,9 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-
+      
       .course-card {
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 25px;
         border-radius: 15px;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -1015,27 +895,27 @@
         gap: 10px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .course-card i {
         color: #0071e3;
         font-size: 1.2rem;
         transition: transform 0.3s ease;
       }
-
+      
       .course-card:hover {
         transform: scale(1.05);
         box-shadow: 0 15px 30px rgba(0, 113, 227, 0.3);
       }
-
+      
       .course-card:hover i {
         transform: scale(1.2);
       }
-
+      
       /* Contact Section */
       .contact {
         background: #1d1d1f;
       }
-
+      
       .contact form {
         max-width: 600px;
         margin: 0 auto 40px;
@@ -1044,16 +924,12 @@
         gap: 20px;
         opacity: 0;
         transform: translateY(40px);
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .contact input,
       .contact textarea {
         padding: 15px;
@@ -1064,14 +940,14 @@
         font-size: clamp(0.9rem, 2vw, 1rem);
         transition: border-color 0.3s, box-shadow 0.3s;
       }
-
+      
       .contact input:focus,
       .contact textarea:focus {
         border-color: #0071e3;
         outline: none;
         box-shadow: 0 0 10px rgba(0, 113, 227, 0.3);
       }
-
+      
       .contact button {
         padding: 12px;
         background: linear-gradient(135deg, #0071e3, #005bb5);
@@ -1087,16 +963,16 @@
         gap: 10px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
+      
       .contact button i {
         font-size: 1.2rem;
       }
-
+      
       .contact button:hover {
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
       }
-
+      
       .map {
         max-width: 800px;
         margin: 0 auto;
@@ -1106,13 +982,176 @@
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
-
-      @media (max-width: 768px) {
-        .map {
-          height: 200px;
-        }
+      
+      /* AppExchange Solutions Section */
+      .appexchange {
+        background: #1d1d1f;
+        padding: clamp(60px, 15vw, 120px) 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
       }
-
+      
+      .appexchange-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .solution-card {
+        background: linear-gradient(135deg, rgba(245, 245, 245, 0.05), rgba(0, 113, 227, 0.05));
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        opacity: 0;
+        transform: translateY(40px);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      
+      .solution-card img {
+        max-width: 100%;
+        height: auto;
+        max-height: 100px; /* Constrain height to prevent overflow */
+        object-fit: contain; /* Scale proportionally */
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .solution-card h3 {
+        color: #ffffff;
+        font-weight: 500;
+        margin-bottom: 10px;
+        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .solution-card h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+      
+      .solution-card h3 i {
+        color: #0071e3;
+        font-size: 1.2rem;
+        transition: transform 0.4s ease;
+      }
+      
+      .solution-card h3:hover {
+        color: #0071e3;
+      }
+      
+      .solution-card h3:hover i {
+        transform: scale(1.2);
+      }
+      
+      .solution-card p {
+        color: #86868b;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      
+      .solution-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 113, 227, 0.3);
+      }
+      
+      .solution-card:hover h3 + p {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Footer Section */
+      .footer {
+        background: linear-gradient(135deg, #1d1d1f, #000000);
+        padding: 60px 20px 20px;
+        color: #f5f5f5;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 40px;
+        padding-bottom: 40px;
+      }
+      
+      .footer-brand h3 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        color: #ffffff;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 10px rgba(0, 113, 227, 0.3);
+      }
+      
+      .footer-brand p {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        color: #ffffff;
+        font-weight: 300;
+      }
+      
+      .footer-links h4 {
+        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        color: #ffffff;
+        margin-bottom: 15px;
+      }
+      
+      .footer-links ul {
+        list-style: none;
+      }
+      
+      .footer-links ul li {
+        margin: 10px 0;
+      }
+      
+      .footer-links ul li a {
+        color: #f5f5f5;
+        text-decoration: none;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      
+      .footer-links ul li a:hover {
+        color: #0071e3;
+        transform: translateX(5px);
+      }
+      
+      .footer-social h4 {
+        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        color: #ffffff;
+        margin-bottom: 15px;
+      }
+      
+      .footer-social a {
+        color: #f5f5f5;
+        font-size: 1.5rem;
+        margin: 0 15px;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      
+      .footer-social a:hover {
+        color: #0071e3;
+        transform: scale(1.2);
+      }
+      
+      .footer-bottom {
+        border-top: 1px solid rgba(0, 113, 227, 0.2);
+        padding-top: 20px;
+        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+        color: #86868b;
+      }
+      
       /* Animations */
       @keyframes fadeInDown {
         from {
@@ -1124,7 +1163,7 @@
           transform: translateY(0);
         }
       }
-
+      
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -1135,7 +1174,7 @@
           transform: translateY(0);
         }
       }
-
+      
       @keyframes fadeInScale {
         from {
           opacity: 0;
@@ -1146,7 +1185,19 @@
           transform: scale(1);
         }
       }
-
+      
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      
       @keyframes pulse {
         0% {
           transform: scale(1);
@@ -1158,7 +1209,7 @@
           transform: scale(1);
         }
       }
-
+      
       /* Visible class for animation trigger */
       .visible h2,
       .visible .detail-item,
@@ -1170,196 +1221,205 @@
       .visible .map,
       .visible form,
       .visible p,
-      .visible .exp-card {
+      .visible .exp-card,
+      .visible .solution-card {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0) translateY(0); /* Ensure full reset for all animations */
       }
-
-      /* AppExchange Solutions Section */
-      .appexchange {
-        background: #1d1d1f;
-        padding: clamp(60px, 15vw, 120px) 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .appexchange-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .solution-card {
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 245, 0.05),
-          rgba(0, 113, 227, 0.05)
-        );
-        padding: 20px;
-        border-radius: 15px;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        opacity: 0;
-        transform: translateY(40px);
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .solution-card img {
-        max-width: 100%;
-        height: auto;
-        max-height: 100px; /* Constrain height to prevent overflow */
-        object-fit: contain; /* Scale proportionally */
-        border-radius: 10px;
-        margin-bottom: 15px;
-      }
-
-      .solution-card h3 {
-        color: #ffffff;
-        font-weight: 500;
-        margin-bottom: 10px;
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .solution-card h3 a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .solution-card h3 i {
-        color: #0071e3;
-        font-size: 1.2rem;
-        transition: transform 0.4s ease;
-      }
-
-      .solution-card h3:hover {
-        color: #0071e3;
-      }
-
-      .solution-card h3:hover i {
-        transform: scale(1.2);
-      }
-
-      .solution-card p {
-        color: #86868b;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-      }
-
-      .solution-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 113, 227, 0.3);
-      }
-
-      .solution-card:hover h3 + p {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Ensure animation triggers */
-      .appexchange.visible .solution-card {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Footer Section */
-      .footer {
-        background: linear-gradient(135deg, #1d1d1f, #000000);
-        padding: 60px 20px 20px;
-        color: #f5f5f5;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 40px;
-        padding-bottom: 40px;
-      }
-
-      .footer-brand h3 {
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        color: #ffffff;
-        margin-bottom: 10px;
-        text-shadow: 0 2px 10px rgba(0, 113, 227, 0.3);
-      }
-
-      .footer-brand p {
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        color: #ffffff;
-        font-weight: 300;
-      }
-
-      .footer-links h4 {
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        color: #ffffff;
-        margin-bottom: 15px;
-      }
-
-      .footer-links ul {
-        list-style: none;
-      }
-
-      .footer-links ul li {
-        margin: 10px 0;
-      }
-
-      .footer-links ul li a {
-        color: #f5f5f5;
-        text-decoration: none;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        transition: color 0.3s ease, transform 0.3s ease;
-      }
-
-      .footer-links ul li a:hover {
-        color: #0071e3;
-        transform: translateX(5px);
-      }
-
-      .footer-social h4 {
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        color: #ffffff;
-        margin-bottom: 15px;
-      }
-
-      .footer-social a {
-        color: #f5f5f5;
-        font-size: 1.5rem;
-        margin: 0 15px;
-        transition: color 0.3s ease, transform 0.3s ease;
-      }
-
-      .footer-social a:hover {
-        color: #0071e3;
-        transform: scale(1.2);
-      }
-
-      .footer-bottom {
-        border-top: 1px solid rgba(0, 113, 227, 0.2);
-        padding-top: 20px;
-        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-        color: #86868b;
-      }
-
+      
+      /* Mobile View Adjustments */
       @media (max-width: 768px) {
+        /* Experience */
+        .timeline {
+          grid-template-columns: 1fr; /* Single column for mobile */
+          gap: 20px;
+        }
+      
+        .exp-card {
+          margin: 0;
+          width: 100%;
+        }
+      
+        .exp-card:nth-child(odd) {
+          transform: translateX(-100px) translateY(40px); /* Slide from left */
+        }
+      
+        .exp-card:nth-child(even) {
+          transform: translateX(100px) translateY(40px); /* Slide from right */
+        }
+      
+        .exp-card.visible {
+          opacity: 1;
+          transform: translateX(0) translateY(0);
+        }
+      
+        /* Certifications */
+        .certifications-grid {
+          gap: 20px;
+        }
+      
+        .cert-card {
+          transform: translateY(40px);
+        }
+      
+        .cert-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .cert-card:hover {
+          transform: rotateY(180deg);
+        }
+      
+        /* Skills */
+        .skills-grid {
+          gap: 20px;
+        }
+      
+        .skill-card {
+          transform: translateY(40px);
+        }
+      
+        .skill-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .skill-card:hover {
+          transform: rotate(5deg);
+        }
+      
+        /* Projects */
+        .project-grid {
+          gap: 20px;
+        }
+      
+        .project-card {
+          transform: translateY(40px);
+        }
+      
+        .project-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .project-card.merge-orgs:hover {
+          transform: scale(1.05) rotate(2deg);
+        }
+        .project-card.demerge-orgs:hover {
+          transform: scale(1.05) rotate(-2deg);
+        }
+        .project-card.lwc-ui:hover {
+          transform: translateY(-10px);
+        }
+        .project-card.sla:hover {
+          transform: scale(1.05);
+        }
+        .project-card.einstein:hover {
+          transform: translateX(10px);
+        }
+        .project-card.loyalty:hover {
+          transform: translateX(-10px);
+        }
+        .project-card.braze:hover {
+          transform: scale(1.05) rotate(1deg);
+        }
+        .project-card.storage:hover {
+          transform: translateY(-10px) rotate(-1deg);
+        }
+        .project-card.bulk-email:hover {
+          transform: scale(1.05) rotate(2deg);
+        }
+        .project-card.user-access:hover {
+          transform: translateY(-10px);
+        }
+        .project-card.mdm:hover {
+          transform: scale(1.05);
+        }
+        .project-card.encryption:hover {
+          transform: translateX(10px) rotate(1deg);
+        }
+      
+        /* AppExchange Solutions */
+        .appexchange-grid {
+          gap: 20px;
+        }
+      
+        .solution-card {
+          transform: translateY(40px);
+        }
+      
+        .solution-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .solution-card:hover {
+          transform: translateY(-10px);
+        }
+      
+        /* Resume */
+        .resume-btn {
+          transform: translateY(40px);
+        }
+      
+        .resume-btn.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .resume-btn:hover {
+          transform: scale(1.05);
+        }
+      
+        /* Courses */
+        .courses-grid {
+          gap: 20px;
+        }
+      
+        .course-card {
+          transform: translateY(40px);
+        }
+      
+        .course-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .course-card:hover {
+          transform: scale(1.05);
+        }
+      
+        /* Contact */
+        .contact form {
+          transform: translateY(40px);
+        }
+      
+        .contact form.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        .contact button:hover {
+          transform: scale(1.05);
+        }
+      
+        .map {
+          transform: translateY(40px);
+          height: 200px;
+        }
+      
+        .map.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      
+        /* Footer */
         .footer-content {
           grid-template-columns: 1fr;
           text-align: center;
         }
-
+      
         .footer-social a {
           margin: 10px;
         }
@@ -1405,7 +1465,7 @@
       <h2>About Me</h2>
       <p>
         Experienced Salesforce Developer, Data Architect, and Service Cloud
-        Consultant with over 6 years of expertise in designing and developing
+        Consultant with over 7 years of expertise in designing and developing
         Salesforce solutions, including LWC, Apex, Aura, triggers, flows, and
         process builders. Skilled in delivering innovative business solutions,
         merging/de-merging Salesforce orgs, integration, data migration,
@@ -1420,7 +1480,7 @@
       <h2>Details</h2>
       <div class="details-grid">
         <div class="detail-item">
-          <i class="fas fa-user-graduate"></i> Bachelor of Information
+          <i class="fas fa-user-graduate"></i>Bachelor of Information
           Technology
         </div>
         <div class="detail-item">
@@ -1448,17 +1508,17 @@
           <div class="company">Country Road Group, Melbourne, Australia</div>
           <ul>
             <li>
-              Collaborated with stakeholders to prioritize requirements and
+              - Collaborated with stakeholders to prioritize requirements and
               manage project timelines.
             </li>
             <li>
-              Resolved Salesforce issues (data quality, errors, performance).
+              - Resolved Salesforce issues (data quality, errors, performance).
             </li>
-            <li>Kept up with Salesforce best practices and emerging tech.</li>
-            <li>Managed integrations with external vendors.</li>
-            <li>Delivered multiple projects on time and within budget.</li>
+            <li>- Kept up with Salesforce best practices and emerging tech.</li>
+            <li>- Managed integrations with external vendors.</li>
+            <li>- Delivered multiple projects on time and within budget.</li>
             <li>
-              Contributed to de-merging Salesforce orgs with data analysis and
+              - Contributed to de-merging Salesforce orgs with data analysis and
               custom solutions.
             </li>
           </ul>
@@ -1469,18 +1529,18 @@
           <div class="company">Webcentral Group, Melbourne, Australia</div>
           <ul>
             <li>
-              Developed custom workflows, VF pages, Apex, and SOQL queries.
+              - Developed custom workflows, VF pages, Apex, and SOQL queries.
             </li>
             <li>
-              Provided technical support and troubleshooting for
+              - Provided technical support and troubleshooting for
               Sales/Service/Community Clouds.
             </li>
-            <li>Reviewed test protocols for application testing.</li>
+            <li>- Reviewed test protocols for application testing.</li>
             <li>
-              Improved customer processes using Salesforce best practices.
+              - Improved customer processes using Salesforce best practices.
             </li>
             <li>
-              Merged Service and Sales Cloud orgs with cross-functional
+              - Merged Service and Sales Cloud orgs with cross-functional
               collaboration.
             </li>
           </ul>
@@ -1490,11 +1550,11 @@
           <div class="date">October 2020 - November 2021</div>
           <div class="company">Salesforce, Hyderabad, India</div>
           <ul>
-            <li>Built custom workflows, VF pages, Apex, and SOQL queries.</li>
-            <li>Supported bug fixes and enhancements across clouds.</li>
-            <li>Reviewed test protocols for user acceptance.</li>
-            <li>Enhanced customer processes and productivity.</li>
-            <li>Improved Salesforce communities for clients.</li>
+            <li>- Built custom workflows, VF pages, Apex, and SOQL queries.</li>
+            <li>- Supported bug fixes and enhancements across clouds.</li>
+            <li>- Reviewed test protocols for user acceptance.</li>
+            <li>- Enhanced customer processes and productivity.</li>
+            <li>- Improved Salesforce communities for clients.</li>
           </ul>
         </div>
         <div class="exp-card">
@@ -1502,13 +1562,13 @@
           <div class="date">October 2017 - September 2020</div>
           <div class="company">ISSQUARED INC, Hyderabad, India</div>
           <ul>
-            <li>Coded user provisioning with Java, ISIM, and TDI.</li>
-            <li>Integrated Salesforce with internal systems.</li>
+            <li>- Coded user provisioning with Java, ISIM, and TDI.</li>
+            <li>- Integrated Salesforce with internal systems.</li>
             <li>
-              Developed connectors and web pages with JavaScript, Apex, and VF.
+              - Developed connectors and web pages with JavaScript, Apex, and VF.
             </li>
-            <li>Performed unit and functional testing with HP ALM.</li>
-            <li>Reported integration issues and recommendations.</li>
+            <li>- Performed unit and functional testing with HP ALM.</li>
+            <li>- Reported integration issues and recommendations.</li>
           </ul>
         </div>
         <div class="exp-card">
@@ -1516,13 +1576,13 @@
           <div class="date">July 2017 - October 2017</div>
           <div class="company">Auzmor Technologies, Chennai, India</div>
           <ul>
-            <li>Worked on back-end connectivity with Vert.x, JWT, and Java.</li>
+            <li>- Worked on back-end connectivity with Vert.x, JWT, and Java.</li>
             <li>
-              Coordinated with front-end team using React Js and Ant Design.
+              - Coordinated with front-end team using React Js and Ant Design.
             </li>
-            <li>Hosted ATS on AWS EC2.</li>
-            <li>Tested and deployed applications.</li>
-            <li>Collaborated across the SDLC.</li>
+            <li>- Hosted ATS on AWS EC2.</li>
+            <li>- Tested and deployed applications.</li>
+            <li>- Collaborated across the SDLC.</li>
           </ul>
         </div>
       </div>
@@ -2022,6 +2082,19 @@
       document.querySelectorAll("section").forEach((section) => {
         observer.observe(section);
       });
+      // Observe individual items within sections
+document.querySelectorAll(".exp-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".cert-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".skill-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".project-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".solution-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".course-card").forEach((card) => observer.observe(card));
+document.querySelectorAll(".detail-item").forEach((item) => observer.observe(item));
+document.querySelectorAll(".resume-btn").forEach((btn) => observer.observe(btn));
+document.querySelectorAll(".contact form").forEach((form) => observer.observe(form));
+document.querySelectorAll(".map").forEach((map) => observer.observe(map));
+document.querySelectorAll("section h2").forEach((h2) => observer.observe(h2));
+document.querySelectorAll(".about p").forEach((p) => observer.observe(p));
     </script>
     <script
       type="text/javascript"
