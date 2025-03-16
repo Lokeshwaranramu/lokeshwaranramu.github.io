@@ -31,6 +31,10 @@
     <!-- Font Awesome CDN for Icons -->
     <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous"
@@ -168,8 +172,8 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
-          sans-serif;
+        font-family: "Fira Code", "SF Pro Display", -apple-system,
+          BlinkMacSystemFont, "Courier New", monospace; /* Coding font first, then fallbacks */
       }
 
       body {
@@ -179,6 +183,36 @@
         overflow-x: hidden;
         cursor: default;
         position: relative;
+      }
+      body *:hover,
+      h1:hover,
+      h2:hover,
+      h3:hover,
+      p:hover,
+      li:hover,
+      a:hover,
+      .subtitle:hover,
+      .detail-item:hover,
+      .exp-card h3:hover,
+      .exp-card .date:hover,
+      .exp-card .company:hover,
+      .exp-card ul li:hover,
+      .cert-card .back:hover,
+      .skill-card:hover,
+      .project-card h3:hover,
+      .project-card p:hover,
+      .solution-card h3:hover,
+      .solution-card p:hover,
+      .resume-btn:hover,
+      .course-card:hover,
+      .contact form input:hover,
+      .contact form textarea:hover,
+      .contact button:hover,
+      .footer-brand p:hover,
+      .footer-links ul li a:hover,
+      .footer-social a:hover,
+      .footer-bottom p:hover {
+        cursor: text;
       }
 
       body::before {
@@ -198,8 +232,12 @@
 
       /* Custom Cursor */
       .custom-cursor:hover {
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230071E3" stroke-width="2"><path d="M3 3l18 18M3 21l18-18"/></svg>'),
-          auto;
+        cursor: text !important; /* Overrides the existing custom cursor SVG */
+      }
+      .contact input,
+      .contact textarea,
+      .contact button {
+        font-family: "Fira Code", monospace; /* Explicitly apply to form elements */
       }
 
       /* Navbar */
@@ -296,7 +334,7 @@
 
       /* Header Section */
       .header {
-        padding: clamp(60px, 15vw, 100px) 20px;
+        padding: clamp(80px, 15vw, 100px) 20px;
         text-align: center;
         background: linear-gradient(135deg, #000000, #1d1d1f);
         position: relative;
@@ -391,7 +429,7 @@
       }
 
       .about p {
-        max-width: 800px;
+        max-width: 80%;
         margin: 0 auto;
         font-size: clamp(1rem, 2.5vw, 1.3rem);
         color: #f5f5f5;
@@ -416,12 +454,13 @@
       .details-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 25px;
-        max-width: 1000px;
+        column-gap: 150px;
+        max-width: 80%;
         margin: 0 auto;
       }
 
       .detail-item {
+        width: 350px;
         padding: 20px;
         background: linear-gradient(
           135deg,
@@ -436,7 +475,7 @@
         transform: translateY(40px);
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 14px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
 
@@ -456,14 +495,16 @@
       }
 
       .certifications-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
         gap: 30px;
         max-width: 1200px;
         margin: 0 auto;
+        justify-content: center;
       }
 
       .cert-card {
+        flex: 0 1 220px;
         background: linear-gradient(
           135deg,
           rgba(245, 245, 245, 0.05),
@@ -477,7 +518,7 @@
         opacity: 0;
         transform: translateY(40px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        height: 200px; /* Fixed height for consistency */
+        height: 200px;
       }
 
       .cert-card:hover {
@@ -524,12 +565,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(
-          0,
-          0,
-          0,
-          0.8
-        ); /* Dark semi-transparent background like Apple */
+        background: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
         z-index: 2000; /* Above all other content */
         display: flex;
         justify-content: center;
@@ -544,22 +580,48 @@
         visibility: visible;
       }
 
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid #ccc; /* Light gray border */
-        border-top: 4px solid #0071e3; /* Apple-like blue */
-        border-radius: 50%;
-        animation: spin 1s linear infinite; /* Smooth spinning animation */
+      /* Salesforce Loader */
+      .salesforce-loader {
+        width: 80px;
+        height: 80px;
+        position: relative;
       }
 
-      /* Keyframes for Spinner Animation */
-      @keyframes spin {
+      .salesforce-loader .cloud {
+        width: 100%;
+        height: 100%;
+        animation: float 2s ease-in-out infinite; /* Cloud floats up and down */
+      }
+
+      .salesforce-loader .pulse {
+        animation: pulse 1.5s ease-in-out infinite; /* White dot pulses */
+      }
+
+      /* Animations */
+      @keyframes float {
         0% {
-          transform: rotate(0deg);
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
         }
         100% {
-          transform: rotate(360deg);
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
         }
       }
 
@@ -642,20 +704,16 @@
       }
 
       .timeline {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
-        position: relative;
         padding: 20px 0;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 20px;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(to bottom, #0071e3, #005bb5);
+        display: grid;
+        grid-template-columns: repeat(
+          2,
+          1fr
+        ); /* Two columns for large screens */
+        gap: 40px;
+        position: relative;
       }
 
       .exp-card {
@@ -666,29 +724,31 @@
         );
         padding: 20px;
         border-radius: 15px;
-        margin: 20px 0 20px 40px;
         position: relative;
-        width: calc(100% - 60px);
-        opacity: 0;
-        transform: translateY(40px);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        opacity: 0; /* Start invisible */
+        transform: translateY(40px); /* Start slightly below */
+        transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.4s ease; /* Smooth transition */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         text-align: left;
       }
 
-      .exp-card::after {
-        content: "";
-        position: absolute;
-        top: 20px;
-        left: -15px;
-        width: 10px;
-        height: 10px;
-        background: #0071e3;
-        border-radius: 50%;
+      /* Differentiate animation based on column */
+      .exp-card:nth-child(odd) {
+        transform: translateX(-100px) translateY(40px); /* Left column slides in from left */
+      }
+
+      .exp-card:nth-child(even) {
+        transform: translateX(100px) translateY(40px); /* Right column slides in from right */
+      }
+
+      /* When visible, animate to final position */
+      .exp-card.visible {
+        opacity: 1;
+        transform: translateX(0) translateY(0); /* Slide and fade into place */
       }
 
       .exp-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Keep hover effect */
         box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
       }
 
@@ -721,21 +781,40 @@
         margin: 5px 0;
       }
 
+      /* Mobile View (1 column) */
       @media (max-width: 768px) {
-        .timeline::before {
-          left: 20px;
+        .timeline {
+          grid-template-columns: 1fr; /* Single column for mobile */
+          gap: 20px;
         }
+
         .exp-card {
-          width: calc(100% - 60px);
-          margin: 20px 0 20px 40px;
-          left: 40px !important;
-          text-align: left;
+          margin: 0;
+          width: 100%;
         }
-        .exp-card::after {
-          left: -15px !important;
+
+        /* Reset animation for mobile to a simpler fade-up */
+        .exp-card:nth-child(odd),
+        .exp-card:nth-child(even) {
+          transform: translateY(40px); /* All cards slide up on mobile */
         }
-        .exp-card:hover {
-          width: 85%;
+
+        .exp-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile View (1 column) */
+      @media (max-width: 768px) {
+        .timeline {
+          grid-template-columns: 1fr; /* Single column for mobile */
+          gap: 20px; /* Reduced gap for tighter spacing */
+        }
+
+        .exp-card {
+          margin: 0; /* Remove any leftover margins */
+          width: 100%; /* Full width on mobile */
         }
       }
 
@@ -1220,7 +1299,7 @@
 
       .footer-brand p {
         font-size: clamp(0.9rem, 2vw, 1rem);
-        color: #0071e3;
+        color: #ffffff;
         font-weight: 300;
       }
 
@@ -1340,6 +1419,10 @@
     <section id="details" class="details">
       <h2>Details</h2>
       <div class="details-grid">
+        <div class="detail-item">
+          <i class="fas fa-user-graduate"></i> Bachelor of Information
+          Technology
+        </div>
         <div class="detail-item">
           <i class="fas fa-calendar-alt"></i> Age: 28
         </div>
@@ -1609,7 +1692,7 @@
         </div>
         <div class="project-card braze">
           <h3 class="custom-cursor">
-            <i class="fas fa-commetns-dollar"></i> Braze Integration
+            <i class="fas fa-comments-dollar"></i> Braze Integration
           </h3>
           <p>
             Integrated Braze marketing solution with Service Cloud for Country
@@ -1745,7 +1828,19 @@
 
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay">
-      <div class="spinner"></div>
+      <div class="salesforce-loader">
+        <svg
+          class="cloud"
+          viewBox="0 0 100 60"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M75 20c0-10-10-18-22-18-10 0-19 6-23 14-12 2-20 12-20 24s8 22 20 22h45c12 0 20-10 20-22s-10-20-20-20z"
+            fill="#0071e3"
+          />
+          <circle class="pulse" cx="50" cy="30" r="5" fill="#ffffff" />
+        </svg>
+      </div>
     </div>
 
     <!-- Contact Section -->
@@ -1800,7 +1895,7 @@
       </form>
       <div class="map">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d201146.67184171496!2d144.83412770000002!3d-37.8152065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1698765432100"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805196.5089893669!2d144.4926920763455!3d-37.97015412734271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC!5e0!3m2!1sen!2sau!4v1645830240744!5m2!1sen!2sau"
           width="100%"
           height="300"
           style="border: 0"
