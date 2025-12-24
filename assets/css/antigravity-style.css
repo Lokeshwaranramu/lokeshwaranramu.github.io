@@ -133,6 +133,9 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 body {
@@ -142,6 +145,8 @@ body {
   color: var(--color-text-dark);
   background: var(--color-white);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -155,6 +160,7 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
+  object-fit: contain;
 }
 
 a {
@@ -175,8 +181,18 @@ button {
    ======================================== */
 .container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+  overflow-x: hidden;
+}
+
+/* Ensure all sections are properly contained */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* ========================================
@@ -739,10 +755,11 @@ button .material-symbols-outlined {
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: var(--spacing-md);
   max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .detail-card {
@@ -1041,9 +1058,10 @@ button .material-symbols-outlined {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .skill-card {
@@ -1107,10 +1125,11 @@ button .material-symbols-outlined {
 
 .featured-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .featured-card {
@@ -1336,9 +1355,10 @@ button .material-symbols-outlined {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .project-card {
@@ -1393,9 +1413,10 @@ button .material-symbols-outlined {
 
 .solutions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .solution-card {
@@ -1460,9 +1481,10 @@ button .material-symbols-outlined {
 
 .appexchange-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .appexchange-card {
@@ -1629,8 +1651,9 @@ button .material-symbols-outlined {
 
 .cta-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
   gap: var(--spacing-md);
+  width: 100%;
 }
 
 .cta-card {
@@ -1705,10 +1728,11 @@ button .material-symbols-outlined {
 
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: var(--spacing-md);
   max-width: 1000px;
   margin: var(--spacing-lg) auto 0;
+  width: 100%;
 }
 
 .cert-badge {
@@ -1751,9 +1775,10 @@ button .material-symbols-outlined {
 
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .course-card {
@@ -1847,6 +1872,8 @@ button .material-symbols-outlined {
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
   margin-top: var(--spacing-lg);
+  width: 100%;
+  max-width: 100%;
 }
 
 .contact-info {
@@ -2679,6 +2706,72 @@ button .material-symbols-outlined {
   }
 }
 
+/* Tablets (max-width: 768px) - NEW BREAKPOINT */
+@media (max-width: 768px) {
+  :root {
+    --spacing-xl: 4rem;
+    --spacing-lg: 2.5rem;
+    --spacing-md: 1.5rem;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* Ensure all sections don't overflow */
+  section {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Hero adjustments */
+  .hero-logo-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Grid layouts - single column on tablets */
+  .skills-grid,
+  .featured-projects-grid,
+  .projects-grid,
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Details grid - ensure proper sizing */
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  /* Icon strip - smaller icons */
+  .icon {
+    font-size: 36px;
+  }
+
+  .icons-container {
+    gap: var(--spacing-sm);
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  /* Case studies */
+  .case-study-card {
+    padding: 1.5rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
 /* Mobile and Tablets (max-width: 930px) */
 @media (max-width: 930px) {
   /* Hide cursor follower on mobile */
@@ -3289,9 +3382,10 @@ button .material-symbols-outlined {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 2rem;
   margin-top: 3rem;
+  width: 100%;
 }
 
 .stat-card {
@@ -3367,6 +3461,10 @@ button .material-symbols-outlined {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 #techCanvas {
@@ -3598,8 +3696,9 @@ button .material-symbols-outlined {
 
 .arch-components {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: 1rem;
+  width: 100%;
 }
 
 .arch-component {
@@ -3848,8 +3947,9 @@ button .material-symbols-outlined {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 .result-item {
@@ -3879,6 +3979,11 @@ button .material-symbols-outlined {
   .tech-stack-canvas {
     height: auto;
     padding: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
   }
 
   .tech-node {
@@ -3886,6 +3991,7 @@ button .material-symbols-outlined {
     display: inline-flex;
     margin: 0.5rem;
     animation: none;
+    max-width: calc(50% - 1rem);
   }
 
   /* Reset absolute positioning for mobile */
@@ -3899,6 +4005,7 @@ button .material-symbols-outlined {
     top: auto;
     left: auto;
     transform: none;
+    position: relative;
   }
 
   #techCanvas {
