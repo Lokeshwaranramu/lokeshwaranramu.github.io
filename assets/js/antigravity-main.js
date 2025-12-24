@@ -596,12 +596,21 @@
     initIconStripAnimation();
     initKeyboardNavigation();
     
-    // Initialize new enhanced animations
+    // Initialize enhanced animations (batch 1)
     initScrollProgressIndicator();
     initTimelineProgressAnimation();
     initParallaxCards();
     initStaggeredEntrance();
     initInteractiveGradient();
+    
+    // Initialize enhanced animations (batch 2)
+    // initTypingAnimation(); // Disabled - static text per user request
+    initMagneticButtons();
+    initNumberCounters();
+    initFloatingBadges();
+    initPageTransitions();
+    // initSkillProgressBars(); // Disabled - removed per user request
+    initMouseTrail();
 
     console.log('✅ Portfolio initialized successfully!');
   }
@@ -1200,11 +1209,260 @@
   }
 
   /* ========================================
+     Additional Enhanced Animations (Batch 2)
+     ======================================== */
+
+  // 1. Typing Animation for Hero Tagline
+  function initTypingAnimation() {
+    const typingElement = document.querySelector('.typing-text');
+    if (!typingElement) return;
+
+    const phrases = JSON.parse(typingElement.dataset.phrases || '[]');
+    if (phrases.length === 0) return;
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typingSpeed = 2000; // Pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typingSpeed = 500; // Pause before new phrase
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    // Start typing after short delay
+    setTimeout(type, 1000);
+  }
+
+  // 2. Magnetic Button Effect
+  function initMagneticButtons() {
+    // Skip on mobile/touch devices
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      return;
+    }
+
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    
+    buttons.forEach(button => {
+      button.classList.add('magnetic-button');
+      const magneticArea = 50; // Pixels
+
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        if (distance < magneticArea + rect.width / 2) {
+          const strength = Math.min(1, (magneticArea - distance) / magneticArea);
+          const moveX = deltaX * strength * 0.3;
+          const moveY = deltaY * strength * 0.3;
+          
+          button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+          button.classList.add('magnetic-active');
+        }
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = '';
+        button.classList.remove('magnetic-active');
+      });
+    });
+  }
+
+  // 3. Scroll-Triggered Number Counter
+  function initNumberCounters() {
+    const counters = document.querySelectorAll('#yearsOfExperience, [data-counter]');
+    
+    const animateCounter = (element) => {
+      const target = parseInt(element.textContent);
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
+      
+      element.classList.add('counter-number', 'counting');
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target;
+          element.classList.remove('counting');
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, duration / steps);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+  }
+
+  // 4. Floating Badge Animations
+  function initFloatingBadges() {
+    // Add to certification badges
+    const badges = document.querySelectorAll('.certification-card, .badge-card');
+    badges.forEach(badge => {
+      badge.classList.add('floating-badge');
+    });
+  }
+
+  // 5. Smooth Page Transitions
+  function initPageTransitions() {
+    // Create transition overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition';
+    overlay.innerHTML = `
+      <div class="page-transition-content">
+        <div class="page-transition-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Trigger on internal navigation
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = link.getAttribute('href');
+        if (target && target !== '#') {
+          overlay.classList.add('active');
+          
+          setTimeout(() => {
+            overlay.classList.remove('active');
+          }, 500);
+        }
+      });
+    });
+
+    // Hide on page load
+    window.addEventListener('load', () => {
+      overlay.classList.remove('active');
+    });
+  }
+
+  // 6. Interactive Skill Progress Bars
+  function initSkillProgressBars() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    
+    // Define skill levels (you can customize these)
+    const skillLevels = {
+      'Agentforce': 90,
+      'OmniStudio': 85,
+      'Salesforce LWC': 95,
+      'Apex': 95,
+      'SOQL': 90,
+      'Salesforce Flows': 90,
+      'Python': 85,
+      'JavaScript': 90,
+      'SQL': 85,
+      'REST APIs': 90,
+      'Data Migration': 95,
+      'Integration': 90
+    };
+
+    skillCards.forEach(card => {
+      const skillName = card.querySelector('strong')?.textContent?.trim();
+      const level = skillLevels[skillName] || 80;
+
+      // Create progress bar
+      const progressBar = document.createElement('div');
+      progressBar.className = 'skill-progress-bar';
+      progressBar.innerHTML = `
+        <div class="skill-progress-fill" data-progress="${level}"></div>
+      `;
+      
+      card.appendChild(progressBar);
+    });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target.querySelector('.skill-progress-fill');
+          if (fill) {
+            const progress = fill.dataset.progress;
+            setTimeout(() => {
+              fill.style.width = progress + '%';
+            }, 100);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    skillCards.forEach(card => observer.observe(card));
+  }
+
+  // 7. Mouse Trail Effect
+  function initMouseTrail() {
+    // Skip on mobile/touch devices
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      return;
+    }
+
+    const colors = ['trail-color-1', 'trail-color-2', 'trail-color-3', 'trail-color-4'];
+    let colorIndex = 0;
+    let lastTrailTime = 0;
+    const trailInterval = 30; // ms between particles
+
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastTrailTime < trailInterval) return;
+      
+      lastTrailTime = now;
+
+      const particle = document.createElement('div');
+      particle.className = `mouse-trail-particle ${colors[colorIndex]}`;
+      particle.style.left = e.clientX + 'px';
+      particle.style.top = e.clientY + 'px';
+      
+      document.body.appendChild(particle);
+
+      // Remove after animation
+      setTimeout(() => particle.remove(), 1000);
+
+      colorIndex = (colorIndex + 1) % colors.length;
+    });
+  }
+
+  /* ========================================
      Expose API for debugging (optional)
      ======================================== */
   if (typeof window !== 'undefined') {
     window.PortfolioAPI = {
-      version: '1.0.0',
+      version: '2.0.0',
       config: config,
       getMousePosition: () => ({ x: mouseX, y: mouseY }),
       reinitialize: init

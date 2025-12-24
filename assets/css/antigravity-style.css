@@ -2385,6 +2385,248 @@ button .material-symbols-outlined {
 }
 
 /* ========================================
+   Additional Enhanced Animations (7 More)
+   ======================================== */
+
+/* 1. Typing Animation for Hero Tagline */
+.typing-text {
+  display: inline-block;
+  min-width: 300px;
+  color: var(--color-primary-blue);
+  font-weight: 600;
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: var(--color-primary-blue);
+  animation: cursorBlink 1s steps(2) infinite;
+  margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 2. Magnetic Button Effect */
+.magnetic-button {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.magnetic-button::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: inherit;
+  pointer-events: auto;
+}
+
+.magnetic-button.magnetic-active {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(49, 134, 255, 0.4);
+}
+
+/* Disable on touch devices */
+@media (hover: none) {
+  .magnetic-button {
+    transform: none !important;
+  }
+}
+
+/* 3. Number Counter */
+.counter-number {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  transition: all 0.3s ease;
+}
+
+.counter-number.counting {
+  color: #00B95C;
+}
+
+/* 4. Floating Badge Animations */
+.floating-badge {
+  animation: floatBadge 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.floating-badge:nth-child(odd) {
+  animation-delay: -3s;
+}
+
+.floating-badge:hover {
+  animation-play-state: paused;
+  transform: scale(1.1) rotateY(180deg);
+  box-shadow: 0 10px 40px rgba(49, 134, 255, 0.4);
+}
+
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+/* Badge flip effect */
+.floating-badge {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 5. Page Transition Overlay */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #3186FF, #00B95C);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.page-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.page-transition-content {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-transition-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 6. Interactive Skill Progress Bars */
+.skill-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-surface-gray);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.skill-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3186FF, #00B95C);
+  border-radius: 10px;
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 0 10px rgba(49, 134, 255, 0.5);
+}
+
+.skill-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(0); opacity: 0; }
+  50% { transform: translateX(-30px); opacity: 1; }
+}
+
+.skill-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 0.25rem;
+  color: var(--color-text-light);
+}
+
+.skill-progress-percent {
+  font-weight: 600;
+  color: var(--color-primary-blue);
+}
+
+/* 7. Mouse Trail Effect */
+.mouse-trail-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0;
+  animation: trailParticleFade 1s ease-out forwards;
+}
+
+@keyframes trailParticleFade {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+/* Trail colors (Salesforce palette) */
+.trail-color-1 { background: #3186FF; box-shadow: 0 0 6px #3186FF; }
+.trail-color-2 { background: #00B95C; box-shadow: 0 0 6px #00B95C; }
+.trail-color-3 { background: #FFE432; box-shadow: 0 0 6px #FFE432; }
+.trail-color-4 { background: #00A1E0; box-shadow: 0 0 6px #00A1E0; }
+
+/* Disable trail on mobile */
+@media (max-width: 768px) {
+  .mouse-trail-particle {
+    display: none;
+  }
+}
+
+/* Update reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .typing-cursor,
+  .floating-badge,
+  .skill-progress-fill::after,
+  .mouse-trail-particle {
+    animation: none !important;
+  }
+  
+  .magnetic-button {
+    transform: none !important;
+  }
+}
+
+/* ========================================
    Responsive Design
    ======================================== */
 
