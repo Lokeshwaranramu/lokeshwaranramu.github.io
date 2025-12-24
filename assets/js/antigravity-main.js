@@ -16,10 +16,12 @@
     particleSpeedMin: 0.1,
     particleSpeedMax: 0.5,
     colors: [
-      '#3186FF', // blue
-      '#749BFF', // light blue
-      '#DADCE0', // gray
-      '#86868B'  // lighter gray
+      '#3186FF', // Salesforce blue
+      '#00A1E0', // Salesforce light blue
+      '#032D60', // Salesforce navy
+      '#FFE432', // Lightning yellow
+      '#FBBC04', // Gold
+      '#00B95C'  // Success green
     ],
     observerThreshold: 0.3
   };
@@ -593,6 +595,13 @@
     initLazyLoading();
     initIconStripAnimation();
     initKeyboardNavigation();
+    
+    // Initialize new enhanced animations
+    initScrollProgressIndicator();
+    initTimelineProgressAnimation();
+    initParallaxCards();
+    initStaggeredEntrance();
+    initInteractiveGradient();
 
     console.log('✅ Portfolio initialized successfully!');
   }
@@ -786,6 +795,409 @@
       console.log('▶️ Page visible - resuming animations');
     }
   });
+
+  /* ========================================
+     Salesforce Themed Animations
+     ======================================== */
+  
+  // Lightning Strike Animation
+  function createLightningStrike() {
+    const lightning = document.createElement('div');
+    lightning.className = 'sf-lightning';
+    lightning.innerHTML = '⚡';
+    lightning.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: -50px;
+      font-size: ${24 + Math.random() * 24}px;
+      color: ${['#FFE432', '#FBBC04', '#3186FF'][Math.floor(Math.random() * 3)]};
+      position: fixed;
+      filter: drop-shadow(0 0 10px currentColor);
+    `;
+    
+    document.body.appendChild(lightning);
+    
+    // Trigger animation
+    setTimeout(() => lightning.classList.add('active'), 10);
+    
+    // Remove after animation
+    setTimeout(() => lightning.remove(), 600);
+  }
+
+  // Data Node Animation (Salesforce data flow)
+  function createDataNodes() {
+    const sections = document.querySelectorAll('.features-section, .skills-section, .experience-section');
+    
+    sections.forEach(section => {
+      // Create 5-8 data nodes per section
+      const nodeCount = 5 + Math.floor(Math.random() * 4);
+      
+      for (let i = 0; i < nodeCount; i++) {
+        const node = document.createElement('div');
+        node.className = 'sf-data-node';
+        node.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 2}s;
+        `;
+        section.style.position = 'relative';
+        section.appendChild(node);
+      }
+    });
+  }
+
+  // Connection Lines Animation (data flow between elements)
+  function createConnectionLines() {
+    const cards = document.querySelectorAll('.feature-card, .skill-card');
+    
+    cards.forEach((card, index) => {
+      if (index % 3 === 0) { // Add lines to every 3rd card
+        const line = document.createElement('div');
+        line.className = 'sf-connection-line';
+        line.style.cssText = `
+          width: ${100 + Math.random() * 100}px;
+          top: 50%;
+          left: 100%;
+          animation-delay: ${Math.random() * 3}s;
+        `;
+        card.style.position = 'relative';
+        card.style.overflow = 'visible';
+        card.appendChild(line);
+      }
+    });
+  }
+
+  // Initialize Salesforce animations
+  function initSalesforceAnimations() {
+    // Create data nodes - DISABLED
+    // createDataNodes();
+    
+    // Create connection lines
+    createConnectionLines();
+    
+    // Lightning strikes every 5-10 seconds
+    setInterval(() => {
+      if (Math.random() > 0.5) {
+        createLightningStrike();
+      }
+    }, 5000 + Math.random() * 5000);
+    
+    // Add badge glow to certification images
+    document.querySelectorAll('.cert-badge img').forEach(img => {
+      img.parentElement.classList.add('sf-badge-glow');
+    });
+    
+    // Add interactive class to project cards
+    document.querySelectorAll('.featured-card, .solution-card, .appexchange-card').forEach(card => {
+      card.classList.add('sf-interactive');
+    });
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initSalesforceAnimations, 1000);
+    });
+  } else {
+    setTimeout(initSalesforceAnimations, 1000);
+  }
+
+  /* ========================================
+     Salesforce Cursor Follower Cloud
+     ======================================== */
+  
+  function initCursorFollower() {
+    // Create cursor cloud element
+    const cursorCloud = document.createElement('div');
+    cursorCloud.className = 'sf-cursor-cloud';
+    cursorCloud.innerHTML = '☁️';
+    document.body.appendChild(cursorCloud);
+
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    const ease = 0.15; // Smoothing factor (lower = smoother but slower)
+    let isMoving = false;
+    let hideTimeout;
+    const trails = [];
+    let lastTrailTime = 0;
+    const trailInterval = 50; // Create trail dot every 50ms
+
+    // Smooth animation loop
+    function animate() {
+      // Smooth easing towards target position
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
+
+      // Update cloud position
+      cursorCloud.style.left = currentX + 'px';
+      cursorCloud.style.top = currentY + 'px';
+
+      // Continue animation loop
+      requestAnimationFrame(animate);
+    }
+
+    // Track mouse movement
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+
+      // Show cloud on movement
+      if (!isMoving) {
+        isMoving = true;
+        cursorCloud.classList.add('active');
+      }
+
+      // Clear hide timeout
+      clearTimeout(hideTimeout);
+
+      // Create trail effect
+      const now = Date.now();
+      if (now - lastTrailTime > trailInterval) {
+        createTrailDot(e.clientX, e.clientY);
+        lastTrailTime = now;
+      }
+
+      // Hide after 2 seconds of no movement
+      hideTimeout = setTimeout(() => {
+        isMoving = false;
+        cursorCloud.classList.remove('active');
+      }, 2000);
+    });
+
+    // Hide when mouse leaves window
+    document.addEventListener('mouseleave', () => {
+      cursorCloud.classList.remove('active');
+    });
+
+    // Show when mouse enters window
+    document.addEventListener('mouseenter', () => {
+      if (isMoving) {
+        cursorCloud.classList.add('active');
+      }
+    });
+
+    // Create trail dot
+    function createTrailDot(x, y) {
+      const trail = document.createElement('div');
+      trail.className = 'sf-cursor-trail';
+      trail.style.left = x + 'px';
+      trail.style.top = y + 'px';
+      document.body.appendChild(trail);
+
+      // Activate trail
+      setTimeout(() => trail.classList.add('active'), 10);
+
+      // Remove after animation
+      setTimeout(() => trail.remove(), 1000);
+    }
+
+    // Start animation loop
+    animate();
+  }
+
+  /* ========================================
+     Touch Ripple Effect (Mobile Alternative)
+     ======================================== */
+  function initTouchRipple() {
+    document.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      createTouchRipple(touch.clientX, touch.clientY);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      // Create ripples along touch path (throttled)
+      const touch = e.touches[0];
+      const now = Date.now();
+      if (now - (window.lastTouchRipple || 0) > 100) {
+        createTouchRipple(touch.clientX, touch.clientY);
+        window.lastTouchRipple = now;
+      }
+    });
+
+    function createTouchRipple(x, y) {
+      const ripple = document.createElement('div');
+      ripple.className = 'sf-touch-ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      document.body.appendChild(ripple);
+
+      // Activate ripple
+      setTimeout(() => ripple.classList.add('active'), 10);
+
+      // Remove after animation
+      setTimeout(() => ripple.remove(), 800);
+    }
+  }
+
+  // Initialize cursor follower after page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initCursorFollower, 500);
+    });
+  } else {
+    setTimeout(initCursorFollower, 500);
+  }
+
+  /* ========================================
+     Enhanced Animations
+     ======================================== */
+  
+  // 1. Scroll Progress Indicator
+  function initScrollProgressIndicator() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+
+    function updateProgress() {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.pageYOffset;
+      const progress = (scrolled / scrollHeight) * 100;
+      progressBar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // 2. Timeline Progress Line Animation
+  function initTimelineProgressAnimation() {
+    const timeline = document.querySelector('.timeline');
+    if (!timeline) return;
+
+    // Create progress line
+    const progressLine = document.createElement('div');
+    progressLine.className = 'timeline-progress';
+    
+    const progressDot = document.createElement('div');
+    progressDot.className = 'timeline-progress-dot';
+    progressLine.appendChild(progressDot);
+    
+    timeline.appendChild(progressLine);
+
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    function updateTimelineProgress() {
+      const timelineRect = timeline.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate progress based on timeline visibility
+      if (timelineRect.top < viewportHeight && timelineRect.bottom > 0) {
+        const scrollProgress = Math.max(0, viewportHeight - timelineRect.top);
+        const maxHeight = Math.min(timelineRect.height, scrollProgress);
+        progressLine.style.height = maxHeight + 'px';
+        
+        // Highlight timeline items that are passed
+        timelineItems.forEach((item, index) => {
+          const itemRect = item.getBoundingClientRect();
+          if (itemRect.top < viewportHeight * 0.5) {
+            item.classList.add('timeline-active');
+          } else {
+            item.classList.remove('timeline-active');
+          }
+        });
+      }
+    }
+
+    window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+    updateTimelineProgress();
+  }
+
+  // 3. Card Parallax Depth Effect
+  function initParallaxCards() {
+    // Skip on mobile/touch devices for performance
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      return;
+    }
+
+    const cards = document.querySelectorAll('.feature-card, .detail-card, .project-card');
+    
+    cards.forEach(card => {
+      card.classList.add('parallax-card');
+      
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg
+        const rotateY = ((x - centerX) / centerX) * 5;
+        
+        card.classList.add('parallax-active');
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('parallax-active');
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // 4. Staggered Entrance Animations
+  function initStaggeredEntrance() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const featureCards = document.querySelectorAll('.feature-card');
+    
+    // Add stagger class to all items
+    [...skillCards, ...timelineItems, ...featureCards].forEach(item => {
+      item.classList.add('stagger-item');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Find all stagger items in the parent container
+          const container = entry.target.closest('.skills-grid, .timeline, .features-grid');
+          if (container) {
+            const items = container.querySelectorAll('.stagger-item');
+            items.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add('stagger-visible');
+              }, index * 100); // 100ms between each item
+            });
+          } else {
+            entry.target.classList.add('stagger-visible');
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Observe parent containers
+    const containers = document.querySelectorAll('.skills-grid, .timeline, .features-grid');
+    containers.forEach(container => observer.observe(container));
+  }
+
+  // 5. Interactive Background Gradient
+  function initInteractiveGradient() {
+    // Create gradient background element
+    const gradientBg = document.createElement('div');
+    gradientBg.className = 'gradient-bg';
+    document.body.insertBefore(gradientBg, document.body.firstChild);
+
+    // Update gradient position based on mouse movement (throttled)
+    let ticking = false;
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const x = (e.clientX / window.innerWidth) * 100;
+          const y = (e.clientY / window.innerHeight) * 100;
+          
+          gradientBg.style.setProperty('--mouse-x', x + '%');
+          gradientBg.style.setProperty('--mouse-y', y + '%');
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
 
   /* ========================================
      Expose API for debugging (optional)

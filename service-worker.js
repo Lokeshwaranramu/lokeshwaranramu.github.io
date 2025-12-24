@@ -1,5 +1,5 @@
 // Service Worker for Offline Functionality
-const CACHE_NAME = 'lokeshwaran-portfolio-v1';
+const CACHE_NAME = 'lokeshwaran-portfolio-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index-antigravity.html',

@@ -243,8 +243,14 @@
   <!-- Hero Section -->
   <section id="hero" class="hero-section">
     <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    
+    <!-- Salesforce Themed Elements -->
+    <div class="sf-cloud sf-cloud-1">☁️</div>
+    <div class="sf-cloud sf-cloud-2">☁️</div>
+    <div class="sf-cloud sf-cloud-3">☁️</div>
+    
     <div class="hero-content">
-      <div class="hero-logo">
+      <div class="hero-logo sf-badge-glow">
         <img src="assets/img/new_profile_img.png" alt="Lokeshwaran Ramu" class="hero-logo-img" loading="eager">
       </div>
       <h1 class="hero-title">Lokeshwaran Ramu</h1>
@@ -252,7 +258,7 @@
         Salesforce Developer | Consultant | SME | Architect
       </p>
       <div class="hero-buttons">
-        <button class="btn-primary" onclick="location.href='#contact'">
+        <button class="btn-primary sf-interactive" onclick="location.href='#contact'">
           <span class="material-symbols-outlined">chat</span>
           Get in Touch
         </button>
@@ -268,6 +274,24 @@
   <section id="about" class="about-section">
     <div class="container">
       <h2 class="section-heading">About Me</h2>
+      
+      <!-- Salesforce Divider Animation -->
+      <div class="sf-section-divider">
+        <svg viewBox="0 0 100 20" class="sf-divider-svg">
+          <path d="M0 10 Q 25 0, 50 10 T 100 10" stroke="url(#salesforce-gradient)" stroke-width="2" fill="none" class="sf-divider-path"/>
+          <circle cx="10" cy="10" r="3" fill="#3186FF" class="sf-divider-dot" style="animation-delay: 0s"/>
+          <circle cx="50" cy="10" r="3" fill="#FFE432" class="sf-divider-dot" style="animation-delay: 0.3s"/>
+          <circle cx="90" cy="10" r="3" fill="#00B95C" class="sf-divider-dot" style="animation-delay: 0.6s"/>
+          <defs>
+            <linearGradient id="salesforce-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#3186FF;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#FFE432;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#00B95C;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      
       <div class="about-content animate-on-scroll">
         <p>
           Results-driven Customer Domain CRM SME, Salesforce Developer, and Data Architect with <span id="yearsOfExperience">8</span> years of experience in designing, developing, and delivering innovative solutions to optimize customer data management and CRM systems. Expertise in Salesforce technologies, including LWC, Apex, Aura, triggers, flows, and process builders, with a proven track record of architecting seamless data flows and integrations across complex systems.
@@ -761,6 +785,7 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date" id="currentJobDate">August 2025 - Present</div>
+            <div class="timeline-duration"><span id="currentJobDuration">5 months</span></div>
             <h3>Senior Salesforce Developer</h3>
             <div class="timeline-company">OurMoneyMarket • Adelaide, Australia</div>
             <p>Leading Salesforce development initiatives, implementing Einstein AI, and architecting data solutions for financial services platform.</p>
@@ -771,6 +796,7 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">February 2023 - May 2025</div>
+            <div class="timeline-duration"><span id="crg-duration">2 years 4 months</span></div>
             <h3>Senior Salesforce Developer & Customer Domain SME</h3>
             <div class="timeline-company">Country Road Group • Melbourne, Australia</div>
             <p>Spearheaded org de-merger, loyalty platform implementation, Braze integration, and data privacy solutions for leading retail group.</p>
@@ -781,6 +807,7 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2021 - February 2023</div>
+            <div class="timeline-duration"><span id="webcentral-duration">1 year 5 months</span></div>
             <h3>Senior Salesforce Developer</h3>
             <div class="timeline-company">Webcentral Group • Melbourne, Australia</div>
             <p>Led successful merger of Service Cloud and Sales Cloud orgs, developed custom LWC solutions, and optimized business processes.</p>
@@ -791,6 +818,7 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2020 - November 2021</div>
+            <div class="timeline-duration"><span id="salesforce-duration">1 year 2 months</span></div>
             <h3>Developer Success Engineer</h3>
             <div class="timeline-company">Salesforce • Hyderabad, India</div>
             <p>Provided technical support and development assistance for Sales Cloud, Service Cloud, and Community Cloud implementations.</p>
@@ -801,6 +829,7 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2017 - September 2020</div>
+            <div class="timeline-duration"><span id="issquared-duration">3 years</span></div>
             <h3>Software Developer</h3>
             <div class="timeline-company">ISSQUARED INC • Hyderabad, India</div>
             <p>Developed identity management solutions integrating Salesforce with IBM Security Identity Manager and various backend systems.</p>
@@ -1069,6 +1098,16 @@
     // ========================================
     // AUTOMATED UPDATES - No Manual Changes Needed
     // ========================================
+    // All dates, durations, and dynamic content are calculated automatically.
+    // You never need to manually update:
+    //   - Age (calculated from birthdate)
+    //   - Years of experience (calculated from career start)
+    //   - Current job date (auto-formats "Month Year - Present")
+    //   - Job durations (calculates "X years Y months" for all positions)
+    //   - Copyright years (always shows current year)
+    //   - Schema.org dateModified (updates to today's date)
+    // Simply update the reference dates in the functions if needed.
+    // ========================================
     
     // 1. Calculate Age Automatically
     function calculateAge() {
@@ -1128,13 +1167,51 @@
         try {
           const schema = JSON.parse(script.textContent);
           if (schema.dateModified) {
-            const today = new Date().toISOString();
-            schema.dateModified = today;
+            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+            schema.dateModified = today + 'T00:00:00Z';
             script.textContent = JSON.stringify(schema, null, 8);
           }
         } catch (e) {
           // Skip if not valid JSON
         }
+      });
+    }
+    
+    // 6. Calculate Job Durations Automatically
+    function calculateJobDurations() {
+      const jobs = [
+        { start: '2025-08-01', end: null, element: 'currentJobDuration' },
+        { start: '2023-02-01', end: '2025-05-31', element: 'crg-duration' },
+        { start: '2021-10-01', end: '2023-02-28', element: 'webcentral-duration' },
+        { start: '2020-10-01', end: '2021-11-30', element: 'salesforce-duration' },
+        { start: '2017-10-01', end: '2020-09-30', element: 'issquared-duration' }
+      ];
+      
+      jobs.forEach(job => {
+        const element = document.getElementById(job.element);
+        if (!element) return;
+        
+        const start = new Date(job.start);
+        const end = job.end ? new Date(job.end) : new Date();
+        
+        let years = end.getFullYear() - start.getFullYear();
+        let months = end.getMonth() - start.getMonth();
+        
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+        
+        let duration = '';
+        if (years > 0) {
+          duration += `${years} year${years > 1 ? 's' : ''}`;
+        }
+        if (months > 0) {
+          if (duration) duration += ' ';
+          duration += `${months} month${months > 1 ? 's' : ''}`;
+        }
+        
+        element.textContent = duration || '1 month';
       });
     }
     
@@ -1145,6 +1222,7 @@
       calculateYearsOfExperience();
       updateCurrentJobDate();
       updateSchemaDate();
+      calculateJobDurations();
     });
     
     // Also run immediately in case DOMContentLoaded already fired
@@ -1152,6 +1230,7 @@
     updateCopyrightYear();
     calculateYearsOfExperience();
     updateCurrentJobDate();
+    calculateJobDurations();
   </script>
 </body>
 </html>
