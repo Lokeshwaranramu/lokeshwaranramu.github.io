@@ -321,125 +321,6 @@
     </div>
   </section>
 
-  <!-- Stats Section (GitHub, Trailblazer, Visitor Counter) -->
-  <section id="stats" class="stats-section">
-    <div class="container">
-      <h2 class="section-heading">Live Statistics</h2>
-      
-      <div class="stats-grid">
-        <!-- GitHub Stats -->
-        <div class="stat-card github-stats animate-on-scroll">
-          <div class="stat-header">
-            <i class="fab fa-github"></i>
-            <h3>GitHub Activity</h3>
-          </div>
-          <div id="githubStats" class="stat-content">
-            <div class="stat-loading">
-              <span class="material-symbols-outlined rotating">progress_activity</span>
-              <p>Loading GitHub stats...</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Trailblazer Stats -->
-        <div class="stat-card trailblazer-stats animate-on-scroll">
-          <div class="stat-header">
-            <span class="material-symbols-outlined">cloud</span>
-            <h3>Trailblazer Profile</h3>
-          </div>
-          <div id="trailblazerStats" class="stat-content">
-            <div class="stat-item">
-              <span class="material-symbols-outlined">emoji_events</span>
-              <div>
-                <strong id="trailblazerBadges">Loading...</strong>
-                <p>Badges Earned</p>
-              </div>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">stars</span>
-              <div>
-                <strong id="trailblazerPoints">Loading...</strong>
-                <p>Trailblazer Points</p>
-              </div>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">workspace_premium</span>
-              <div>
-                <strong id="trailblazerRank">Loading...</strong>
-                <p>Trailblazer Rank</p>
-              </div>
-            </div>
-          </div>
-          <a href="https://trailblazer.me/id/lokeshwaranramu" target="_blank" rel="noopener noreferrer" class="stat-link">
-            View Full Profile <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-        </div>
-
-        <!-- Visitor Counter -->
-        <div class="stat-card visitor-stats animate-on-scroll">
-          <div class="stat-header">
-            <span class="material-symbols-outlined">visibility</span>
-            <h3>Portfolio Visits</h3>
-          </div>
-          <div class="stat-content">
-            <div class="visitor-counter">
-              <div class="counter-display" id="visitorCount">0</div>
-              <p>Total Visitors</p>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">today</span>
-              <div>
-                <strong id="todayVisits">0</strong>
-                <p>Today's Visits</p>
-              </div>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">calendar_month</span>
-              <div>
-                <strong id="monthVisits">0</strong>
-                <p>This Month</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LinkedIn Recommendations Placeholder -->
-        <div class="stat-card linkedin-stats animate-on-scroll">
-          <div class="stat-header">
-            <i class="fab fa-linkedin"></i>
-            <h3>LinkedIn Profile</h3>
-          </div>
-          <div class="stat-content">
-            <div class="stat-item">
-              <span class="material-symbols-outlined">people</span>
-              <div>
-                <strong>500+</strong>
-                <p>Connections</p>
-              </div>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">recommend</span>
-              <div>
-                <strong>12</strong>
-                <p>Recommendations</p>
-              </div>
-            </div>
-            <div class="stat-item">
-              <span class="material-symbols-outlined">business_center</span>
-              <div>
-                <strong>8+ Years</strong>
-                <p>Experience</p>
-              </div>
-            </div>
-          </div>
-          <a href="https://www.linkedin.com/in/lokeshwaranramu" target="_blank" rel="noopener noreferrer" class="stat-link">
-            Connect on LinkedIn <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Features Section -->
   <section id="features" class="features-section">
     <div class="container">
@@ -839,7 +720,7 @@
         <div class="appexchange-card animate-on-scroll">
           <div class="appexchange-image">
             <picture>
-              <source srcset="assets/img/COCETPIMAGE.webp" type="image/webp">
+              <source srcset="assets/img/COCETPIMAGE.png" type="image/webp">
               <img src="assets/img/COCETPIMAGE.png" alt="Convert Case Emails To PDF" loading="lazy" width="300" height="200">
             </picture>
           </div>
@@ -854,7 +735,7 @@
         <div class="appexchange-card animate-on-scroll">
           <div class="appexchange-image">
             <picture>
-              <source srcset="assets/img/SEOMC.webp" type="image/webp">
+              <source srcset="assets/img/SEOMC.png" type="image/webp">
               <img src="assets/img/SEOMC.png" alt="Send Email On Multiple Cases" loading="lazy" width="300" height="200">
             </picture>
           </div>
@@ -1032,6 +913,12 @@
       </div>
     </div>
   </section>
+
+  <!-- Fixed Visitor Counter (Bottom Left) -->
+  <div id="visitorCounterFixed" class="visitor-counter-fixed">
+    <span class="material-symbols-outlined">visibility</span>
+    <span id="visitorCount">0</span>
+  </div>
 
   <!-- Contact Section -->
   <section id="contact" class="contact-section">

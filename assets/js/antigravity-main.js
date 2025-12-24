@@ -634,153 +634,23 @@
   }
 
   /* ========================================
-     GitHub Stats Fetcher
-     ======================================== */
-  async function fetchGitHubStats() {
-    const username = 'Lokeshwaranramu';
-    const statsContainer = document.getElementById('githubStats');
-    
-    if (!statsContainer) return;
-    
-    try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
-      const userData = await response.json();
-      
-      const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`);
-      const repos = await reposResponse.json();
-      
-      let html = `
-        <div class="stat-item">
-          <span class="material-symbols-outlined">folder</span>
-          <div>
-            <strong>${userData.public_repos || 0}</strong>
-            <p>Public Repositories</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <span class="material-symbols-outlined">people</span>
-          <div>
-            <strong>${userData.followers || 0}</strong>
-            <p>Followers</p>
-          </div>
-        </div>
-        <div class="stat-item">
-          <span class="material-symbols-outlined">star</span>
-          <div>
-            <strong id="totalStars">...</strong>
-            <p>Total Stars</p>
-          </div>
-        </div>
-      `;
-      
-      // Calculate total stars
-      let totalStars = 0;
-      repos.forEach(repo => {
-        totalStars += repo.stargazers_count || 0;
-      });
-      
-      statsContainer.innerHTML = html;
-      document.getElementById('totalStars').textContent = totalStars;
-      
-    } catch (error) {
-      console.error('Error fetching GitHub stats:', error);
-      statsContainer.innerHTML = `
-        <div class="stat-item">
-          <span class="material-symbols-outlined">error</span>
-          <div>
-            <strong>Error</strong>
-            <p>Unable to load GitHub stats</p>
-          </div>
-        </div>
-      `;
-    }
-  }
-
-  /* ========================================
-     Trailblazer Stats (Mock - API not publicly available)
-     ======================================== */
-  function displayTrailblazerStats() {
-    // Trailblazer API is not publicly available, so we'll display mock/manual data
-    // Update these values manually or scrape from profile page
-    const stats = {
-      badges: '50+',
-      points: '85,000+',
-      rank: 'Ranger'
-    };
-    
-    document.getElementById('trailblazerBadges').textContent = stats.badges;
-    document.getElementById('trailblazerPoints').textContent = stats.points;
-    document.getElementById('trailblazerRank').textContent = stats.rank;
-  }
-
-  /* ========================================
-     Visitor Counter with localStorage
+     Visitor Counter - Simple Version
      ======================================== */
   function initVisitorCounter() {
     const STORAGE_KEY = 'portfolio_visits';
-    const TODAY_KEY = 'portfolio_visits_today';
-    const MONTH_KEY = 'portfolio_visits_month';
-    const LAST_VISIT_KEY = 'portfolio_last_visit';
-    
-    // Get current date info
-    const now = new Date();
-    const today = now.toDateString();
-    const currentMonth = `${now.getFullYear()}-${now.getMonth() + 1}`;
     
     // Get stored data
     let totalVisits = parseInt(localStorage.getItem(STORAGE_KEY) || '0');
-    let todayVisits = parseInt(localStorage.getItem(TODAY_KEY) || '0');
-    let monthVisits = parseInt(localStorage.getItem(MONTH_KEY) || '0');
-    let lastVisit = localStorage.getItem(LAST_VISIT_KEY);
-    let lastMonth = localStorage.getItem('portfolio_last_month');
     
     // Increment total visits
     totalVisits++;
     localStorage.setItem(STORAGE_KEY, totalVisits.toString());
     
-    // Check if new day
-    if (lastVisit !== today) {
-      todayVisits = 1;
-      localStorage.setItem(LAST_VISIT_KEY, today);
-    } else {
-      todayVisits++;
-    }
-    localStorage.setItem(TODAY_KEY, todayVisits.toString());
-    
-    // Check if new month
-    if (lastMonth !== currentMonth) {
-      monthVisits = 1;
-      localStorage.setItem('portfolio_last_month', currentMonth);
-    } else {
-      monthVisits++;
-    }
-    localStorage.setItem(MONTH_KEY, monthVisits.toString());
-    
-    // Update display with animation
-    function animateCounter(element, target) {
-      const duration = 1000;
-      const start = 0;
-      const increment = target / (duration / 16);
-      let current = start;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          element.textContent = target.toLocaleString();
-          clearInterval(timer);
-        } else {
-          element.textContent = Math.floor(current).toLocaleString();
-        }
-      }, 16);
-    }
-    
+    // Update display
     const visitorCountEl = document.getElementById('visitorCount');
-    const todayVisitsEl = document.getElementById('todayVisits');
-    const monthVisitsEl = document.getElementById('monthVisits');
-    
-    if (visitorCountEl) animateCounter(visitorCountEl, totalVisits);
-    if (todayVisitsEl) todayVisitsEl.textContent = todayVisits.toLocaleString();
-    if (monthVisitsEl) monthVisitsEl.textContent = monthVisits.toLocaleString();
+    if (visitorCountEl) {
+      visitorCountEl.textContent = totalVisits.toLocaleString();
+    }
   }
 
   /* ========================================
@@ -887,13 +757,15 @@
      Initialize All Dynamic Features
      ======================================== */
   function initDynamicFeatures() {
+    console.log('🚀 Initializing portfolio automation...');
+    
     initDarkMode();
-    fetchGitHubStats();
-    displayTrailblazerStats();
     initVisitorCounter();
     registerServiceWorker();
     initPWAInstall();
     enhanceContactForm();
+    
+    console.log('✅ All dynamic features initialized successfully');
   }
 
   // Run dynamic features after DOM is loaded

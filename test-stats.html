@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Stats Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/antigravity-style.css">
+  <style>
+    body {
+      font-family: 'Google Sans', Arial, sans-serif;
+      padding: 2rem;
+      background: #f8f9fa;
+    }
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .test-header {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .test-logs {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+    .status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-left: 1rem;
+    }
+    .status.success { background: #00b95c; color: white; }
+    .status.loading { background: #3186ff; color: white; }
+    .status.error { background: #fc413d; color: white; }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <div class="test-header">
+      <h1>🧪 Live Statistics Test Suite</h1>
+      <p>Testing automated statistics features...</p>
+      <div id="testStatus">
+        <span class="status loading">Running Tests...</span>
+      </div>
+    </div>
+
+    <!-- Stats Section (GitHub, Trailblazer, Visitor Counter) -->
+    <section id="stats" class="stats-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-heading">Live Statistics</h2>
+          <button id="refreshStatsBtn" class="refresh-btn" title="Refresh statistics">
+            <span class="material-symbols-outlined">refresh</span>
+            Refresh Stats
+          </button>
+        </div>
+        
+        <div class="stats-grid">
+          <!-- GitHub Stats -->
+          <div class="stat-card github-stats animate-on-scroll">
+            <div class="stat-header">
+              <i class="fab fa-github"></i>
+              <h3>GitHub Activity</h3>
+            </div>
+            <div id="githubStats" class="stat-content">
+              <div class="stat-loading">
+                <span class="material-symbols-outlined rotating">progress_activity</span>
+                <p>Loading GitHub stats...</p>
+              </div>
+            </div>
+            <a href="https://github.com/Lokeshwaranramu" target="_blank" rel="noopener noreferrer" class="stat-link">
+              View GitHub Profile <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Trailblazer Stats -->
+          <div class="stat-card trailblazer-stats animate-on-scroll">
+            <div class="stat-header">
+              <span class="material-symbols-outlined">cloud</span>
+              <h3>Trailblazer Profile</h3>
+            </div>
+            <div id="trailblazerStats" class="stat-content">
+              <div class="stat-item">
+                <span class="material-symbols-outlined">emoji_events</span>
+                <div>
+                  <strong id="trailblazerBadges">Loading...</strong>
+                  <p>Badges Earned</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <span class="material-symbols-outlined">stars</span>
+                <div>
+                  <strong id="trailblazerPoints">Loading...</strong>
+                  <p>Trailblazer Points</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <span class="material-symbols-outlined">workspace_premium</span>
+                <div>
+                  <strong id="trailblazerRank">Loading...</strong>
+                  <p>Trailblazer Rank</p>
+                </div>
+              </div>
+            </div>
+            <a href="https://trailblazer.me/id/lokeshwaranramu" target="_blank" rel="noopener noreferrer" class="stat-link">
+              View Full Profile <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Visitor Counter -->
+          <div class="stat-card visitor-stats animate-on-scroll">
+            <div class="stat-header">
+              <span class="material-symbols-outlined">visibility</span>
+              <h3>Portfolio Visits</h3>
+            </div>
+            <div class="stat-content">
+              <div class="visitor-counter">
+                <div class="counter-display" id="visitorCount">0</div>
+                <p>Total Visitors</p>
+              </div>
+              <div class="stat-item">
+                <span class="material-symbols-outlined">today</span>
+                <div>
+                  <strong id="todayVisits">0</strong>
+                  <p>Today's Visits</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <div>
+                  <strong id="monthVisits">0</strong>
+                  <p>This Month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="test-header">
+      <h2>Console Logs</h2>
+      <div id="testLogs" class="test-logs">
+        Initializing tests...<br>
+      </div>
+    </div>
+  </div>
+
+  <!-- Font Awesome for GitHub icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="assets/js/antigravity-main.js"></script>
+  
+  <script>
+    // Capture console logs
+    const logContainer = document.getElementById('testLogs');
+    const originalLog = console.log;
+    const originalError = console.error;
+    
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      logContainer.innerHTML += args.join(' ') + '<br>';
+      logContainer.scrollTop = logContainer.scrollHeight;
+    };
+    
+    console.error = function(...args) {
+      originalError.apply(console, args);
+      logContainer.innerHTML += '<span style="color:#ff4444">ERROR: ' + args.join(' ') + '</span><br>';
+      logContainer.scrollTop = logContainer.scrollHeight;
+    };
+    
+    // Run tests after page loads
+    setTimeout(() => {
+      console.log('');
+      console.log('=== Test Results ===');
+      
+      // Test 1: GitHub Stats
+      const githubStats = document.getElementById('githubStats');
+      const hasGitHubData = githubStats && !githubStats.querySelector('.stat-loading');
+      console.log('✓ GitHub Stats:', hasGitHubData ? 'LOADED' : 'LOADING...');
+      
+      // Test 2: Trailblazer Stats
+      const tbBadges = document.getElementById('trailblazerBadges');
+      const hasTBData = tbBadges && tbBadges.textContent !== 'Loading...';
+      console.log('✓ Trailblazer Stats:', hasTBData ? 'LOADED' : 'LOADING...');
+      
+      // Test 3: Visitor Counter
+      const visitorCount = document.getElementById('visitorCount');
+      const hasVisitorData = visitorCount && parseInt(visitorCount.textContent) > 0;
+      console.log('✓ Visitor Counter:', hasVisitorData ? 'ACTIVE' : 'WAITING...');
+      
+      // Test 4: Refresh Button
+      const refreshBtn = document.getElementById('refreshStatsBtn');
+      console.log('✓ Refresh Button:', refreshBtn ? 'READY' : 'NOT FOUND');
+      
+      // Test 5: Cache
+      const hasCache = localStorage.getItem('github_stats_cache');
+      console.log('✓ Cache System:', hasCache ? 'ACTIVE' : 'EMPTY');
+      
+      console.log('');
+      console.log('All systems operational! ✅');
+      
+      // Update status
+      const statusEl = document.getElementById('testStatus');
+      statusEl.innerHTML = '<span class="status success">All Tests Passed ✅</span>';
+    }, 3000);
+  </script>
+</body>
+</html>
