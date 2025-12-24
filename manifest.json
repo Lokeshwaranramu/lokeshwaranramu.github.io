@@ -1,0 +1,32 @@
+{
+  "name": "Lokeshwaran Ramu - Salesforce Developer",
+  "short_name": "LR Portfolio",
+  "description": "Salesforce Architect, Developer & Data SME specializing in LWC, Apex, Data Migration, and System Integrations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#3186FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/img/Avatar.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/Avatar.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "portfolio"],
+  "screenshots": [
+    {
+      "src": "assets/img/profile-image.jpeg",
+      "sizes": "1200x630",
+      "type": "image/jpeg"
+    }
+  ]
+}
