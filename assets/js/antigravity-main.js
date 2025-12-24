@@ -32,6 +32,21 @@
   let ticking = false;
 
   /* ========================================
+     Utility Functions
+     ======================================== */
+  function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  /* ========================================
      Particle Drift Animation (Canvas)
      ======================================== */
   class ParticleSystem {
@@ -565,6 +580,317 @@
   /* ========================================
      Initialize All Features
      ======================================== */
+  /* ========================================
+     PROJECT STATS DASHBOARD
+     ======================================== */
+  function initStatsCounters() {
+    const statCards = document.querySelectorAll('.stat-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate number counter
+          const numberElement = entry.target.querySelector('.stat-number');
+          if (numberElement && !numberElement.dataset.counted) {
+            const targetValue = parseInt(numberElement.dataset.counter);
+            animateCounter(numberElement, targetValue, 2000);
+            numberElement.dataset.counted = 'true';
+          }
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    statCards.forEach(card => observer.observe(card));
+  }
+
+  function animateCounter(element, target, duration) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        element.textContent = target;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current);
+      }
+    }, 16);
+  }
+
+  /* ========================================
+     TECH STACK VISUALIZATION
+     ======================================== */
+  function initTechStack() {
+    const canvas = document.getElementById('techCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const techNodes = document.querySelectorAll('.tech-node');
+    const centerNode = document.querySelector('.tech-center');
+    
+    // Set canvas size
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+      drawConnections();
+    }
+    
+    resizeCanvas();
+    
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 200);
+    });
+    
+    // Draw connections from center to all nodes
+    function drawConnections() {
+      if (window.innerWidth <= 930) return; // Don't draw on mobile
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      if (!centerNode) return;
+      
+      const centerRect = centerNode.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+      const centerX = centerRect.left + centerRect.width / 2 - canvasRect.left;
+      const centerY = centerRect.top + centerRect.height / 2 - canvasRect.top;
+      
+      techNodes.forEach(node => {
+        if (node === centerNode) return;
+        
+        const nodeRect = node.getBoundingClientRect();
+        const nodeX = nodeRect.left + nodeRect.width / 2 - canvasRect.left;
+        const nodeY = nodeRect.top + nodeRect.height / 2 - canvasRect.top;
+        
+        // Draw line
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(nodeX, nodeY);
+        ctx.strokeStyle = node.classList.contains('active') 
+          ? 'rgba(49, 134, 255, 0.5)' 
+          : 'rgba(218, 220, 224, 0.5)';
+        ctx.lineWidth = node.classList.contains('active') ? 2 : 1;
+        ctx.stroke();
+      });
+    }
+    
+    // Node hover interactions
+    techNodes.forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        node.classList.add('active');
+        drawConnections();
+      });
+      
+      node.addEventListener('mouseleave', () => {
+        node.classList.remove('active');
+        drawConnections();
+      });
+    });
+    
+    // Initial draw
+    setTimeout(drawConnections, 100);
+  }
+
+  /* ========================================
+     CODE SHOWCASE
+     ======================================== */
+  function initCodeShowcase() {
+    const tabs = document.querySelectorAll('.code-tab');
+    const panels = document.querySelectorAll('.code-panel');
+    const copyButtons = document.querySelectorAll('.code-copy');
+    
+    if (!tabs.length || !panels.length) {
+      console.log('Code showcase elements not found');
+      return;
+    }
+    
+    console.log(`Code showcase: ${tabs.length} tabs, ${panels.length} panels found`);
+    
+    // Tab switching
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = tab.dataset.lang;
+        
+        console.log(`Switching to: ${lang}`);
+        
+        // Update active tab
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update active panel
+        panels.forEach(panel => {
+          if (panel.dataset.panel === lang) {
+            panel.classList.add('active');
+            console.log(`Showing panel: ${lang}`);
+          } else {
+            panel.classList.remove('active');
+          }
+        });
+      });
+    });
+    
+    // Copy to clipboard
+    copyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const codeType = button.dataset.code;
+        const panel = document.querySelector(`.code-panel[data-panel="${codeType}"]`);
+        if (!panel) return;
+        
+        const codeBlock = panel.querySelector('code');
+        if (!codeBlock) return;
+        
+        const codeText = codeBlock.textContent;
+        
+        navigator.clipboard.writeText(codeText).then(() => {
+          const originalText = button.innerHTML;
+          button.innerHTML = '<span class="material-symbols-outlined">check</span> Copied!';
+          button.style.background = 'rgba(0, 185, 92, 0.2)';
+          
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = '';
+          }, 2000);
+        });
+      });
+    });
+  }
+
+  /* ========================================
+     ARCHITECTURE DIAGRAM
+     ======================================== */
+  function initArchitectureDiagram() {
+    const components = document.querySelectorAll('.arch-component');
+    const popup = document.getElementById('archPopup');
+    const closeBtn = document.querySelector('.arch-popup-close');
+    
+    // Component data
+    const componentInfo = {
+      'lwc': {
+        title: 'Lightning Web Components',
+        description: 'Modern UI framework using web standards. Fast, lightweight, and follows best practices for component-based architecture.',
+        tags: ['JavaScript', 'HTML', 'CSS', 'Web Components']
+      },
+      'visualforce': {
+        title: 'Visualforce Pages',
+        description: 'Server-side rendering framework for custom UI. Used for complex page layouts and legacy integrations.',
+        tags: ['Apex', 'HTML', 'JavaScript', 'Server-Side']
+      },
+      'apex-classes': {
+        title: 'Apex Classes',
+        description: 'Business logic implementation with object-oriented patterns. Handles data processing, validations, and complex calculations.',
+        tags: ['Apex', 'OOP', 'Business Logic', 'Unit Tests']
+      },
+      'triggers': {
+        title: 'Apex Triggers',
+        description: 'Event-driven automation for DML operations. Implements before/after logic for record lifecycle management.',
+        tags: ['Apex', 'Automation', 'Event-Driven', 'Data Validation']
+      },
+      'flows': {
+        title: 'Flows & Process Builder',
+        description: 'Declarative automation tools for screen flows, record-triggered flows, and scheduled automation.',
+        tags: ['Flow Builder', 'No-Code', 'Automation', 'Declarative']
+      },
+      'rest-api': {
+        title: 'REST APIs',
+        description: 'RESTful web services for external integrations. Handles authentication, rate limiting, and JSON payloads.',
+        tags: ['REST', 'HTTP', 'JSON', 'OAuth']
+      },
+      'platform-events': {
+        title: 'Platform Events',
+        description: 'Event-driven architecture for real-time messaging. Enables decoupled, scalable integrations.',
+        tags: ['Event Bus', 'Pub/Sub', 'Real-Time', 'Scalable']
+      },
+      'mulesoft': {
+        title: 'MuleSoft Integration',
+        description: 'Enterprise integration platform for API-led connectivity. Orchestrates complex data flows across systems.',
+        tags: ['MuleSoft', 'APIs', 'ESB', 'Data Mapping']
+      },
+      'custom-objects': {
+        title: 'Custom Objects',
+        description: 'Custom data models tailored to business needs. Includes relationships, validation rules, and security.',
+        tags: ['Data Model', 'Relationships', 'Schema', 'Metadata']
+      },
+      'external-objects': {
+        title: 'External Objects',
+        description: 'Real-time access to external data via Salesforce Connect. No data storage, direct API calls.',
+        tags: ['Salesforce Connect', 'OData', 'External Data', 'Real-Time']
+      },
+      'aws': {
+        title: 'AWS Services',
+        description: 'Cloud infrastructure for scalable processing. Lambda functions, S3 storage, and SQS queues.',
+        tags: ['AWS Lambda', 'S3', 'SQS', 'CloudWatch']
+      },
+      'third-party': {
+        title: 'Third-Party APIs',
+        description: 'External service integrations for payments, SMS, email, and specialized business functions.',
+        tags: ['External APIs', 'Webhooks', 'HTTP Callouts', 'Authentication']
+      }
+    };
+    
+    // Click handler
+    components.forEach(component => {
+      component.addEventListener('click', () => {
+        const compKey = component.dataset.component;
+        const info = componentInfo[compKey];
+        
+        if (info) {
+          document.getElementById('popupTitle').textContent = info.title;
+          document.getElementById('popupDescription').textContent = info.description;
+          
+          const tagsContainer = document.getElementById('popupTags');
+          tagsContainer.innerHTML = info.tags
+            .map(tag => `<span class="popup-tag">${tag}</span>`)
+            .join('');
+          
+          popup.classList.add('active');
+        }
+      });
+    });
+    
+    // Close handlers
+    closeBtn.addEventListener('click', () => {
+      popup.classList.remove('active');
+    });
+    
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.classList.remove('active');
+      }
+    });
+  }
+
+  /* ========================================
+     CASE STUDIES
+     ======================================== */
+  function initCaseStudies() {
+    const cards = document.querySelectorAll('.case-study-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 200);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    cards.forEach(card => observer.observe(card));
+  }
+
+  /* ========================================
+     Initialize Portfolio
+     ======================================== */
   function init() {
     console.log('🚀 Initializing Antigravity Portfolio...');
 
@@ -611,6 +937,13 @@
     initPageTransitions();
     // initSkillProgressBars(); // Disabled - removed per user request
     initMouseTrail();
+    
+    // Initialize new showcase sections
+    initStatsCounters();
+    initTechStack();
+    initCodeShowcase();
+    initArchitectureDiagram();
+    initCaseStudies();
 
     console.log('✅ Portfolio initialized successfully!');
   }
