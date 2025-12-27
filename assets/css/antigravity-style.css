@@ -4134,16 +4134,16 @@ button .material-symbols-outlined {
   background: linear-gradient(135deg, #3186FF 0%, #749BFF 100%);
   border-radius: 16px;
   padding: 2rem;
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .case-study-results h4 {
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 1.5rem;
 }
 
 .case-study-results h4 .material-symbols-outlined {
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .results-grid {
@@ -4160,6 +4160,7 @@ button .material-symbols-outlined {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
+  color: #3289ff;
 }
 
 .result-label {
