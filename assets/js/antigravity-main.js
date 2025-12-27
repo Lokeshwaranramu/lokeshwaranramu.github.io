@@ -588,14 +588,16 @@
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
           entry.target.classList.add('visible');
+          entry.target.dataset.animated = 'true';
           
           // Animate number counter
           const numberElement = entry.target.querySelector('.stat-number');
           if (numberElement && !numberElement.dataset.counted) {
             const targetValue = parseInt(numberElement.dataset.counter);
-            animateCounter(numberElement, targetValue, 2000);
+            const startValue = parseInt(numberElement.textContent) || 0;
+            animateCounter(numberElement, startValue, targetValue, 2000);
             numberElement.dataset.counted = 'true';
           }
           
@@ -607,14 +609,16 @@
     statCards.forEach(card => observer.observe(card));
   }
 
-  function animateCounter(element, target, duration) {
-    const start = 0;
-    const increment = target / (duration / 16);
+  function animateCounter(element, start, target, duration) {
+    if (start === target) return; // No animation needed if already at target
+    
+    const range = target - start;
+    const increment = range / (duration / 16);
     let current = start;
     
     const timer = setInterval(() => {
       current += increment;
-      if (current >= target) {
+      if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
         element.textContent = target;
         clearInterval(timer);
       } else {
@@ -772,67 +776,97 @@
     const popup = document.getElementById('archPopup');
     const closeBtn = document.querySelector('.arch-popup-close');
     
-    // Component data
+    // Component data - Real implementations from projects
     const componentInfo = {
       'lwc': {
         title: 'Lightning Web Components',
-        description: 'Modern UI framework using web standards. Fast, lightweight, and follows best practices for component-based architecture.',
-        tags: ['JavaScript', 'HTML', 'CSS', 'Web Components']
+        description: 'Built custom LWC components for Service Console UI, account search, calendar planner, duplicate record manager, and record ownership analyzer. Modern, performant components following Salesforce best practices.',
+        tags: ['JavaScript', 'HTML', 'CSS', 'User Management', 'Custom UI']
       },
-      'visualforce': {
-        title: 'Visualforce Pages',
-        description: 'Server-side rendering framework for custom UI. Used for complex page layouts and legacy integrations.',
-        tags: ['Apex', 'HTML', 'JavaScript', 'Server-Side']
+      'service-console': {
+        title: 'Service Console Customization',
+        description: 'Customized Service Console for Customer Service Teams at Country Road Group, Webcentral Group, and Netregistry. Enhanced agent productivity with custom LWC components and workspace configuration.',
+        tags: ['Service Cloud', 'Agent Console', 'Case Management', 'SLA']
+      },
+      'einstein-ui': {
+        title: 'Einstein AI Implementation',
+        description: 'Implemented Einstein AI for Country Road Group retail operations. Enabled predictive insights, intelligent case routing, and automated customer service recommendations.',
+        tags: ['Einstein AI', 'Machine Learning', 'Predictive Analytics', 'Retail']
       },
       'apex-classes': {
-        title: 'Apex Classes',
-        description: 'Business logic implementation with object-oriented patterns. Handles data processing, validations, and complex calculations.',
-        tags: ['Apex', 'OOP', 'Business Logic', 'Unit Tests']
+        title: 'Apex Development',
+        description: 'Developed complex Apex classes for org mergers/de-mergers, data migration, integration handlers, and business logic. Expert in OOP patterns, bulkification, and governor limit optimization.',
+        tags: ['Apex', 'OOP', 'Batch Apex', 'Test Classes', 'Future Methods']
       },
       'triggers': {
-        title: 'Apex Triggers',
-        description: 'Event-driven automation for DML operations. Implements before/after logic for record lifecycle management.',
-        tags: ['Apex', 'Automation', 'Event-Driven', 'Data Validation']
+        title: 'Trigger Framework',
+        description: 'Architected trigger handler framework for scalable automation. Implemented complex business logic for Account, Case, Contact, and custom objects across multiple orgs.',
+        tags: ['Trigger Handlers', 'Bulkification', 'Recursion Control', 'SOQL Optimization']
       },
       'flows': {
-        title: 'Flows & Process Builder',
-        description: 'Declarative automation tools for screen flows, record-triggered flows, and scheduled automation.',
-        tags: ['Flow Builder', 'No-Code', 'Automation', 'Declarative']
+        title: 'Process Automation & SLA',
+        description: 'Implemented SLA tracking in Service Cloud with record-triggered flows. Built screen flows for customer self-service and complex approval processes. Automated case escalations and routing.',
+        tags: ['Flow Builder', 'SLA Milestones', 'Entitlement Process', 'Automation']
+      },
+      'batch-jobs': {
+        title: 'Batch & Scheduled Jobs',
+        description: 'Developed batch jobs for large-scale data migrations (5M+ records), org mergers, duplicate detection, and data cleanup. Implemented schedulable classes for automated processes.',
+        tags: ['Database.Batchable', 'Schedulable', 'Queueable', 'Async Processing']
+      },
+      'braze': {
+        title: 'Braze Marketing Integration',
+        description: 'Integrated Braze marketing automation platform with Service Cloud for Country Road Group. Real-time customer data synchronization, campaign tracking, and personalized customer engagement.',
+        tags: ['Braze', 'Marketing Cloud', 'REST API', 'Customer Journey']
+      },
+      'loyalty': {
+        title: 'Loyalty Platform Integration',
+        description: 'Built and integrated custom loyalty solution for Country Road Group with Service Cloud. Real-time points tracking, tier management, and rewards redemption for retail customers.',
+        tags: ['Loyalty Management', 'Points System', 'Retail', 'Customer Rewards']
       },
       'rest-api': {
-        title: 'REST APIs',
-        description: 'RESTful web services for external integrations. Handles authentication, rate limiting, and JSON payloads.',
-        tags: ['REST', 'HTTP', 'JSON', 'OAuth']
+        title: 'API Integrations',
+        description: 'Architected and developed REST/SOAP API integrations with external systems. Handled authentication (OAuth 2.0), error handling, rate limiting, and data transformation for seamless connectivity.',
+        tags: ['REST API', 'SOAP', 'OAuth', 'Callouts', 'Named Credentials']
       },
-      'platform-events': {
-        title: 'Platform Events',
-        description: 'Event-driven architecture for real-time messaging. Enables decoupled, scalable integrations.',
-        tags: ['Event Bus', 'Pub/Sub', 'Real-Time', 'Scalable']
+      'jira': {
+        title: 'Salesforce DevOps - JIRA Integration',
+        description: 'Created custom integration posting updates from Salesforce DevOps Center to JIRA tickets using Apex and Flow. Automated project tracking without third-party apps.',
+        tags: ['DevOps Center', 'JIRA API', 'CI/CD', 'Project Management']
       },
-      'mulesoft': {
-        title: 'MuleSoft Integration',
-        description: 'Enterprise integration platform for API-led connectivity. Orchestrates complex data flows across systems.',
-        tags: ['MuleSoft', 'APIs', 'ESB', 'Data Mapping']
+      'org-merger': {
+        title: 'Org Merger & De-Merger Expert',
+        description: 'Successfully merged Webcentral Group and Netregistry Service Cloud orgs. De-merged Country Road Group and David Jones orgs. Expertise in data migration, metadata deployment, and integration reconfiguration.',
+        tags: ['Org Consolidation', 'Data Migration', 'Change Sets', 'Metadata API']
       },
-      'custom-objects': {
-        title: 'Custom Objects',
-        description: 'Custom data models tailored to business needs. Includes relationships, validation rules, and security.',
-        tags: ['Data Model', 'Relationships', 'Schema', 'Metadata']
+      'mdm': {
+        title: 'Master Data Management',
+        description: 'Building MDM solution for customer data in Service Cloud using fuzzy logic matching. Automated duplicate detection and merge processes for maintaining data integrity across 5M+ records.',
+        tags: ['MDM', 'Fuzzy Matching', 'Data Quality', 'Duplicate Management']
       },
-      'external-objects': {
-        title: 'External Objects',
-        description: 'Real-time access to external data via Salesforce Connect. No data storage, direct API calls.',
-        tags: ['Salesforce Connect', 'OData', 'External Data', 'Real-Time']
+      'data-encryption': {
+        title: 'Data Security & Encryption',
+        description: 'Implemented Shield Platform Encryption for customer data protection. Configured field-level encryption for sensitive data in integrations and sandbox environments ensuring GDPR compliance.',
+        tags: ['Shield Encryption', 'Data Privacy', 'GDPR', 'Compliance', 'Security']
       },
-      'aws': {
-        title: 'AWS Services',
-        description: 'Cloud infrastructure for scalable processing. Lambda functions, S3 storage, and SQS queues.',
-        tags: ['AWS Lambda', 'S3', 'SQS', 'CloudWatch']
+      'data-migration': {
+        title: 'Large-Scale Data Migration',
+        description: 'Migrated 5M+ records across org mergers using Data Loader, Python scripts, and custom Apex batch jobs. Expertise in data mapping, transformation, validation, and maintaining referential integrity.',
+        tags: ['Data Loader', 'Python', 'ETL', 'Data Mapping', 'Validation Rules']
       },
-      'third-party': {
-        title: 'Third-Party APIs',
-        description: 'External service integrations for payments, SMS, email, and specialized business functions.',
-        tags: ['External APIs', 'Webhooks', 'HTTP Callouts', 'Authentication']
+      'service-cloud': {
+        title: 'Service Cloud Expertise',
+        description: 'Certified Service Cloud Consultant with extensive implementation experience across retail and telecom. Expert in case management, omni-channel routing, knowledge base, entitlements, and field service.',
+        tags: ['Service Cloud', 'Case Management', 'Omni-Channel', 'Knowledge', 'CTI']
+      },
+      'sales-cloud': {
+        title: 'Sales Cloud Implementation',
+        description: 'Implemented and customized Sales Cloud for lead management, opportunity tracking, forecasting, and sales automation. Integrated with marketing and service clouds for unified customer view.',
+        tags: ['Sales Cloud', 'Opportunity', 'Lead Management', 'Forecasting', 'Reports']
+      },
+      'appexchange': {
+        title: 'AppExchange Solutions',
+        description: 'Published 2 AppExchange solutions: "Convert Case Emails to PDF" for storage optimization and "Send Emails on Multiple Cases" for bulk communication. Used by multiple organizations.',
+        tags: ['AppExchange', 'Managed Packages', 'PDF Generation', 'Email Services']
       }
     };
     
@@ -924,7 +958,7 @@
     
     // Initialize enhanced animations (batch 1)
     initScrollProgressIndicator();
-    initTimelineProgressAnimation();
+    // Timeline progress animation removed for performance
     initParallaxCards();
     initStaggeredEntrance();
     initInteractiveGradient();
@@ -1402,48 +1436,9 @@
     updateProgress();
   }
 
-  // 2. Timeline Progress Line Animation
-  function initTimelineProgressAnimation() {
-    const timeline = document.querySelector('.timeline');
-    if (!timeline) return;
-
-    // Create progress line
-    const progressLine = document.createElement('div');
-    progressLine.className = 'timeline-progress';
-    
-    const progressDot = document.createElement('div');
-    progressDot.className = 'timeline-progress-dot';
-    progressLine.appendChild(progressDot);
-    
-    timeline.appendChild(progressLine);
-
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    function updateTimelineProgress() {
-      const timelineRect = timeline.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Calculate progress based on timeline visibility
-      if (timelineRect.top < viewportHeight && timelineRect.bottom > 0) {
-        const scrollProgress = Math.max(0, viewportHeight - timelineRect.top);
-        const maxHeight = Math.min(timelineRect.height, scrollProgress);
-        progressLine.style.height = maxHeight + 'px';
-        
-        // Highlight timeline items that are passed
-        timelineItems.forEach((item, index) => {
-          const itemRect = item.getBoundingClientRect();
-          if (itemRect.top < viewportHeight * 0.5) {
-            item.classList.add('timeline-active');
-          } else {
-            item.classList.remove('timeline-active');
-          }
-        });
-      }
-    }
-
-    window.addEventListener('scroll', updateTimelineProgress, { passive: true });
-    updateTimelineProgress();
-  }
+  // Timeline Progress Animation - REMOVED
+  // The progress line animation was causing infinite scroll issues and has been replaced
+  // with a modern card-based design that doesn't require scroll-based animations
 
   // 3. Card Parallax Depth Effect
   function initParallaxCards() {

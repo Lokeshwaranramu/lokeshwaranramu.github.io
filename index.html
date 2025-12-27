@@ -689,34 +689,34 @@
       <div class="stats-grid">
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">code</span>
-          <div class="stat-number" data-counter="50">0</div>
+          <div class="stat-number" data-counter="25">25</div>
           <div class="stat-label">Projects Completed</div>
         </div>
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">group</span>
-          <div class="stat-number" data-counter="15">0</div>
+          <div class="stat-number" data-counter="10">10</div>
           <div class="stat-label">Org Migrations</div>
         </div>
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">database</span>
-          <div class="stat-number" data-counter="5">0</div>
+          <div class="stat-number" data-counter="5">5</div>
           <div class="stat-suffix">M+</div>
           <div class="stat-label">Records Migrated</div>
         </div>
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">integration_instructions</span>
-          <div class="stat-number" data-counter="30">0</div>
+          <div class="stat-number" data-counter="30">30</div>
           <div class="stat-label">Integrations Built</div>
         </div>
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">verified</span>
-          <div class="stat-number" data-counter="99">0</div>
+          <div class="stat-number" data-counter="1">1</div>
           <div class="stat-suffix">.9%</div>
           <div class="stat-label">Data Integrity</div>
         </div>
         <div class="stat-card animate-on-scroll">
           <span class="material-symbols-outlined">support_agent</span>
-          <div class="stat-number" data-counter="10">0</div>
+          <div class="stat-number" data-counter="10">10</div>
           <div class="stat-label">Clients Served</div>
         </div>
       </div>
@@ -727,7 +727,7 @@
   <section id="tech-stack" class="tech-stack-section">
     <div class="container">
       <h2 class="section-heading">Technology Ecosystem</h2>
-      <p class="section-subtitle">Hover over technologies to see relationships</p>
+      <p class="section-subtitle">Core technologies and integrations I work with</p>
       <div class="tech-stack-canvas">
         <div class="tech-node tech-center" data-tech="salesforce">
           <span class="material-symbols-outlined">cloud</span>
@@ -782,169 +782,11 @@
     </div>
   </section>
 
-  <!-- Code Snippets Showcase -->
-  <section id="code-showcase" class="code-showcase-section">
-    <div class="container">
-      <h2 class="section-heading">Code Examples</h2>
-      <p class="section-subtitle">Real implementations from production systems</p>
-      
-      <div class="code-tabs">
-        <button type="button" class="code-tab active" data-lang="apex">Apex</button>
-        <button type="button" class="code-tab" data-lang="lwc">LWC</button>
-        <button type="button" class="code-tab" data-lang="flow">Flow</button>
-        <button type="button" class="code-tab" data-lang="integration">Integration</button>
-      </div>
-
-      <div class="code-content">
-        <div class="code-panel active" data-panel="apex">
-          <div class="code-header">
-            <span class="code-title">Batch Apex - Data Migration</span>
-            <button class="code-copy" data-code="apex">
-              <span class="material-symbols-outlined">content_copy</span>
-              Copy
-            </button>
-          </div>
-          <pre class="code-block"><code class="language-apex">public class AccountDataMigrationBatch implements Database.Batchable&lt;sObject&gt; {
-    
-    public Database.QueryLocator start(Database.BatchableContext bc) {
-        return Database.getQueryLocator([
-            SELECT Id, Name, Industry, BillingCountry
-            FROM Account
-            WHERE LastModifiedDate = LAST_N_DAYS:30
-        ]);
-    }
-    
-    public void execute(Database.BatchableContext bc, List&lt;Account&gt; scope) {
-        List&lt;Account&gt; accountsToUpdate = new List&lt;Account&gt;();
-        
-        for(Account acc : scope) {
-            if(acc.Industry == 'Technology') {
-                acc.CustomField__c = 'Migrated';
-                accountsToUpdate.add(acc);
-            }
-        }
-        
-        if(!accountsToUpdate.isEmpty()) {
-            Database.update(accountsToUpdate, false);
-        }
-    }
-    
-    public void finish(Database.BatchableContext bc) {
-        System.debug('Migration completed successfully');
-    }
-}</code></pre>
-        </div>
-
-        <div class="code-panel" data-panel="lwc">
-          <div class="code-header">
-            <span class="code-title">Lightning Web Component - Account Search</span>
-            <button class="code-copy" data-code="lwc">
-              <span class="material-symbols-outlined">content_copy</span>
-              Copy
-            </button>
-          </div>
-          <pre class="code-block"><code class="language-javascript">import { LightningElement, track } from 'lwc';
-import searchAccounts from '@salesforce/apex/AccountController.searchAccounts';
-
-export default class AccountSearch extends LightningElement {
-    @track searchKey = '';
-    @track accounts = [];
-    @track error;
-
-    handleSearchKeyChange(event) {
-        this.searchKey = event.target.value;
-    }
-
-    handleSearch() {
-        searchAccounts({ searchTerm: this.searchKey })
-            .then(result => {
-                this.accounts = result;
-                this.error = undefined;
-            })
-            .catch(error => {
-                this.error = error;
-                this.accounts = [];
-            });
-    }
-}</code></pre>
-        </div>
-
-        <div class="code-panel" data-panel="flow">
-          <div class="code-header">
-            <span class="code-title">Flow Pattern - Record-Triggered Automation</span>
-            <button class="code-copy" data-code="flow">
-              <span class="material-symbols-outlined">content_copy</span>
-              Copy
-            </button>
-          </div>
-          <pre class="code-block"><code class="language-yaml">Flow: Account_Validation_Flow
-Trigger: Before Save
-Object: Account
-
-Decision: Check_Industry
-  Criteria: Industry = 'Technology'
-  
-  If TRUE:
-    - Set: Priority__c = 'High'
-    - Send Email: Technology_Team_Alert
-    - Create Task: Follow_up_with_Account
-    
-  If FALSE:
-    - Set: Priority__c = 'Standard'
-
-Error Handling:
-  - Catch All Errors
-  - Send Email Alert to Admin
-  - Log Error Details</code></pre>
-        </div>
-
-        <div class="code-panel" data-panel="integration">
-          <div class="code-header">
-            <span class="code-title">REST Integration - External Service Callout</span>
-            <button class="code-copy" data-code="integration">
-              <span class="material-symbols-outlined">content_copy</span>
-              Copy
-            </button>
-          </div>
-          <pre class="code-block"><code class="language-apex">public class ExternalAPIIntegration {
-    
-    @future(callout=true)
-    public static void syncDataToExternalSystem(String accountId) {
-        Account acc = [SELECT Id, Name, Industry FROM Account WHERE Id = :accountId];
-        
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint('callout:External_System_API/accounts');
-        req.setMethod('POST');
-        req.setHeader('Content-Type', 'application/json');
-        
-        Map&lt;String, Object&gt; payload = new Map&lt;String, Object&gt;{
-            'name' =&gt; acc.Name,
-            'industry' =&gt; acc.Industry,
-            'salesforceId' =&gt; acc.Id
-        };
-        
-        req.setBody(JSON.serialize(payload));
-        
-        Http http = new Http();
-        HttpResponse res = http.send(req);
-        
-        if(res.getStatusCode() == 200) {
-            System.debug('Successfully synced to external system');
-        } else {
-            System.debug('Error: ' + res.getBody());
-        }
-    }
-}</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Salesforce Architecture Diagram -->
   <section id="architecture" class="architecture-section">
     <div class="container">
-      <h2 class="section-heading">System Architecture</h2>
-      <p class="section-subtitle">Click on components to see implementation details</p>
+      <h2 class="section-heading">Enterprise Salesforce Architecture</h2>
+      <p class="section-subtitle">Click on components to see real implementation details from my projects</p>
       
       <div class="architecture-diagram">
         <div class="arch-layer arch-presentation">
@@ -952,17 +794,21 @@ Error Handling:
           <div class="arch-components">
             <div class="arch-component" data-component="lwc">
               <span class="material-symbols-outlined">widgets</span>
-              <span>Lightning Web Components</span>
+              <span>LWC Components</span>
             </div>
-            <div class="arch-component" data-component="visualforce">
-              <span class="material-symbols-outlined">web</span>
-              <span>Visualforce Pages</span>
+            <div class="arch-component" data-component="service-console">
+              <span class="material-symbols-outlined">support_agent</span>
+              <span>Service Console</span>
+            </div>
+            <div class="arch-component" data-component="einstein-ui">
+              <span class="material-symbols-outlined">psychology</span>
+              <span>Einstein AI</span>
             </div>
           </div>
         </div>
 
         <div class="arch-layer arch-business">
-          <h3>Business Logic Layer</h3>
+          <h3>Business Logic & Automation</h3>
           <div class="arch-components">
             <div class="arch-component" data-component="apex-classes">
               <span class="material-symbols-outlined">code</span>
@@ -970,57 +816,77 @@ Error Handling:
             </div>
             <div class="arch-component" data-component="triggers">
               <span class="material-symbols-outlined">bolt</span>
-              <span>Triggers</span>
+              <span>Triggers & Handlers</span>
             </div>
             <div class="arch-component" data-component="flows">
               <span class="material-symbols-outlined">automation</span>
-              <span>Flows & Process Builder</span>
+              <span>Flows & SLA</span>
+            </div>
+            <div class="arch-component" data-component="batch-jobs">
+              <span class="material-symbols-outlined">schedule</span>
+              <span>Batch & Schedulable</span>
             </div>
           </div>
         </div>
 
         <div class="arch-layer arch-integration">
-          <h3>Integration Layer</h3>
+          <h3>Integration & External Systems</h3>
           <div class="arch-components">
+            <div class="arch-component" data-component="braze">
+              <span class="material-symbols-outlined">campaign</span>
+              <span>Braze Marketing</span>
+            </div>
+            <div class="arch-component" data-component="loyalty">
+              <span class="material-symbols-outlined">military_tech</span>
+              <span>Loyalty Platform</span>
+            </div>
             <div class="arch-component" data-component="rest-api">
               <span class="material-symbols-outlined">api</span>
-              <span>REST APIs</span>
+              <span>REST/SOAP APIs</span>
             </div>
-            <div class="arch-component" data-component="platform-events">
-              <span class="material-symbols-outlined">stream</span>
-              <span>Platform Events</span>
-            </div>
-            <div class="arch-component" data-component="mulesoft">
-              <span class="material-symbols-outlined">hub</span>
-              <span>MuleSoft</span>
+            <div class="arch-component" data-component="jira">
+              <span class="material-symbols-outlined">integration_instructions</span>
+              <span>JIRA Integration</span>
             </div>
           </div>
         </div>
 
         <div class="arch-layer arch-data">
-          <h3>Data Layer</h3>
+          <h3>Data Architecture & Migration</h3>
           <div class="arch-components">
-            <div class="arch-component" data-component="custom-objects">
-              <span class="material-symbols-outlined">database</span>
-              <span>Custom Objects</span>
-            </div>
-            <div class="arch-component" data-component="external-objects">
+            <div class="arch-component" data-component="org-merger">
               <span class="material-symbols-outlined">cloud_sync</span>
-              <span>External Objects</span>
+              <span>Org Merger/De-Merger</span>
+            </div>
+            <div class="arch-component" data-component="mdm">
+              <span class="material-symbols-outlined">manage_search</span>
+              <span>Master Data Management</span>
+            </div>
+            <div class="arch-component" data-component="data-encryption">
+              <span class="material-symbols-outlined">lock</span>
+              <span>Data Encryption</span>
+            </div>
+            <div class="arch-component" data-component="data-migration">
+              <span class="material-symbols-outlined">upload</span>
+              <span>Data Migration (5M+ Records)</span>
             </div>
           </div>
         </div>
 
         <div class="arch-layer arch-external">
-          <h3>External Systems</h3>
+          <h3>Clouds & AppExchange</h3>
           <div class="arch-components">
-            <div class="arch-component" data-component="aws">
-              <span class="material-symbols-outlined">cloud_queue</span>
-              <span>AWS Services</span>
+            <div class="arch-component" data-component="service-cloud">
+              <span class="material-symbols-outlined">headset_mic</span>
+              <span>Service Cloud</span>
             </div>
-            <div class="arch-component" data-component="third-party">
-              <span class="material-symbols-outlined">extension</span>
-              <span>Third-Party APIs</span>
+            <div class="arch-component" data-component="sales-cloud">
+              <span class="material-symbols-outlined">trending_up</span>
+              <span>Sales Cloud</span>
+            </div>
+            <div class="arch-component" data-component="appexchange">
+              <span class="material-symbols-outlined">apps</span>
+              <span>AppExchange Solutions</span>
             </div>
           </div>
         </div>
@@ -1048,30 +914,31 @@ Error Handling:
         <div class="case-study-card animate-on-scroll">
           <div class="case-study-header">
             <span class="case-study-icon">
-              <span class="material-symbols-outlined">merge</span>
+              <span class="material-symbols-outlined">cloud_sync</span>
             </span>
-            <h3>Multi-Org Consolidation</h3>
+            <h3>Webcentral Group & Netregistry Org Merger</h3>
           </div>
           
           <div class="case-study-content">
             <div class="case-study-section">
               <h4><span class="material-symbols-outlined">problem</span> Challenge</h4>
-              <p>Major retail group needed to merge 5 separate Salesforce orgs into a single unified instance, maintaining data integrity across 2M+ customer records and preserving all historical data.</p>
+              <p>Webcentral Group needed to merge two separate Service Cloud orgs (Webcentral and Netregistry) into a single unified instance while maintaining business continuity and ensuring zero downtime for customer service operations across Australia's leading web hosting providers.</p>
             </div>
 
             <div class="case-study-section">
               <h4><span class="material-symbols-outlined">lightbulb</span> Solution</h4>
-              <p>Architected phased migration strategy using custom Apex batch jobs, Data Loader Pro, and automated validation scripts. Implemented duplicate detection algorithms and data cleansing workflows.</p>
+              <p>Architected comprehensive org merger strategy with phased data migration using custom Apex batch jobs, Data Loader, and Python scripts. Developed custom LWC components for user access management, implemented SLA tracking, and rebuilt integrations for unified operations. Created duplicate detection and data cleansing workflows.</p>
             </div>
 
             <div class="case-study-tech">
               <h4>Technologies Used</h4>
               <div class="tech-tags">
-                <span class="tech-tag">Apex Batch</span>
+                <span class="tech-tag">Apex Batch Jobs</span>
                 <span class="tech-tag">Data Loader</span>
-                <span class="tech-tag">SOQL</span>
+                <span class="tech-tag">LWC</span>
                 <span class="tech-tag">Python Scripts</span>
-                <span class="tech-tag">Duplicate Rules</span>
+                <span class="tech-tag">Service Cloud</span>
+                <span class="tech-tag">SLA Milestones</span>
               </div>
             </div>
 
@@ -1087,13 +954,13 @@ Error Handling:
                   <div class="result-label">Data Accuracy</div>
                 </div>
                 <div class="result-item">
-                  <div class="result-number">40%</div>
+                  <div class="result-number">Zero</div>
+                  <div class="result-label">Downtime</div>
+                </div>
+                <div class="result-item">
+                  <div class="result-number">30%</div>
                   <div class="result-label">Cost Reduction</div>
                 </div>
-                <div class="result-item">
-                  <div class="result-number">6 weeks</div>
-                  <div class="result-label">Completion Time</div>
-                </div>
               </div>
             </div>
           </div>
@@ -1102,105 +969,109 @@ Error Handling:
         <div class="case-study-card animate-on-scroll">
           <div class="case-study-header">
             <span class="case-study-icon">
-              <span class="material-symbols-outlined">integration_instructions</span>
+              <span class="material-symbols-outlined">call_split</span>
             </span>
-            <h3>Real-Time Integration Platform</h3>
+            <h3>Country Road Group Org De-Merger & Retail Platform</h3>
           </div>
           
           <div class="case-study-content">
             <div class="case-study-section">
               <h4><span class="material-symbols-outlined">problem</span> Challenge</h4>
-              <p>Financial services company required real-time data sync between Salesforce and 8 external systems, including legacy mainframes, with sub-second latency requirements.</p>
+              <p>Country Road Group needed to de-merge their Service Cloud org from David Jones to establish independent retail operations. Additionally, required implementation of Einstein AI, Loyalty platform integration with Braze marketing automation, and comprehensive data privacy framework for GDPR compliance.</p>
             </div>
 
             <div class="case-study-section">
               <h4><span class="material-symbols-outlined">lightbulb</span> Solution</h4>
-              <p>Designed event-driven architecture using Platform Events, custom REST APIs, and middleware integration layer. Implemented circuit breaker patterns and retry logic for resilience.</p>
+              <p>Led complete org de-merger with selective data migration of 5M+ records. Implemented Einstein AI for predictive insights, built custom Loyalty platform integrated with Service Cloud, established real-time Braze integration for marketing campaigns, and deployed Shield Platform Encryption for customer data protection. Developed custom LWC components for enhanced customer service experience.</p>
             </div>
 
             <div class="case-study-tech">
               <h4>Technologies Used</h4>
               <div class="tech-tags">
-                <span class="tech-tag">Platform Events</span>
+                <span class="tech-tag">Einstein AI</span>
+                <span class="tech-tag">Braze Integration</span>
+                <span class="tech-tag">Loyalty Platform</span>
+                <span class="tech-tag">Shield Encryption</span>
                 <span class="tech-tag">REST API</span>
-                <span class="tech-tag">AWS Lambda</span>
-                <span class="tech-tag">Custom Apex</span>
-                <span class="tech-tag">Change Data Capture</span>
-              </div>
-            </div>
-
-            <div class="case-study-results">
-              <h4><span class="material-symbols-outlined">trending_up</span> Results</h4>
-              <div class="results-grid">
-                <div class="result-item">
-                  <div class="result-number">&lt;500ms</div>
-                  <div class="result-label">Sync Latency</div>
-                </div>
-                <div class="result-item">
-                  <div class="result-number">99.99%</div>
-                  <div class="result-label">Uptime</div>
-                </div>
-                <div class="result-item">
-                  <div class="result-number">10K+</div>
-                  <div class="result-label">Events/Day</div>
-                </div>
-                <div class="result-item">
-                  <div class="result-number">Zero</div>
-                  <div class="result-label">Data Loss</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="case-study-card animate-on-scroll">
-          <div class="case-study-header">
-            <span class="case-study-icon">
-              <span class="material-symbols-outlined">shield</span>
-            </span>
-            <h3>Data Privacy & Compliance</h3>
-          </div>
-          
-          <div class="case-study-content">
-            <div class="case-study-section">
-              <h4><span class="material-symbols-outlined">problem</span> Challenge</h4>
-              <p>Retail organization needed GDPR and HIPAA compliance solution with automated data masking, audit trails, and right-to-be-forgotten implementation.</p>
-            </div>
-
-            <div class="case-study-section">
-              <h4><span class="material-symbols-outlined">lightbulb</span> Solution</h4>
-              <p>Built comprehensive privacy framework with field-level encryption, automated PII detection, and consent management system. Created custom LWC for data subject access requests.</p>
-            </div>
-
-            <div class="case-study-tech">
-              <h4>Technologies Used</h4>
-              <div class="tech-tags">
-                <span class="tech-tag">Shield Platform Encryption</span>
                 <span class="tech-tag">LWC</span>
-                <span class="tech-tag">Apex Triggers</span>
-                <span class="tech-tag">Field Audit Trail</span>
-                <span class="tech-tag">Custom Permissions</span>
+                <span class="tech-tag">Apex Batch</span>
               </div>
             </div>
 
             <div class="case-study-results">
               <h4><span class="material-symbols-outlined">trending_up</span> Results</h4>
               <div class="results-grid">
+                <div class="result-item">
+                  <div class="result-number">5M+</div>
+                  <div class="result-label">Records Migrated</div>
+                </div>
+                <div class="result-item">
+                  <div class="result-number">40%</div>
+                  <div class="result-label">AI Efficiency Gain</div>
+                </div>
+                <div class="result-item">
+                  <div class="result-number">Real-Time</div>
+                  <div class="result-label">Marketing Sync</div>
+                </div>
                 <div class="result-item">
                   <div class="result-number">100%</div>
-                  <div class="result-label">Compliance</div>
+                  <div class="result-label">GDPR Compliance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study-card animate-on-scroll">
+          <div class="case-study-header">
+            <span class="case-study-icon">
+              <span class="material-symbols-outlined">manage_search</span>
+            </span>
+            <h3>Master Data Management & AppExchange Innovation</h3>
+          </div>
+          
+          <div class="case-study-content">
+            <div class="case-study-section">
+              <h4><span class="material-symbols-outlined">problem</span> Challenge</h4>
+              <p>Organizations faced duplicate customer records, storage limitations from case email attachments, and inefficient bulk communication processes in Service Cloud. Need for scalable MDM solution and storage optimization across multiple Salesforce clouds.</p>
+            </div>
+
+            <div class="case-study-section">
+              <h4><span class="material-symbols-outlined">lightbulb</span> Solution</h4>
+              <p>Developed custom Master Data Management solution using fuzzy logic matching for automated duplicate detection and merge. Published two AppExchange solutions: "Convert Case Emails to PDF" for automatic storage optimization, and "Send Emails on Multiple Cases" for bulk customer communication. Created GitHub solutions including Calendar Planner LWC, Record Ownership Analyzer, and Salesforce DevOps-JIRA integration.</p>
+            </div>
+
+            <div class="case-study-tech">
+              <h4>Technologies Used</h4>
+              <div class="tech-tags">
+                <span class="tech-tag">Fuzzy Matching</span>
+                <span class="tech-tag">LWC</span>
+                <span class="tech-tag">Email Services</span>
+                <span class="tech-tag">PDF Generation</span>
+                <span class="tech-tag">Apex Classes</span>
+                <span class="tech-tag">Flow</span>
+                <span class="tech-tag">AppExchange</span>
+              </div>
+            </div>
+
+            <div class="case-study-results">
+              <h4><span class="material-symbols-outlined">trending_up</span> Results</h4>
+              <div class="results-grid">
+                <div class="result-item">
+                  <div class="result-number">99.9%</div>
+                  <div class="result-label">Data Integrity</div>
                 </div>
                 <div class="result-item">
-                  <div class="result-number">500K+</div>
-                  <div class="result-label">Records Secured</div>
+                  <div class="result-number">60%</div>
+                  <div class="result-label">Storage Saved</div>
                 </div>
                 <div class="result-item">
-                  <div class="result-number">24hr</div>
-                  <div class="result-label">DSAR Response</div>
+                  <div class="result-number">10+</div>
+                  <div class="result-label">Organizations Using</div>
                 </div>
                 <div class="result-item">
-                  <div class="result-number">Zero</div>
-                  <div class="result-label">Breaches</div>
+                  <div class="result-number">5+</div>
+                  <div class="result-label">Open Source Tools</div>
                 </div>
               </div>
             </div>
@@ -1310,7 +1181,6 @@ Error Handling:
       
       <div class="timeline">
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date" id="currentJobDate">August 2025 - Present</div>
             <div class="timeline-duration"><span id="currentJobDuration">5 months</span></div>
@@ -1321,7 +1191,6 @@ Error Handling:
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">February 2023 - May 2025</div>
             <div class="timeline-duration"><span id="crg-duration">2 years 4 months</span></div>
@@ -1332,7 +1201,6 @@ Error Handling:
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2021 - February 2023</div>
             <div class="timeline-duration"><span id="webcentral-duration">1 year 5 months</span></div>
@@ -1343,7 +1211,6 @@ Error Handling:
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2020 - November 2021</div>
             <div class="timeline-duration"><span id="salesforce-duration">1 year 2 months</span></div>
@@ -1354,7 +1221,6 @@ Error Handling:
         </div>
 
         <div class="timeline-item animate-on-scroll">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-date">October 2017 - September 2020</div>
             <div class="timeline-duration"><span id="issquared-duration">3 years</span></div>
