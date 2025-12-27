@@ -1800,6 +1800,132 @@
 })();
 
 /* ========================================
+   Copy Code Snippet Function
+   ======================================== */
+function copyCode(button) {
+  const codeSnippet = button.closest('.code-snippet');
+  const codeElement = codeSnippet.querySelector('code');
+  const codeText = codeElement.textContent;
+
+  // Create temporary textarea
+  const textarea = document.createElement('textarea');
+  textarea.value = codeText;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  
+  // Select and copy
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // For mobile
+  
+  try {
+    document.execCommand('copy');
+    
+    // Update button with success feedback
+    const icon = button.querySelector('.material-symbols-outlined');
+    const originalIcon = icon.textContent;
+    icon.textContent = 'check';
+    button.style.color = '#00B95C';
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+      icon.textContent = originalIcon;
+      button.style.color = '';
+    }, 2000);
+    
+    // Show toast notification
+    showToast('Code copied to clipboard!');
+  } catch (err) {
+    console.error('Failed to copy:', err);
+    showToast('Failed to copy code', 'error');
+  }
+  
+  document.body.removeChild(textarea);
+}
+
+/* ========================================
+   Toast Notification Function
+   ======================================== */
+function showToast(message, type = 'success') {
+  // Remove existing toast if any
+  const existingToast = document.querySelector('.toast-notification');
+  if (existingToast) {
+    existingToast.remove();
+  }
+  
+  // Create toast
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: ${type === 'success' ? '#00B95C' : '#FC413D'};
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideInRight 0.3s ease-out;
+  `;
+  
+  toast.innerHTML = `
+    <span class="material-symbols-outlined" style="font-size: 20px;">
+      ${type === 'success' ? 'check_circle' : 'error'}
+    </span>
+    ${message}
+  `;
+  
+  document.body.appendChild(toast);
+  
+  // Animate out and remove
+  setTimeout(() => {
+    toast.style.animation = 'slideOutRight 0.3s ease-out forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+
+// Add toast animation keyframes
+const toastStyle = document.createElement('style');
+toastStyle.textContent = `
+  @keyframes slideInRight {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .toast-notification {
+      right: 15px !important;
+      left: 15px !important;
+      bottom: 20px !important;
+    }
+  }
+`;
+document.head.appendChild(toastStyle);
+
+/* ========================================
    Additional Utilities
    ======================================== */
 
