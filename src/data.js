@@ -8,7 +8,7 @@ export const personalInfo = {
   birthDate: '1996-05-16',
   careerStart: '2017-10-01',
   education: 'Bachelor of Information Technology',
-  resumeUrl: 'Lokeshwaran_Ramu - CRM SME_Salesforce_Dev.pdf',
+  resumeUrl: 'Lokeshwaran_Ramu_Resume.pdf',
   profileImage: '/assets/img/new_profile_img.png',
   avatarImage: '/assets/img/Avatar.png',
   social: {
