@@ -2,8 +2,6 @@ import { motion } from 'motion/react'
 import { features } from '../data'
 import { useSectionParallax, staggerContainer, fadeUp } from '../hooks/useMotion'
 
-const IS_TOUCH = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
-
 const iconList = [
   'cloud', 'code', 'integration_instructions', 'database', 'security',
   'automation', 'terminal', 'api', 'storage', 'settings', 'data_object',
@@ -16,10 +14,10 @@ function FeatureCard({ feature, index }) {
   return (
     <motion.div
       className={`feature-card ${isEven ? '' : 'feature-card-reverse'}`}
-      initial={{ opacity: 0, y: 40, x: IS_TOUCH ? 0 : (isEven ? -25 : 25) }}
+      initial={{ opacity: 0, y: 60, x: isEven ? -40 : 40 }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, type: 'spring', stiffness: 90 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.7, type: 'spring', stiffness: 80 }}
     >
       <motion.div
         className="feature-icon-wrapper"

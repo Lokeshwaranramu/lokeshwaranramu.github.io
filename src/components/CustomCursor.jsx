@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const IS_TOUCH = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
-
 export default function CustomCursor() {
-  // Don't render on touch devices — pointless and wastes a rAF loop
-  if (IS_TOUCH) return null
-
   const outerRef = useRef(null)
   const innerRef = useRef(null)
   const [hovering, setHovering] = useState(false)
