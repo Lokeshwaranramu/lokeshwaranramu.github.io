@@ -3,6 +3,8 @@ import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'moti
 import { skills } from '../data'
 import { useSectionParallax, staggerContainer, fadeScale } from '../hooks/useMotion'
 
+const IS_TOUCH = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+
 /* ─── Skill node with interactive glow ring ─── */
 function SkillNode({ skill, index, total }) {
   const ref = useRef(null)
@@ -42,9 +44,9 @@ function SkillNode({ skill, index, total }) {
         '--skill-color': color,
       }}
       variants={fadeScale}
-      onMouseMove={handleMouse}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={handleLeave}
+      onMouseMove={IS_TOUCH ? undefined : handleMouse}
+      onMouseEnter={IS_TOUCH ? undefined : () => setHovered(true)}
+      onMouseLeave={IS_TOUCH ? undefined : handleLeave}
       whileTap={{ scale: 0.95 }}
     >
       {/* Animated ring */}
@@ -97,48 +99,69 @@ function SkillConnections() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    const canvas = canvasRef.current
+    if (!canvas) return
     const ctx = canvas.getContext('2d')
     let animId
     let time = 0
+    let visible = true
+    let cachedRects = []
+    let frameCount = 0
+    const DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting }, { threshold: 0 })
+    io.observe(canvas)
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
-      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0)
+      canvas.width = canvas.offsetWidth * DPR
+      canvas.height = canvas.offsetHeight * DPR
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
+      cachedRects = [] // force recalc after resize
     }
 
     const animate = () => {
-      time += 0.005
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
-      const nodes = canvas.parentElement.querySelectorAll('.skill-node')
-      const rects = Array.from(nodes).map(n => {
-        const r = n.getBoundingClientRect()
-        const cr = canvas.getBoundingClientRect()
-        return { x: r.left - cr.left + r.width / 2, y: r.top - cr.top + r.height / 2 }
-      })
+      animId = requestAnimationFrame(animate)
+      if (!visible) return
+      time += 0.004
+      frameCount++
 
-      for (let i = 0; i < rects.length; i++) {
-        for (let j = i + 1; j < rects.length; j++) {
-          const dx = rects[i].x - rects[j].x
-          const dy = rects[i].y - rects[j].y
+      // Recalc node positions every 30 frames (not every frame) to avoid forced layout
+      if (frameCount % 30 === 0 || cachedRects.length === 0) {
+        const nodes = canvas.parentElement.querySelectorAll('.skill-node')
+        const cr = canvas.getBoundingClientRect()
+        cachedRects = Array.from(nodes).map(n => {
+          const r = n.getBoundingClientRect()
+          return { x: r.left - cr.left + r.width / 2, y: r.top - cr.top + r.height / 2 }
+        })
+      }
+
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+      for (let i = 0; i < cachedRects.length; i++) {
+        for (let j = i + 1; j < cachedRects.length; j++) {
+          const dx = cachedRects[i].x - cachedRects[j].x
+          const dy = cachedRects[i].y - cachedRects[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 250) {
-            const alpha = 0.06 * (1 - dist / 250) * (0.5 + 0.5 * Math.sin(time + i + j))
+          if (dist < 220) {
+            const alpha = 0.05 * (1 - dist / 220) * (0.5 + 0.5 * Math.sin(time + i + j))
             ctx.beginPath()
-            ctx.moveTo(rects[i].x, rects[i].y)
-            ctx.lineTo(rects[j].x, rects[j].y)
+            ctx.moveTo(cachedRects[i].x, cachedRects[i].y)
+            ctx.lineTo(cachedRects[j].x, cachedRects[j].y)
             ctx.strokeStyle = `rgba(2, 132, 199, ${alpha})`
             ctx.lineWidth = 1
             ctx.stroke()
           }
         }
       }
-      animId = requestAnimationFrame(animate)
     }
 
+    const resizeObs = new ResizeObserver(resize)
+    resizeObs.observe(canvas)
     resize(); animate()
-    window.addEventListener('resize', resize)
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+    return () => {
+      cancelAnimationFrame(animId)
+      io.disconnect()
+      resizeObs.disconnect()
+    }
   }, [])
 
   return <canvas ref={canvasRef} className="skill-connections-canvas" />
@@ -167,12 +190,12 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Hover to interact — Technologies and platforms I specialize in
+            {IS_TOUCH ? 'Tap to interact' : 'Hover to interact'} — Technologies and platforms I specialize in
           </motion.p>
         </motion.div>
 
         <div className="skills-wrapper">
-          <SkillConnections />
+          {!IS_TOUCH && <SkillConnections />}
           <motion.div
             className="skills-grid"
             variants={staggerContainer(0.1, 0.05)}

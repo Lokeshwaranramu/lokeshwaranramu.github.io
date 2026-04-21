@@ -329,6 +329,13 @@ section { padding: var(--section-gap) 0; position: relative; }
   border-right-color: var(--accent-secondary);
   border-bottom-color: var(--accent-tertiary);
 }
+/* CSS-driven spin — replaces the rAF loop in JS */
+.hero-avatar-ring--spin {
+  animation: ringRotate 12s linear infinite;
+}
+@keyframes ringRotate {
+  to { transform: rotate(360deg); }
+}
 .hero-avatar-glow {
   position: absolute; inset: -30px;
   border-radius: 50%;

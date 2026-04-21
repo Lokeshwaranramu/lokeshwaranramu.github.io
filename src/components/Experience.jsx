@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react'
 import { experience } from '../data'
 import { useSectionParallax, staggerContainer, slideInLeft } from '../hooks/useMotion'
 
+const IS_TOUCH = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+
 function formatDate(d) {
   if (!d) return 'Present'
   return new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
@@ -45,10 +47,10 @@ function ExperienceCard({ job, index }) {
   return (
     <motion.div
       className={`timeline-item ${isLeft ? 'timeline-left' : 'timeline-right'}`}
-      initial={{ opacity: 0, x: isLeft ? -80 : 80 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, x: IS_TOUCH ? 0 : (isLeft ? -50 : 50), y: IS_TOUCH ? 30 : 0 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.7, type: 'spring', stiffness: 100, delay: index * 0.12 }}
+      transition={{ duration: 0.6, type: 'spring', stiffness: 100, delay: index * 0.1 }}
     >
       <TimelineDot index={index} isLast={index === experience.length - 1} />
 

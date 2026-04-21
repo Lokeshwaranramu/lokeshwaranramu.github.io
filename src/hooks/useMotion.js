@@ -1,7 +1,11 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useScroll, useTransform, useSpring, useMotionValue } from 'motion/react'
 
-/* ─── Magnetic Element ─── */
+/* ─── Touch / mobile detection (hover: none = touch device) ─── */
+const isTouchDevice = () =>
+  typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+
+/* ─── Magnetic Element (no-op on touch) ─── */
 export function useMagnetic(strength = 0.3) {
   const ref = useRef(null)
   const x = useMotionValue(0)
@@ -11,7 +15,7 @@ export function useMagnetic(strength = 0.3) {
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || isTouchDevice()) return
     const move = (e) => {
       const rect = el.getBoundingClientRect()
       const cx = rect.left + rect.width / 2
@@ -20,7 +24,7 @@ export function useMagnetic(strength = 0.3) {
       y.set((e.clientY - cy) * strength)
     }
     const leave = () => { x.set(0); y.set(0) }
-    el.addEventListener('mousemove', move)
+    el.addEventListener('mousemove', move, { passive: true })
     el.addEventListener('mouseleave', leave)
     return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave) }
   }, [strength, x, y])
@@ -28,7 +32,7 @@ export function useMagnetic(strength = 0.3) {
   return { ref, style: { x: springX, y: springY } }
 }
 
-/* ─── 3D Tilt Card ─── */
+/* ─── 3D Tilt Card (no-op on touch) ─── */
 export function useTilt(intensity = 15) {
   const ref = useRef(null)
   const rotateX = useMotionValue(0)
@@ -40,7 +44,7 @@ export function useTilt(intensity = 15) {
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || isTouchDevice()) return
     const move = (e) => {
       const rect = el.getBoundingClientRect()
       const px = (e.clientX - rect.left) / rect.width
@@ -51,24 +55,15 @@ export function useTilt(intensity = 15) {
       glareY.set(py * 100)
     }
     const leave = () => { rotateX.set(0); rotateY.set(0); glareX.set(50); glareY.set(50) }
-    el.addEventListener('mousemove', move)
+    el.addEventListener('mousemove', move, { passive: true })
     el.addEventListener('mouseleave', leave)
     return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave) }
   }, [intensity, rotateX, rotateY, glareX, glareY])
 
-  return {
-    ref,
-    style: {
-      rotateX: springRX,
-      rotateY: springRY,
-      transformPerspective: 800,
-    },
-    glareX,
-    glareY,
-  }
+  return { ref, style: { rotateX: springRX, rotateY: springRY, transformPerspective: 800 }, glareX, glareY }
 }
 
-/* ─── Mouse Parallax ─── */
+/* ─── Mouse Parallax (no-op on touch) ─── */
 export function useMouseParallax(factor = 0.02) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -76,24 +71,26 @@ export function useMouseParallax(factor = 0.02) {
   const springY = useSpring(y, { stiffness: 50, damping: 20 })
 
   useEffect(() => {
+    if (isTouchDevice()) return
     const move = (e) => {
       const cx = window.innerWidth / 2
       const cy = window.innerHeight / 2
       x.set((e.clientX - cx) * factor)
       y.set((e.clientY - cy) * factor)
     }
-    window.addEventListener('mousemove', move)
+    window.addEventListener('mousemove', move, { passive: true })
     return () => window.removeEventListener('mousemove', move)
   }, [factor, x, y])
 
   return { x: springX, y: springY }
 }
 
-/* ─── Scroll-linked section parallax ─── */
+/* ─── Scroll-linked section parallax (disabled on touch for smooth scroll) ─── */
 export function useSectionParallax(offset = 50) {
   const ref = useRef(null)
+  const touch = isTouchDevice()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset])
+  const y = useTransform(scrollYProgress, [0, 1], touch ? [0, 0] : [offset, -offset])
   const springY = useSpring(y, { stiffness: 100, damping: 30 })
   return { ref, y: springY, progress: scrollYProgress }
 }
@@ -113,26 +110,27 @@ export const staggerContainer = (delay = 0, stagger = 0.03) => ({
 })
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 export const fadeScale = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.9 },
   show: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 200, damping: 20 } },
 }
 
 export const slideInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, x: -40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 export const slideInRight = {
-  hidden: { opacity: 0, x: 60 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, x: 40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
+/* ─── charReveal: 2D only (no rotateX — avoids expensive 3D compositing layers) ─── */
 export const charReveal = {
-  hidden: { opacity: 0, y: 20, rotateX: -90 },
-  show: { opacity: 1, y: 0, rotateX: 0 },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
 }
