@@ -192,6 +192,17 @@
   }
   </script>
 
+  <!-- GitHub Pages SPA routing — decode redirect from 404.html -->
+  <script>
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+
   <!-- Google Verification & Analytics -->
   <meta name="google-site-verification" content="2Xr6_uUvqI2ALVJR6vJmyMnydwPPkCs-EfYKJaKmDxU">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5V9X2G4PX"></script>

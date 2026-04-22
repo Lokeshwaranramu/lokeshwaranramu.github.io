@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
 import Header from './components/Header'
@@ -9,12 +10,14 @@ import Projects from './components/Projects'
 import Stats from './components/Stats'
 import CaseStudies from './components/CaseStudies'
 import OpenSource from './components/OpenSource'
+import AppExchange from './components/AppExchange'
 import Experience from './components/Experience'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ConvertCasePage from './pages/ConvertCasePage'
 
-export default function App() {
+function Portfolio() {
   return (
     <>
       <CustomCursor />
@@ -29,11 +32,21 @@ export default function App() {
         <Stats />
         <CaseStudies />
         <OpenSource />
+        <AppExchange />
         <Experience />
         <Certifications />
         <Contact />
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Portfolio />} />
+      <Route path="/convert-case-emails-to-pdf" element={<ConvertCasePage />} />
+    </Routes>
   )
 }

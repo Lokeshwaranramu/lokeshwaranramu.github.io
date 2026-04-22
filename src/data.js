@@ -187,6 +187,79 @@ export const caseStudies = [
   },
 ]
 
+export const appExchangeProducts = [
+  {
+    id: 'convert-case-emails-to-pdf',
+    name: 'Convert Case Emails to PDF',
+    slug: 'convert-case-emails-to-pdf',
+    tagline: 'Save Salesforce Storage. Retain Every Email.',
+    category: 'Memory Solution',
+    appExchangeUrl: 'https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HSbdNUAT',
+    detailPath: '/convert-case-emails-to-pdf',
+    price: 'Free',
+    rating: 4.25,
+    reviewCount: 4,
+    version: 'V6 4.1.0',
+    listedDate: 'Feb 2023',
+    latestRelease: 'Feb 2024',
+    languages: 18,
+    icon: 'picture_as_pdf',
+    description:
+      'Convert case email messages into PDFs and attach them back to the respective case records based on email created dates — dramatically reducing data storage usage while retaining every important communication inside your Salesforce org.',
+    storageStats: { before: '~7.3 MB', beforePct: 100, after: '~0.3 MB', afterPct: 4, saved: '96%' },
+    highlights: [
+      {
+        icon: 'storage',
+        title: 'Maximize Storage',
+        desc: 'Unleash the power of Service Cloud — save precious storage space while retaining important case emails as PDFs. Orgs that use Service Cloud save up to 60% storage.',
+        color: '#0284c7',
+      },
+      {
+        icon: 'compress',
+        title: 'Minimum File Size',
+        desc: 'Only Closed cases are processed (isClosed = true). PDFs are created with minimum file size and attached directly to the respective cases.',
+        color: '#4f46e5',
+      },
+      {
+        icon: 'lock',
+        title: 'Stay Inside Salesforce',
+        desc: 'Email messages are retained inside your Salesforce org rather than buying new external storage — keeping all your data in one secure, compliant place.',
+        color: '#16a34a',
+      },
+    ],
+    stats: [
+      { label: 'Rating', value: '4.25★', icon: 'star' },
+      { label: 'Reviews', value: '4', icon: 'rate_review' },
+      { label: 'Price', value: 'Free', icon: 'sell' },
+      { label: 'Languages', value: '18', icon: 'language' },
+    ],
+    industries: ['Communications', 'Consumer Goods', 'High Tech'],
+    compatibility: ['Sales Cloud', 'Service Cloud', 'Platform Cloud'],
+    requires: 'Service Cloud',
+    additionalRequirements: 'Email-to-Case',
+    supportedFeatures: ['No Limits', 'Lightning Ready', 'Managed Package', 'Lightning App Builder', 'Salesforce Mobile'],
+    salesforceEditions: ['Professional', 'Enterprise', 'Unlimited', 'Force.com', 'Developer', 'Essentials'],
+    pros: [
+      'Frees up data storage without losing email history',
+      'Fully automated — no manual intervention required',
+      'Works across all major Salesforce editions',
+      'PDFs created at minimum file size for efficiency',
+      'Attachments stored directly on case records',
+      'Lightning Ready, Mobile-compatible managed package',
+    ],
+    cons: [
+      'Only processes closed cases (isClosed = true)',
+      'Requires Email-to-Case to be configured',
+      'Service Cloud license required',
+    ],
+    sampleEmails: [
+      { id: '#1042', subject: 'Password Reset Issue', size: '2.4 MB' },
+      { id: '#1043', subject: 'Billing Inquiry', size: '1.8 MB' },
+      { id: '#1044', subject: 'Product Return Request', size: '3.1 MB' },
+    ],
+  },
+]
+
 export const stats = [
   { value: 25, label: 'Projects Completed', icon: 'code' },
   { value: 10, label: 'Org Migrations', icon: 'group' },
