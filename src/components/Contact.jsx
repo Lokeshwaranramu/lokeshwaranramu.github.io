@@ -47,8 +47,8 @@ export default function Contact() {
         'service_hln8j1b',
         'template_zvnpvci',
         {
-          from_name: data.get('name'),
-          from_email: data.get('email'),
+          name: data.get('name'),
+          email: data.get('email'),
           subject: data.get('subject'),
           message: data.get('message'),
         },
