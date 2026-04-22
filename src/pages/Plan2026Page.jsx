@@ -213,6 +213,7 @@ export default function Plan2026Page() {
                 ['#s15', '15. Pty Ltd — The Truth'],
                 ['#s16', '16. Adelaide vs Melbourne West'],
                 ['#s17', '17. Optimal Strategy 🏆'],
+                ['#s18', '18. Wife Career Guide 👩‍💼'],
               ].map(([href, label]) => (
                 <a key={href} href={href} className="plan-toc-link">{label}</a>
               ))}
@@ -1018,7 +1019,298 @@ export default function Plan2026Page() {
           </FadeIn>
         </Section>
 
-        {/* ── END ADDITION ── */}
+        {/* SECTION 18 */}
+        <Section id="s18" number="18" title="Career & Earning Guide — Your Wife">
+          <FadeIn>
+            <Callout type="tip">
+              <strong>Her profile:</strong> B.Tech in IT (2018), no work experience in India or Australia, not interested in programming, English confidence is low but growing, PR holder, motivated to earn and support the family.
+            </Callout>
+            <p>Your wife has a B.Tech degree — a genuine advantage. But 7+ years without any work experience needs a smart approach. Australia has massive labour shortages right now; employers are desperate in several sectors, many not requiring experience or perfect English.</p>
+            <p>Options ranked from <strong>quickest to earn money</strong> → <strong>highest long-term earning potential</strong>.</p>
+          </FadeIn>
+
+          <FadeIn delay={0.05}>
+            <h3>Tier 1 — Start Earning Within 2–4 Weeks</h3>
+            <p style={{color:'var(--plan-muted)', marginTop:'-0.5rem', marginBottom:'1rem'}}>No course needed, minimal English required</p>
+            <Table
+              headers={['Option', 'Role', 'Pay', 'English needed', 'How to start']}
+              rows={[
+                ['A', 'Warehouse & Logistics (Amazon, Coles, Woolworths, Aldi distribution)', '$28–$35/hr ($55k–$70k/yr) + penalty rates', 'Basic — often visual/physical instructions', 'Register with Hays, Randstad, Adecco, Workforce Australia'],
+                ['B', 'Retail — Indian grocery stores, supermarkets', '$25–$32/hr', 'Basic to moderate — Hindi/Tamil speakers actively sought in Adelaide & Melbourne west', 'Walk into local Indian grocery stores, register on SEEK/Indeed'],
+                ['C', 'Cleaning — commercial offices or residential/Airbnb', '$28–$38/hr ($55k–$75k with regular clients)', 'Minimal', 'Register on Airtasker, Hipages, or contact commercial cleaning companies'],
+              ]}
+            />
+          </FadeIn>
+
+          <FadeIn delay={0.08}>
+            <h3>Tier 2 — Start Earning in 1–3 Months</h3>
+            <p style={{color:'var(--plan-muted)', marginTop:'-0.5rem', marginBottom:'1rem'}}>Short course or certification needed — most are FREE</p>
+
+            <h3 style={{fontSize:'1rem'}}>Option D: Aged Care / Disability Support Worker ⭐ Highly Recommended</h3>
+            <Table
+              headers={['Item', 'Details']}
+              rows={[
+                ['Pay', '$30–$40/hr ($60k–$80k/yr); NDIS support workers $35–$45/hr; higher on weekends/nights'],
+                ['Course', 'Certificate III in Individual Support (Ageing & Disability) — 6–9 months, can start paid placement within 3 months'],
+                ['Cost', 'FREE through Fee-Free TAFE (both VIC and SA) — qualifies as PR holder'],
+                ['Demand', 'MASSIVE — 65,000+ unfilled positions nationally. 100% employment rate for graduates'],
+                ['English needed', 'Moderate — communicate with clients, write basic care notes'],
+                ['Career pathway', 'Cert III → Cert IV → Diploma of Nursing → Registered Nurse ($80k–$110k)'],
+              ]}
+            />
+            <Callout type="good">Genuine 100% employment rate after graduation, fee-free, flexible shifts around your daughter, and a clear pathway to nursing. This is her fastest path to stable income.</Callout>
+
+            <h3 style={{fontSize:'1rem', marginTop:'1.5rem'}}>Option E: Childcare / Early Childhood Education ⭐ Also Excellent</h3>
+            <Table
+              headers={['Item', 'Details']}
+              rows={[
+                ['Pay', '$27–$35/hr ($55k–$70k/yr); Diploma holders $65k–$80k'],
+                ['Course', 'Certificate III in Early Childhood Education and Care — 6–12 months, FREE through Fee-Free TAFE'],
+                ['Demand', 'Very high — national shortage, especially in Werribee, Tarneit, Wyndham Vale, Adelaide north'],
+                ['English needed', 'Moderate'],
+                ['Huge bonus', 'Staff childcare discount — many centres offer 50%+ off fees for their employees\' children. Saves $500–$1,000+/month for your family'],
+              ]}
+            />
+            <Callout type="tip">She's already raising a 2-year-old — real-world experience with children. The staff childcare discount alone can save your family more than $500/month.</Callout>
+
+            <h3 style={{fontSize:'1rem', marginTop:'1.5rem'}}>Option F: Bookkeeping & Accounts</h3>
+            <Table
+              headers={['Item', 'Details']}
+              rows={[
+                ['Pay', '$55k–$75k/yr; freelance $40–$60/hr'],
+                ['Course', 'Certificate IV in Accounting and Bookkeeping — 6–12 months, FREE in VIC, subsidised in SA'],
+                ['English needed', 'Moderate — numbers-focused, less speaking required'],
+                ['Upside', 'Her IT background means she\'s comfortable with software (Xero, MYOB). Can eventually manage YOUR contracting business finances. Can work from home. Can freelance.'],
+              ]}
+            />
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <h3>Tier 3 — Start Earning in 3–6 Months ⭐⭐⭐ The Power Move</h3>
+
+            <h3 style={{fontSize:'1rem'}}>Option G: Salesforce Administrator</h3>
+            <Callout type="good">
+              <strong>This is the game-changer — and it uses YOUR expertise to accelerate HER career.</strong><br />
+              Salesforce Admin is a "point and click" role — configuring Salesforce, managing users, creating reports, setting up workflows. <strong>Zero coding required.</strong> You are a Senior Salesforce Developer — you can mentor her at home, teach her Trailhead, help her study for certifications. This is the most in-demand non-coding tech role in Australia.
+            </Callout>
+
+            <h3 style={{fontSize:'0.9rem', fontWeight:500, marginTop:'1rem'}}>The Path</h3>
+            <div className="plan-steps">
+              {[
+                { step: '1', title: 'Month 1–2: Salesforce Trailhead (FREE)', content: 'Complete Salesforce Trailhead modules at trailhead.salesforce.com. Focus on "Admin Beginner" and "Admin Intermediate" trails. You guide her 30 minutes/day.' },
+                { step: '2', title: 'Month 2–3: Salesforce Certified Administrator Exam', content: '$200 USD exam fee. With you tutoring her at home, she can pass in 2–3 months. This single certification is worth $70,000+/year.' },
+                { step: '3', title: 'Month 3–4: Build a Portfolio', content: 'Set up a free Salesforce Developer Org. Create sample dashboards, reports, and automation flows to show employers.' },
+                { step: '4', title: 'Month 4–6: Apply for Roles', content: 'Junior Salesforce Admin roles or CRM support roles. Melbourne has significantly more opportunities (~50–100+ active roles vs ~10–20 in Adelaide).' },
+              ].map(({ step, title, content }) => (
+                <div className="plan-step" key={step}>
+                  <div className="plan-step-num">{step}</div>
+                  <div className="plan-step-body"><h3>{title}</h3><p style={{margin:0}}>{content}</p></div>
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{fontSize:'0.9rem', fontWeight:500, marginTop:'1.5rem'}}>Salesforce Admin Pay Progression</h3>
+            <Table
+              headers={['Year', 'Role', 'Salary']}
+              rows={[
+                ['Year 1', 'Junior Salesforce Admin / CRM Support', '$65,000–$80,000'],
+                ['Year 2–3', 'Salesforce Administrator', '$90,000–$110,000'],
+                ['Year 3–5', 'Senior Admin or Business Analyst', '$110,000–$140,000'],
+              ]}
+            />
+
+            <h3 style={{fontSize:'0.9rem', fontWeight:500, marginTop:'1.5rem'}}>Combined Family Income Potential</h3>
+            <Table
+              headers={['Income source', 'Amount']}
+              rows={[
+                ['You (contractor)', '$220,000–$260,000'],
+                ['Her (Salesforce Admin)', '$70,000–$110,000'],
+                ['Combined', '$290,000–$370,000/year'],
+              ]}
+            />
+            <Callout type="good">That puts your family in the top 5% of Australian households and accelerates your Chennai house savings enormously.</Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.12}>
+            <h3>English Confidence — Build It Fast</h3>
+            <Table
+              headers={['Resource', 'Cost', 'What it does']}
+              rows={[
+                ['AMEP (Adult Migrant English Program)', 'FREE for PR holders', 'Up to 510 hours of free English classes. Available at TAFE SA (Adelaide) and multiple providers in Melbourne. Register at immi.homeaffairs.gov.au'],
+                ['Local library English conversation groups', 'FREE', 'Most Adelaide and Melbourne libraries run free weekly groups'],
+                ['YouTube — "English with Lucy", "Rachel\'s English"', 'FREE', 'Watch 30 min/day; consistent practice builds confidence fast'],
+                ['HelloTalk app', 'FREE', 'Practice English by chatting with native speakers'],
+                ['Volunteering', 'FREE', 'Local charity shop, community group, daughter\'s childcare — real conversation builds confidence faster than any class'],
+                ['TAFE English courses', 'FREE or low cost', 'Certificate I–III in Spoken and Written English'],
+              ]}
+            />
+            <Callout type="tip"><strong>Register for AMEP immediately.</strong> It's free, specifically designed for migrants, and classes are built around practical everyday English — not academic English.</Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.14}>
+            <h3>Adelaide vs Melbourne — Which City Wins for Her Career?</h3>
+            <Table
+              headers={['Factor', 'Adelaide', 'Melbourne']}
+              rows={[
+                ['Aged care/disability jobs', 'High demand', 'High demand'],
+                ['Childcare jobs', 'High demand', 'Very high demand (more centres in growth suburbs)'],
+                ['Salesforce Admin jobs', 'Limited (~10–20 active roles)', '✅ Strong (~50–100+ active roles)'],
+                ['IT/office jobs', 'Moderate', '✅ Strong'],
+                ['AMEP English classes', 'Available (TAFE SA)', 'Widely available (many providers)'],
+                ['Fee-Free TAFE', 'Available (limited places)', '✅ 80+ courses'],
+                ['Indian community support', 'Growing, concentrated', '✅ Very large, well-established'],
+                ['Overall for her career', 'Good for care sector', '✅ Better for tech/Salesforce path'],
+              ]}
+            />
+            <Callout type="tip">Melbourne wins if she pursues the Salesforce Admin path. Adelaide is equal for aged care or childcare.</Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.16}>
+            <h3>Childcare for Your Daughter</h3>
+            <p>Your wife can't work without childcare sorted first. The Australian government subsidises costs via the <strong>Child Care Subsidy (CCS)</strong>:</p>
+            <Table
+              headers={['Combined family income', 'CCS subsidy %', 'You pay (approx/day)']}
+              rows={[
+                ['Under $80,000', '90%', '~$12–$15/day'],
+                ['$80,000–$175,000', '80–85%', '~$20–$30/day'],
+                ['$175,000–$256,000', '65–75%', '~$30–$45/day'],
+                ['Over $350,000', '50%', '~$55–$65/day'],
+              ]}
+            />
+            <Callout type="good">At your current $150k income, you'll pay roughly <strong>$25–$30/day</strong> (~$500–$600/month for 5 days). Your wife earning even $500/week part-time MORE than covers this — so it's always net positive. And if she works IN a childcare centre, the staff discount (50%+) saves $500–$1,000/month.</Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.18}>
+            <h3>Tier 5 — Lawyer &amp; Migration Agent — Full Analysis</h3>
+
+            <h3 style={{fontSize:'1rem', marginTop:'1rem'}}>Path 1: Becoming a Lawyer in Australia</h3>
+            <Table
+              headers={['Item', 'Details']}
+              rows={[
+                ['Qualification needed', 'Juris Doctor (JD) — 3 years full-time or 4–6 years part-time'],
+                ['Cost', '$90,000–$140,000 total tuition + $5,000–$12,000 Practical Legal Training'],
+                ['Entry requirement', 'Bachelor\'s degree (B.Tech qualifies ✅), LSAT, strong English'],
+                ['Then', '18–24 months supervised practice before independent work'],
+                ['Total timeline', '5–7 years'],
+                ['Total cost', '$100,000–$150,000+'],
+              ]}
+            />
+            <Table
+              headers={['Level', 'Salary']}
+              rows={[
+                ['Graduate lawyer (Year 1–2)', '$65,000–$85,000'],
+                ['Solicitor (3–5 years)', '$85,000–$120,000'],
+                ['Senior Associate (5–10 years)', '$120,000–$180,000'],
+                ['Partner (10+ years)', '$200,000–$500,000+'],
+              ]}
+            />
+            <Callout type="bad">
+              <strong>NOT recommended for your wife's situation.</strong> 5–7 years before earning, $100k–$150k cost, exceptional English required, and Australian law qualifications don't transfer to Indian practice. If you're leaving in 10 years, she'd only practise for 3–5 years before the qualification becomes largely useless.
+            </Callout>
+
+            <h3 style={{fontSize:'1rem', marginTop:'1.5rem'}}>Path 2: Registered Migration Agent ⭐ Much More Realistic</h3>
+            <p>In Australia you <strong>don't need a law degree</strong> to give immigration advice — you need to be a <strong>Registered Migration Agent (RMA)</strong> through MARA.</p>
+            <Table
+              headers={['Item', 'Details']}
+              rows={[
+                ['Qualification', 'Graduate Diploma in Australian Migration Law and Practice'],
+                ['Duration', '1–1.5 years full-time (or 2 years part-time)'],
+                ['Cost', '$15,000–$25,000'],
+                ['Entry requirement', 'Any bachelor\'s degree (B.Tech ✅), Australian PR ✅'],
+                ['Mode', 'Most universities offer fully online — study from anywhere (ACU, Victoria Uni, Griffith, ANU)'],
+                ['Then', 'Pass OMARA Capstone Assessment + police check + professional indemnity insurance'],
+                ['Total timeline', '1.5–2.5 years'],
+              ]}
+            />
+            <Table
+              headers={['Level', 'Income']}
+              rows={[
+                ['Employee at migration firm (Year 1–2)', '$60,000–$80,000'],
+                ['Experienced agent (3–5 years)', '$80,000–$120,000'],
+                ['Own practice (established)', '$100,000–$200,000+'],
+                ['Successful own practice (high volume)', '$200,000–$400,000+'],
+              ]}
+            />
+            <Callout type="good">
+              <strong>Why this works brilliantly for her:</strong>
+              <ol style={{marginTop:'0.5rem'}}>
+                <li>Your own 186 TRT visa experience gives her first-hand understanding of what applicants face</li>
+                <li>~700,000 Indians live in Australia — a migration agent who speaks Hindi/Tamil has an enormous natural client base</li>
+                <li>Can work <strong>remotely from India</strong> after you move — a permanent income stream that outlasts your time in Australia</li>
+                <li>Scalable business — start at a firm, then build her own practice</li>
+                <li>Structured, template-based writing — more manageable English requirement than general law</li>
+                <li>Online study — study while working part-time or managing the household</li>
+              </ol>
+            </Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <h3>All Career Paths — Side by Side</h3>
+            <Table
+              headers={['Factor', 'Full Lawyer', 'Migration Agent', 'Salesforce Admin', 'Aged Care']}
+              rows={[
+                ['Time to earn', '5–7 years', '2–3 years', '3–6 months', '3–6 months'],
+                ['Study cost', '$100k–$150k', '$15k–$25k', '$200 (exam only)', 'FREE (TAFE)'],
+                ['English needed', 'Exceptional', 'Good–High', 'Moderate', 'Moderate'],
+                ['Starting salary', '$65k–$85k', '$60k–$80k', '$70k–$90k', '$55k–$70k'],
+                ['5-year salary', '$120k–$180k', '$100k–$200k', '$110k–$140k', '$70k–$85k'],
+                ['Works after India move?', '❌ No', '✅ YES', '⚠️ Possibly (remote)', '❌ No'],
+                ['Uses your visa experience?', '❌ No', '✅ YES', '✅ Yes (SF)', '❌ No'],
+                ['Own business potential', '⚠️ Hard', '✅ Excellent', '⚠️ Moderate', '❌ Low'],
+                ['Fit with 10-year plan', '❌ Poor', '✅ Best', '✅ Good', '✅ Good'],
+              ]}
+            />
+
+            <h3 style={{marginTop:'1.5rem'}}>The Dual-Track Strategy — Recommended</h3>
+            <div className="plan-steps">
+              {[
+                { step: '1', title: 'Now → Year 2: Salesforce Admin (Quick Income)', content: 'Quickest route to $70k–$90k. Free training via Trailhead, you mentor her at home. Gets the family earning two incomes fast.' },
+                { step: '2', title: 'Year 1 → Year 3: Migration Agent (In Parallel)', content: 'Enrol in Graduate Diploma part-time/online while working as Salesforce Admin. Takes 1.5–2 years part-time. Cost ~$20k (affordable once she\'s earning). Builds toward a business she can run from India.' },
+                { step: '3', title: 'Year 5+: Full Transition', content: 'She works as Salesforce Admin ($90k–$110k) WHILE building migration consulting on the side. By year 5, transitions fully to migration consulting. By year 10 when you move to India, she has an established client base and continues earning remotely from Chennai.' },
+              ].map(({ step, title, content }) => (
+                <div className="plan-step" key={step}>
+                  <div className="plan-step-num">{step}</div>
+                  <div className="plan-step-body"><h3>{title}</h3><p style={{margin:0}}>{content}</p></div>
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{marginTop:'1.5rem'}}>Family Income Progression</h3>
+            <Table
+              headers={['Timeline', 'Your income', 'Her income', 'Combined', 'Monthly take-home']}
+              rows={[
+                ['Now', '$150,000', '$0', '$150,000', '~$9,180'],
+                ['6 months (her part-time work)', '$150,000', '~$25,000', '$175,000', '~$10,700'],
+                ['12 months (full-time care or admin)', '$230,000 (contract)', '$65,000', '$295,000', '~$17,500'],
+                ['2 years (both growing)', '$250,000', '$90,000', '$340,000', '~$19,500'],
+                ['5 years (dual-track strategy)', '$260,000–$300,000', '$100,000–$150,000', '$360,000–$450,000', '~$21,000+'],
+              ]}
+            />
+            <Callout type="good">Even the modest scenario of her earning $25,000 part-time adds <strong>$1,500+/month</strong> to your family — that's your house deposit savings accelerated by 30%.</Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.22}>
+            <h3>Top 3 Actions This Week for Your Wife</h3>
+            <div className="plan-steps">
+              {[
+                { step: '1', title: 'Register for AMEP — Free English Classes', content: 'Call 131 881 or visit immi.homeaffairs.gov.au. Eligible as a PR holder. Free, structured, supportive environment. This builds the English confidence that unlocks everything else.' },
+                { step: '2', title: 'Create a Salesforce Trailhead Account', content: 'Go to trailhead.salesforce.com → create a free account → start "Admin Beginner" trail. You sit with her 30 minutes each evening and guide her. In 3 months she can have a certification worth $70,000+/year.' },
+                { step: '3', title: 'Start Looking for Part-Time Work', content: 'Register on SEEK, Indeed, and Jora. Also walk into local Indian grocery stores and ask if they\'re hiring. Even 2 days/week = $400–$800/week and builds her confidence, Australian experience, and social network.' },
+              ].map(({ step, title, content }) => (
+                <div className="plan-step" key={step}>
+                  <div className="plan-step-num">{step}</div>
+                  <div className="plan-step-body"><h3>{title}</h3><p style={{margin:0}}>{content}</p></div>
+                </div>
+              ))}
+            </div>
+
+            <Callout type="good">
+              <strong>Bottom line:</strong> Becoming a full lawyer is NOT the right path (too long, too expensive, doesn't transfer to India). But becoming a <strong>Registered Migration Agent</strong> is a brilliant long-term play — it leverages your own visa experience, serves the huge Indian community, costs only $15–25k, and she can keep earning from India after you move. In the short term, <strong>Salesforce Admin</strong> is the fastest path to high income (you teach her for free). Start earning NOW → layer on the Migration Agent qualification → arrive in India with an established remote business.
+            </Callout>
+          </FadeIn>
+        </Section>
+
+        {/* ── END WIFE CAREER GUIDE ── */}
 
         {/* NEXT STEPS CTA */}
         <FadeIn>
