@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Allow: /Lokeshwaran_Ramu_Resume.pdf
 
 Sitemap: https://www.lokeshwaranramu.com/sitemap.xml
