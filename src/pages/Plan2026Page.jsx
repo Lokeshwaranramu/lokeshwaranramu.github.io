@@ -210,6 +210,9 @@ export default function Plan2026Page() {
                 ['#s12', '12. 10-Year Action Plan'],
                 ['#s13', '13. Risks'],
                 ['#s14', '14. Smart Money Moves'],
+                ['#s15', '15. Pty Ltd — The Truth'],
+                ['#s16', '16. Adelaide vs Melbourne West'],
+                ['#s17', '17. Optimal Strategy 🏆'],
               ].map(([href, label]) => (
                 <a key={href} href={href} className="plan-toc-link">{label}</a>
               ))}
@@ -778,36 +781,275 @@ export default function Plan2026Page() {
           </FadeIn>
         </Section>
 
+        {/* ── ADDITION: PTY LTD + ADELAIDE ANALYSIS ── */}
+
+        {/* SECTION 15 */}
+        <Section id="s15" number="15" title="Does a Pty Ltd Help You Buy a Home?">
+          <FadeIn>
+            <Callout type="critical">
+              <strong>Short answer: NO — it actually makes it HARDER.</strong>
+            </Callout>
+
+            <h3>1. You lose ALL first home buyer benefits</h3>
+            <p>The FHOG and stamp duty concessions are only available to <strong>individuals</strong>, not companies. If you buy through a Pty Ltd, you lose ALL first home buyer benefits — that's up to $50,000+ in SA you'd throw away.</p>
+
+            <h3>2. No main residence CGT exemption for a company</h3>
+            <p>If a Pty Ltd owns the house, there is <strong>no main residence exemption</strong>. When you sell, the company pays CGT on the entire capital gain. As an individual, you live in the house and sell it CGT-free. This could be a $70,000–$100,000+ difference.</p>
+
+            <h3>3. Banks treat company borrowers differently</h3>
+            <p>Most lenders won't give a standard home loan to a Pty Ltd for a residential property. You'd need a commercial loan — higher interest rates (often 1–2% more), larger deposits (usually 20–30% minimum), and fewer features (no offset account, limited extra repayments).</p>
+
+            <h3>4. Stamp duty is often HIGHER for company purchases</h3>
+            <p>In Victoria, companies purchasing residential property don't get the principal place of residence concession. In SA, no first home buyer stamp duty relief for companies.</p>
+
+            <h3>5. PSI rules mean no tax advantage anyway</h3>
+            <p>Your contracting income is Personal Services Income. Even if you earn through a Pty Ltd, it's taxed at your personal rate. There's no pool of "company money" to use for a deposit at a lower tax rate.</p>
+
+            <Callout type="good">
+              <strong>The verdict: Buy the home in YOUR NAME (personally), not through a company.</strong> This is the only way to access:
+              <ul>
+                <li>First Home Owner Grant ($15,000 SA / $10,000 VIC for new homes)</li>
+                <li>Stamp duty exemptions (up to $30,000+ in SA for new homes)</li>
+                <li>First Home Guarantee (5% deposit, $0 LMI)</li>
+                <li>Main residence CGT exemption (sell tax-free)</li>
+                <li>Standard home loan rates (~6.0% instead of ~7.5%+ commercial)</li>
+              </ul>
+            </Callout>
+          </FadeIn>
+        </Section>
+
+        {/* SECTION 16 */}
+        <Section id="s16" number="16" title="Adelaide vs Wyndham Vale/Werribee — The Big Comparison">
+          <FadeIn>
+            <Callout type="tip">
+              Buying a <strong>new home</strong> (house &amp; land package or newly built, never lived in) changes everything — especially because of Adelaide's incredible first home buyer benefits for new homes.
+            </Callout>
+
+            <h3>First Home Buyer Benefits — Side by Side</h3>
+            <Table
+              headers={['Benefit', 'Adelaide (SA) — NEW HOME', 'Wyndham Vale/Werribee (VIC) — NEW HOME', 'VIC — EXISTING HOME']}
+              rows={[
+                ['FHOG cash grant', '$15,000 ✅', '$10,000 (if under $750k, never occupied)', '$0 ❌'],
+                ['Stamp duty', '$0 (abolished for ALL new homes, no price cap) ✅', '$0 if under $600k; partial if $600–750k', '$0 if under $600k; ~$11k at $650k'],
+                ['First Home Guarantee', 'Yes — 5% deposit, $0 LMI (cap $900k)', 'Yes — 5% deposit, $0 LMI (cap $950k)', 'Yes — same'],
+                ['Total benefit on $600k new home', '~$40,000–$45,000', '~$10,000–$31,000', '~$0–$31,000'],
+              ]}
+            />
+            <Callout type="good">
+              <strong>Adelaide's advantage for new homes is massive: ~$15,000–$30,000 more in benefits than Victoria.</strong> SA gives you $15,000 FHOG AND $0 stamp duty on new homes at any price, while VIC's FHOG is only $10,000 and the stamp duty concession phases out above $600k.
+            </Callout>
+
+            <h3>House &amp; Land Package Prices by Location</h3>
+            <Table
+              headers={['Location', 'Typical H&L price', 'What you get']}
+              rows={[
+                ['Adelaide North (Playford, Munno Para, Angle Vale)', '$450,000 – $580,000', '3–4 bed, new estate, smaller lot'],
+                ['Adelaide North (Gawler, Two Wells, Riverlea)', '$520,000 – $650,000', '3–4 bed, larger lot, newer estates'],
+                ['Adelaide Outer South (Seaford, Aldinga)', '$500,000 – $650,000', '3–4 bed, near beach corridor'],
+                ['Wyndham Vale / Werribee (VIC)', '$550,000 – $700,000', '3–4 bed, new estates'],
+                ['Tarneit / Truganina (VIC)', '$580,000 – $750,000', '3–4 bed, newer estates'],
+              ]}
+            />
+            <p><strong>Adelaide is $50,000–$100,000 cheaper</strong> for comparable new homes, AND you get $15,000–$30,000 more in government benefits.</p>
+
+            <h3>Total Upfront Cost — $580,000 New H&L Package</h3>
+            <Table
+              headers={['Item', 'Adelaide (SA)', 'Wyndham Vale (VIC)']}
+              rows={[
+                ['Purchase price', '$580,000', '$580,000'],
+                ['Deposit (5%, First Home Guarantee)', '$29,000', '$29,000'],
+                ['FHOG grant (reduces cash needed)', '−$15,000', '−$10,000 (new only)'],
+                ['Stamp duty', '$0', '$0 (under $600k exemption)'],
+                ['Conveyancing/legal', '~$1,500', '~$2,000'],
+                ['Building inspection', '~$500', '~$500'],
+                ['Other fees', '~$1,500', '~$1,500'],
+                ['TOTAL CASH NEEDED', '~$17,500', '~$23,000'],
+                ['Your savings', '$10,000', '$10,000'],
+                ['Gap to save', '~$7,500', '~$13,000'],
+              ]}
+            />
+            <Callout type="good">
+              With Adelaide's $15,000 FHOG and $0 stamp duty, you could buy a new home with <strong>just $17,500 total cash</strong> — only ~$7,500 more to save. That's 1–2 months of aggressive saving.
+            </Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <h3>10-Year Growth Projection — Which City Wins?</h3>
+            <Table
+              headers={['Metric', 'Adelaide', 'Melbourne (outer west)']}
+              rows={[
+                ['5-year dwelling growth', '~80%', '~15–25%'],
+                ['Annual growth (2025)', '~11–14%', '~1–3%'],
+                ['2026 forecast (major banks)', '6–9%', '-1.7% to +3%'],
+                ['2027 forecast', '~3–5% (slowing)', '+2.9% (recovering)'],
+              ]}
+            />
+            <Callout type="tip">
+              Adelaide's "catch-up" phase is ending — median dwelling value is already $937,000 (March 2026). Melbourne is forecast to <strong>lead the recovery from 2027</strong>; the historically wide price gap vs Sydney tends to correct over time.
+            </Callout>
+
+            <p><strong>$580,000 purchase in Adelaide (new H&L)</strong></p>
+            <Table
+              headers={['Growth rate', 'Value in 10 years', 'Equity gained']}
+              rows={[
+                ['Conservative (4%/yr)', '$858,000', '$278,000'],
+                ['Moderate (5%/yr)', '$945,000', '$365,000'],
+                ['Optimistic (6%/yr)', '$1,039,000', '$459,000'],
+              ]}
+            />
+            <p><strong>$580,000 purchase in Wyndham Vale (new H&L)</strong></p>
+            <Table
+              headers={['Growth rate', 'Value in 10 years', 'Equity gained']}
+              rows={[
+                ['Conservative (3%/yr)', '$779,000', '$199,000'],
+                ['Moderate (4%/yr)', '$858,000', '$278,000'],
+                ['Optimistic (5%/yr)', '$945,000', '$365,000'],
+              ]}
+            />
+
+            <h3>Rental Yield Comparison</h3>
+            <Table
+              headers={['Location', 'Weekly rent', 'Gross yield', 'Rent in 10 years (3% growth)']}
+              rows={[
+                ['Adelaide (northern, new 3-bed)', '~$500–550/wk', '~4.5–5.0%', '~$670–740/wk'],
+                ['Wyndham Vale (3-bed house)', '~$450/wk', '~3.9%', '~$605/wk'],
+                ['Werribee (3-bed house)', '~$480–530/wk', '~3.5–4.0%', '~$645–710/wk'],
+              ]}
+            />
+            <Callout type="good">
+              Adelaide currently delivers <strong>higher rental yields</strong> — meaning the rent covers more of your mortgage if you keep it as an investment.
+            </Callout>
+          </FadeIn>
+
+          <FadeIn delay={0.15}>
+            <h3>Complete Financial Comparison (New Home, $580k, 5% deposit)</h3>
+            <Table
+              headers={['Factor', 'Adelaide (SA)', 'Wyndham Vale (VIC)']}
+              rows={[
+                ['Purchase price', '$580,000', '$580,000'],
+                ['FHOG', '$15,000', '$10,000'],
+                ['Stamp duty', '$0', '$0'],
+                ['Cash needed to buy', '~$17,500', '~$23,000'],
+                ['Loan amount', '$536,000', '$541,000'],
+                ['Monthly repayment (6%, 30yr)', '$3,213', '$3,243'],
+                ['Weekly rent if renting instead', '~$530 ($2,297/mo)', '~$450 ($1,950/mo)'],
+                ['Estimated value in 10 years', '$858,000–$945,000', '$779,000–$858,000'],
+                ['Equity after 10 years', '~$340,000–$430,000', '~$260,000–$340,000'],
+                ['Rental income in 10 years', '~$670–740/wk', '~$605/wk'],
+                ['Rental yield', 'Higher (4.5–5%)', 'Lower (3.5–4%)'],
+              ]}
+            />
+
+            <h3>Non-Financial Factors</h3>
+            <Table
+              headers={['Factor', 'Adelaide', 'Melbourne West']}
+              rows={[
+                ['Where you currently live', '✅ Already here', 'Need to relocate'],
+                ['Salesforce job market', 'Smaller, fewer contracts', '✅ Much larger, more contracts'],
+                ['Contract rates', '~$900–$1,000/day', '✅ ~$1,000–$1,200/day'],
+                ['Family/community', 'Already established', 'Need to rebuild'],
+                ['Cost of living', 'Slightly lower', 'Slightly higher'],
+                ['Rents (while saving)', '$530–600/wk (3-bed)', '$420–480/wk (3-bed)'],
+                ['Long-term growth outlook', '✅ Stronger near-term', '✅ Stronger recovery potential'],
+              ]}
+            />
+          </FadeIn>
+        </Section>
+
+        {/* SECTION 17 */}
+        <Section id="s17" number="17" title="The Optimal Strategy — Recommendation 🏆">
+          <FadeIn>
+            <Callout type="good">
+              <strong>Adelaide NEW HOME wins on almost every financial metric:</strong>
+              <ol style={{marginTop:'0.5rem'}}>
+                <li><strong>$15,000 more in grants</strong> ($15k FHOG vs $10k in VIC)</li>
+                <li><strong>$0 stamp duty</strong> with no price cap (VIC phases out above $600k)</li>
+                <li><strong>$50–100k cheaper</strong> for equivalent new homes</li>
+                <li><strong>Higher rental yields</strong> (4.5–5% vs 3.5–4%)</li>
+                <li><strong>Stronger recent growth</strong> and more momentum</li>
+                <li><strong>You're already there</strong> — no moving costs, no disruption</li>
+                <li><strong>Buy SOONER</strong> — only ~$7,500 more to save vs ~$13,000+ for VIC</li>
+              </ol>
+            </Callout>
+
+            <Callout type="warning">
+              <strong>BUT — there's a catch:</strong> Melbourne offers <strong>$100–$200/day more</strong> in Salesforce contracting rates. Over 10 years, that's <strong>$220,000–$440,000 extra income</strong>.
+            </Callout>
+
+            <h3>The OPTIMAL Path — Buy Adelaide, Then Melbourne</h3>
+            <div className="plan-steps">
+              {[
+                { step: '1', title: 'Right Now — Stay in Adelaide, Save Hard', content: 'Stay in Adelaide, save aggressively for 2–3 months. Target $5,000/month savings.' },
+                { step: '2', title: 'Mid 2026 — Buy in Adelaide North', content: 'Buy a $500–580k H&L package in Adelaide\'s north (Playford, Munno Para, Angle Vale). You need just ~$17,500 cash. Use FHOG ($15k) + First Home Guarantee (5% deposit, $0 LMI) + $0 stamp duty.' },
+                { step: '3', title: '12 Months — Live in the House', content: 'Live in it for 12 months (required for FHOG and stamp duty exemption).' },
+                { step: '4', title: 'Mid 2027 — Move to Melbourne for Contracts', content: 'Move to Melbourne for higher-paying contract work ($1,000–$1,200/day). Rent in Melbourne ($450–500/wk) while renting out your Adelaide house (~$500–550/wk).' },
+                { step: '5', title: 'Years 2–10 — Housing Cost Neutral', content: 'Your Adelaide rent almost covers your Melbourne rent — effectively housing cost neutral. Pay the Adelaide mortgage from your higher Melbourne contract income.' },
+                { step: '6', title: 'Year 10 — Sell Before Leaving Australia', content: 'Sell the Adelaide house while still a tax resident → $0 CGT under main residence exemption (6-year absence rule applies since you won\'t own another property).' },
+              ].map(({ step, title, content }) => (
+                <div className="plan-step" key={step}>
+                  <div className="plan-step-num">{step}</div>
+                  <div className="plan-step-body">
+                    <h3>{title}</h3>
+                    <p style={{margin:0}}>{content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{marginTop:'2rem'}}>10-Year Financial Outcome (This Strategy)</h3>
+            <Table
+              headers={['Item', 'Estimated value']}
+              rows={[
+                ['Adelaide house value in 10 years (5% growth)', '~$945,000'],
+                ['Mortgage balance remaining', '~$460,000'],
+                ['Equity', '~$485,000'],
+                ['Net rental income over ~8 years', '~$50,000–$80,000'],
+                ['Extra Melbourne contract income (vs staying in Adelaide)', '~$300,000+'],
+                ['Savings & investments from higher income', '~$200,000–$400,000'],
+                ['Total accessible wealth at year 10', '~$700,000–$965,000'],
+              ]}
+            />
+
+            <Callout type="critical">
+              <strong>The 6-Year Absence Rule — Critical Timing</strong><br />
+              Live in Adelaide house: <strong>2027–2028</strong> (12+ months) → Rent it out: <strong>2028–2034</strong> (6 years max) → <strong>Sell by 2034</strong> while still an Australian tax resident = <strong>$0 CGT</strong>.<br /><br />
+              If you're away for MORE than 6 years AND become a non-resident, you lose the exemption. Plan your departure accordingly. Since you'll be renting in Melbourne (not owning), this works perfectly.
+            </Callout>
+          </FadeIn>
+        </Section>
+
+        {/* ── END ADDITION ── */}
+
         {/* NEXT STEPS CTA */}
         <FadeIn>
           <div className="plan-cta">
-            <h2>Recommended Next 3 Steps</h2>
-            <p className="plan-cta-sub">Do these this month — April 2026</p>
+            <h2>Updated Next 3 Steps — Do This Month</h2>
+            <p className="plan-cta-sub">April 2026 — Adelaide-first strategy</p>
             <div className="plan-cta-steps">
               <div className="plan-cta-step">
                 <div className="plan-cta-step-num">1</div>
                 <div>
-                  <h3>Register Your ABN</h3>
-                  <p>This week — 15 minutes. Go to <strong>abr.gov.au</strong> → Apply as a sole trader. Also register for GST. Cost: $0. This lets you start side consulting immediately.</p>
+                  <h3>Register Your ABN This Week</h3>
+                  <p>Go to <strong>abr.gov.au</strong> → Apply as a sole trader + register for GST. Cost: $0, takes 15 minutes. This lets you start side consulting immediately and prepares you for contract work.</p>
                 </div>
               </div>
               <div className="plan-cta-step">
                 <div className="plan-cta-step-num">2</div>
                 <div>
-                  <h3>Book a Free Mortgage Broker Consultation</h3>
-                  <p>This week. Find a broker specialising in first home buyers in Melbourne's west. They'll give you your exact borrowing power and walk you through the First Home Guarantee. Try: Aussie Home Loans, Mortgage Choice, or an independent broker. The consultation is <strong>free</strong>.</p>
+                  <h3>Talk to a Mortgage Broker in Adelaide</h3>
+                  <p>This week — free consultation. Find a broker who specialises in first home buyers and H&L packages. Ask specifically about: <strong>FHOG $15k + $0 stamp duty + First Home Guarantee (5% deposit, $0 LMI)</strong>. They'll tell you your exact buying power and how soon you can buy.</p>
                 </div>
               </div>
               <div className="plan-cta-step">
                 <div className="plan-cta-step-num">3</div>
                 <div>
-                  <h3>Start Your Melbourne Job Search & Plan Your Move</h3>
-                  <p>This month. Update LinkedIn to "Open to contract work in Melbourne." Contact 3–4 Salesforce-specialist recruiters (Clicks IT, Hudson, Talent, Hays). Start applying for contracts. Research rental properties in Wyndham Vale ($420–$470/week for a 3-bedroom house).</p>
+                  <h3>Research H&L Packages in Adelaide's North</h3>
+                  <p>Next 2–3 months. Save aggressively ($5,000/month target). Research H&L packages in <strong>Playford, Munno Para, Angle Vale, Two Wells</strong> in the $500–580k range. You could be buying within 3 months with just ~$17,500 total cash needed.</p>
                 </div>
               </div>
             </div>
             <div className="plan-cta-closing">
-              You're in a strong position. A $150k salary, PR status, no debts, young family — you have options. The western Melbourne property market is one of the most affordable entry points into Australian homeownership, and the First Home Guarantee eliminates the biggest barrier (LMI). The key decision is timing: save for 6–12 months while building your contracting income, then buy smart at $600–650k. Sell before you leave for India = tax-free windfall. <strong>You've got this. 💪</strong>
+              <strong>Bottom line:</strong> Adelaide's new home benefits are the best in Australia right now for first home buyers. $15,000 grant + $0 stamp duty + 5% deposit with no LMI = you can buy sooner, cheaper, and with more upside than Melbourne's west. Buy in Adelaide, live there 12 months, then move to Melbourne for the higher contract income. Best of both worlds. <strong>You've got this. 💪</strong>
             </div>
           </div>
         </FadeIn>
