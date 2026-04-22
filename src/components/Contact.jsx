@@ -44,8 +44,8 @@ export default function Contact() {
 
     try {
       await emailjs.send(
-        'service_portfolio',
-        'template_portfolio',
+        'service_hln8j1b',
+        'template_zvnpvci',
         {
           from_name: data.get('name'),
           from_email: data.get('email'),
@@ -55,7 +55,7 @@ export default function Contact() {
         'o7Ti-dGjJ0U5icMI3'
       )
       setStatus('success'); form.reset()
-    } catch { setStatus('error') }
+    } catch (err) { console.error('EmailJS error:', err); setStatus('error') }
     setSending(false)
     setTimeout(() => setStatus(null), 5000)
   }
