@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
+import emailjs from '@emailjs/browser'
 import { personalInfo } from '../data'
 import { useMagnetic } from '../hooks/useMotion'
 
@@ -42,16 +43,18 @@ export default function Contact() {
     const data = new FormData(form)
 
     try {
-      if (window.emailjs) {
-        await window.emailjs.send('service_portfolio', 'template_portfolio', {
-          from_name: data.get('name'), from_email: data.get('email'),
-          subject: data.get('subject'), message: data.get('message'),
-        })
-        setStatus('success'); form.reset()
-      } else {
-        window.open(`mailto:${encodeURIComponent(personalInfo.email)}?subject=${encodeURIComponent(data.get('subject'))}&body=${encodeURIComponent(`From: ${data.get('name')} (${data.get('email')})\n\n${data.get('message')}`)}`)
-        setStatus('success')
-      }
+      await emailjs.send(
+        'service_portfolio',
+        'template_portfolio',
+        {
+          from_name: data.get('name'),
+          from_email: data.get('email'),
+          subject: data.get('subject'),
+          message: data.get('message'),
+        },
+        'o7Ti-dGjJ0U5icMI3'
+      )
+      setStatus('success'); form.reset()
     } catch { setStatus('error') }
     setSending(false)
     setTimeout(() => setStatus(null), 5000)
