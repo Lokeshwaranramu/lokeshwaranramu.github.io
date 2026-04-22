@@ -16,6 +16,7 @@ import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ConvertCasePage from './pages/ConvertCasePage'
+import Plan2026Page from './pages/Plan2026Page'
 
 function Portfolio() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Portfolio />} />
       <Route path="/convert-case-emails-to-pdf" element={<ConvertCasePage />} />
+      <Route path="/plan-2026" element={<Plan2026Page />} />
     </Routes>
   )
 }
