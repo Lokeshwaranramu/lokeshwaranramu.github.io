@@ -17,6 +17,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ConvertCasePage from './pages/ConvertCasePage'
 import Plan2026Page from './pages/Plan2026Page'
+import TravelItineraryPage from './pages/TravelItineraryPage'
 
 function Portfolio() {
   return (
@@ -49,6 +50,7 @@ export default function App() {
       <Route path="/" element={<Portfolio />} />
       <Route path="/convert-case-emails-to-pdf" element={<ConvertCasePage />} />
       <Route path="/plan-2026" element={<Plan2026Page />} />
+      <Route path="/travelItenary" element={<TravelItineraryPage />} />
     </Routes>
   )
 }

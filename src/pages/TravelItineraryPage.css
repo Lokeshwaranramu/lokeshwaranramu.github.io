@@ -1,0 +1,485 @@
+/* ── Travel Itinerary Page ───────────────────────────────────────────────── */
+.ti-root {
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  background: #FAF7F2;
+  color: #1A1A18;
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* TOKENS */
+.ti-root {
+  --bali:       #B85C38;
+  --bali-light: #F7EDE6;
+  --bali-mid:   #D4865E;
+  --nz:         #2B5F4B;
+  --nz-light:   #E4EFE8;
+  --nz-mid:     #4A8C6E;
+  --gold:       #C9A84C;
+  --cream:      #FAF7F2;
+  --dark:       #1A1A18;
+  --mid:        #5A5A55;
+  --light:      #E8E4DC;
+}
+
+/* HERO */
+.ti-hero {
+  background: #1A1A18;
+  color: #fff;
+  padding: 56px 40px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ti-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 40px,
+    rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+  );
+  pointer-events: none;
+}
+.ti-hero-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  border: 1px solid rgba(201,168,76,0.4);
+  padding: 6px 16px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.ti-hero h1 {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+.ti-hero h1 em { font-style: italic; color: #C9A84C; }
+.ti-hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+}
+.ti-hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap;
+}
+.ti-hero-meta-item { text-align: center; }
+.ti-hero-meta-item .label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.ti-hero-meta-item .value {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  margin-top: 2px;
+}
+
+/* LAYOUT */
+.ti-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.ti-section { padding: 48px 0; }
+.ti-divider { height: 1px; background: #E8E4DC; margin: 0; }
+
+.ti-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5A5A55;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ti-section-title::after { content: ''; flex: 1; height: 1px; background: #E8E4DC; }
+
+/* DESTINATION HEADERS */
+.ti-dest-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.ti-dest-header {
+  padding: 28px 28px 24px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.ti-dest-header.bali { background: var(--bali); color: #fff; }
+.ti-dest-header.nz   { background: var(--nz);   color: #fff; }
+.ti-dest-flag { font-size: 28px; margin-bottom: 8px; }
+.ti-dest-header h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.1;
+}
+.ti-dest-sub { font-size: 12px; opacity: 0.7; margin-top: 4px; }
+.ti-dest-hotel {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 12px;
+  opacity: 0.85;
+}
+.ti-dest-hotel strong { display: block; font-size: 13px; font-weight: 500; opacity: 1; margin-bottom: 2px; }
+.ti-dest-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* QUICK COMPARE */
+.ti-quick-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ti-compare-card {
+  background: #fff;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ti-compare-card-header {
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ti-compare-card.bali-card .ti-compare-card-header { background: var(--bali-light); color: var(--bali); }
+.ti-compare-card.nz-card   .ti-compare-card-header { background: var(--nz-light);   color: var(--nz);   }
+.ti-compare-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 20px;
+  border-bottom: 1px solid #F0EDE8;
+  gap: 12px;
+}
+.ti-compare-row:last-child { border-bottom: none; }
+.ti-compare-row .key { font-size: 12px; color: var(--mid); flex-shrink: 0; width: 130px; }
+.ti-compare-row .val { font-size: 12px; font-weight: 500; text-align: right; }
+.ti-compare-row .val.good { color: var(--nz); }
+.ti-compare-row .val.warn { color: var(--bali); }
+.ti-compare-row .val.big  {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* INCLUSIONS */
+.ti-inclusions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.ti-inclusions-card {
+  background: #fff;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  padding: 24px;
+}
+.ti-inclusions-card h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.ti-inc-hotel {
+  font-size: 12px;
+  color: var(--mid);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--light);
+}
+.ti-inc-list { list-style: none; padding: 0; margin: 0; }
+.ti-inc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #F5F2ED;
+}
+.ti-inc-list li:last-child { border-bottom: none; }
+.ti-inc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.ti-inclusions-card.bali-inc .ti-inc-dot { background: var(--bali); }
+.ti-inclusions-card.nz-inc   .ti-inc-dot { background: var(--nz);   }
+.ti-inc-price-tag {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 300;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+.ti-inclusions-card.bali-inc .ti-inc-price-tag { color: var(--bali); }
+.ti-inclusions-card.nz-inc   .ti-inc-price-tag { color: var(--nz);   }
+.ti-inc-price-label { font-size: 11px; color: var(--mid); letter-spacing: 0.05em; }
+
+/* ITINERARY */
+.ti-itinerary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ti-itinerary-col { display: flex; flex-direction: column; gap: 12px; }
+.ti-col-header {
+  padding: 14px 18px;
+  border-radius: 4px 4px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+}
+.ti-col-header.bali { background: var(--bali); }
+.ti-col-header.nz   { background: var(--nz);   }
+
+.ti-day-card {
+  background: #fff;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ti-day-header {
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ti-day-card.bali-day .ti-day-header { background: var(--bali-light); }
+.ti-day-card.nz-day   .ti-day-header { background: var(--nz-light);   }
+.ti-day-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  min-width: 28px;
+}
+.ti-day-card.bali-day .ti-day-num { color: var(--bali); }
+.ti-day-card.nz-day   .ti-day-num { color: var(--nz);   }
+.ti-day-title { font-size: 12px; font-weight: 500; color: #1A1A18; }
+.ti-day-sub   { font-size: 11px; color: var(--mid); }
+.ti-day-body  { padding: 14px 18px; }
+.ti-day-body p { font-size: 13px; color: var(--mid); line-height: 1.65; }
+.ti-day-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ti-day-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.ti-day-card.bali-day .ti-day-tag { background: var(--bali-light); color: var(--bali); }
+.ti-day-card.nz-day   .ti-day-tag { background: var(--nz-light);   color: var(--nz);   }
+
+/* BUDGET */
+.ti-budget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ti-budget-card {
+  background: #fff;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ti-budget-card-header {
+  padding: 16px 24px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+.ti-budget-card.bali-budget .ti-budget-card-header { background: var(--bali-light); color: var(--bali); }
+.ti-budget-card.nz-budget   .ti-budget-card-header { background: var(--nz-light);   color: var(--nz);   }
+.ti-budget-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 24px;
+  border-bottom: 1px solid #F5F2ED;
+  font-size: 13px;
+}
+.ti-budget-row:last-child { border-bottom: none; }
+.ti-budget-row .item   { color: var(--mid); }
+.ti-budget-row .amount { font-weight: 500; }
+.ti-budget-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 16px 24px;
+  font-weight: 500;
+  border-top: 2px solid var(--light);
+  margin-top: 4px;
+}
+.ti-budget-card.bali-budget .ti-budget-total { color: var(--bali); }
+.ti-budget-card.nz-budget   .ti-budget-total { color: var(--nz);   }
+.ti-budget-total .amount {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 300;
+}
+.ti-budget-note {
+  padding: 12px 24px;
+  font-size: 11px;
+  color: var(--mid);
+  background: #FAF7F2;
+  border-top: 1px solid var(--light);
+}
+
+/* VERDICT */
+.ti-verdict {
+  background: #1A1A18;
+  color: #fff;
+  padding: 40px;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 8px;
+}
+.ti-verdict-col h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ti-verdict-list { list-style: none; padding: 0; margin: 0; }
+.ti-verdict-list li {
+  padding: 7px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.ti-verdict-list li:last-child { border-bottom: none; }
+.ti-verdict-list li .icon { opacity: 0.6; flex-shrink: 0; }
+
+/* BOOKING */
+.ti-booking {
+  padding: 40px;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  margin-top: 32px;
+}
+.ti-booking h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #1A1A18;
+  margin-bottom: 6px;
+}
+.ti-booking-sub { font-size: 13px; color: var(--mid); margin-top: 6px; }
+.ti-booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+.ti-booking-item {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+}
+.ti-booking-item h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.ti-booking-detail {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-top: 8px;
+}
+.ti-booking-detail a { color: var(--bali); text-decoration: none; font-weight: 500; }
+.ti-booking-detail a:hover { text-decoration: underline; }
+.ti-booking-detail strong { color: #1A1A18; }
+
+.ti-le-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1A1A18;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+.ti-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-left: 8px;
+  color: #fff;
+}
+.ti-pill.bali { background: var(--bali); }
+.ti-pill.nz   { background: var(--nz);   }
+
+.ti-footer {
+  text-align: center;
+  padding: 40px 0 32px;
+  color: var(--mid);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .ti-dest-headers,
+  .ti-quick-compare,
+  .ti-inclusions-grid,
+  .ti-itinerary-grid,
+  .ti-budget-grid,
+  .ti-verdict,
+  .ti-booking-grid { grid-template-columns: 1fr; }
+
+  .ti-hero h1 { font-size: 32px; }
+  .ti-hero-meta { gap: 20px; }
+  .ti-hero { padding: 40px 20px 36px; }
+  .ti-booking { padding: 24px; }
+  .ti-verdict { padding: 28px; }
+}
