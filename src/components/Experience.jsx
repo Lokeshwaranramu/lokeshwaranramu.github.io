@@ -76,6 +76,24 @@ function ExperienceCard({ job, index }) {
 
         <p className="timeline-desc">{job.desc}</p>
 
+        {job.achievements && job.achievements.length > 0 && (
+          <ul className="timeline-achievements">
+            {job.achievements.map((item, i) => (
+              <motion.li
+                key={i}
+                className="timeline-achievement-item"
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.08 }}
+              >
+                <span className="material-symbols-outlined timeline-achievement-icon">arrow_forward_ios</span>
+                {item}
+              </motion.li>
+            ))}
+          </ul>
+        )}
+
         {/* Decorative animated bar */}
         <motion.div
           className="timeline-progress-bar"

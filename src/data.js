@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: 'Lokeshwaran Ramu',
-  title: 'Salesforce Architect & Developer',
-  roles: ['CRM Domain SME', 'Data Architect', 'Salesforce Developer', 'Solution Consultant', 'Integration Specialist'],
+  title: 'Senior Salesforce Developer | Consultant | Solution Architect',
+  roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior SF Developer', 'Data Architect', 'Security Architecture'],
   email: 'lokeshramu16@gmail.com',
   phone: '+61 410 076 060',
   location: 'Adelaide, Australia',
@@ -22,34 +22,46 @@ export const personalInfo = {
 }
 
 export const aboutParagraphs = [
-  'Results-driven Customer Domain CRM SME, Salesforce Developer, and Data Architect with {years} years of experience in designing, developing, and delivering innovative solutions to optimize customer data management and CRM systems. Expertise in Salesforce technologies, including LWC, Apex, Aura, triggers, flows, and process builders, with a proven track record of architecting seamless data flows and integrations across complex systems.',
-  'Skilled in merging and de-merging Salesforce orgs, data migration, and system integrations, with a strong focus on ensuring data integrity, privacy, and compliance. Adept at collaborating with cross-functional teams, external vendors, and business stakeholders to deliver customer-centric solutions that drive business growth.',
-  'Proficient in Salesforce best practices, Java, and various programming languages, with a demonstrated ability to troubleshoot system issues, enhance performance, and implement scalable solutions. Known for effectively managing independent projects while contributing as a collaborative team player, with a passion for knowledge sharing and continuous improvement.',
+  'I am a Salesforce Solution Architect with {years}+ years of enterprise delivery experience across financial services, retail, and technology sectors — owning end-to-end architecture and delivery across Service Cloud, Sales Cloud, Experience Cloud, and Agentforce. I have pioneered one of the earliest Agentforce production implementations in Australian fintech, building both customer-facing and employee-facing AI service agents that operate at scale.',
+  'My work spans complex integration ecosystems — Amazon Connect for omni-channel contact centres, Braze for real-time marketing automation, Slack, REST/SOAP APIs, and event-driven middleware. I have led enterprise-scale org merges and de-mergers, architected Master Data Management solutions, designed loyalty platforms, and delivered comprehensive enterprise security frameworks — including remediating live security breach risk across integrated Salesforce platforms.',
+  'What sets me apart is a rare combination of hands-on technical execution and strategic architectural thinking, underpinned by an Identity & Access Management (IAM) background that shapes every security and integration decision. Former Developer Success Engineer at Salesforce. 6 Salesforce certifications including Certified Data Architect and Platform Developer II. Australian Permanent Resident — no sponsorship required.',
+]
+
+export const aboutHighlights = [
+  { icon: 'smart_toy', label: 'Agentforce Pioneer', desc: 'First in AU fintech' },
+  { icon: 'security', label: 'Security Architecture', desc: 'Breach risk remediation' },
+  { icon: 'cloud_sync', label: 'Org Merge & De-merge', desc: 'Enterprise scale' },
+  { icon: 'storage', label: 'Data Architect', desc: 'Certified, MDM expert' },
+  { icon: 'headset_mic', label: 'Amazon Connect', desc: 'Omni-channel CTI' },
+  { icon: 'campaign', label: 'Braze Integration', desc: 'Marketing automation' },
+  { icon: 'verified', label: '6 Certifications', desc: 'Incl. PD II & Data Arch' },
+  { icon: 'rocket_launch', label: 'CI/CD & DevOps', desc: 'Pipeline governance' },
 ]
 
 export const skills = [
-  { name: 'Agentforce', desc: 'AI-Powered Agents', icon: 'smart_toy', category: 'ai' },
-  { name: 'OmniStudio', desc: 'Industry Solutions', icon: 'widgets', category: 'platform' },
+  { name: 'Agentforce', desc: 'AI-Powered Service Agents', icon: 'smart_toy', category: 'ai' },
   { name: 'Salesforce LWC', desc: 'Lightning Web Components', icon: 'code', category: 'frontend' },
   { name: 'Apex Programming', desc: 'Custom Business Logic', icon: 'terminal', category: 'backend' },
+  { name: 'Solution Architecture', desc: 'Enterprise Design & Strategy', icon: 'architecture', category: 'architecture' },
+  { name: 'Enterprise Security', desc: 'Security Architecture & IAM', icon: 'security', category: 'security' },
+  { name: 'Amazon Connect', desc: 'Omni-Channel Contact Centre', icon: 'headset_mic', category: 'integration' },
+  { name: 'Braze Integration', desc: 'Marketing Automation', icon: 'campaign', category: 'integration' },
+  { name: 'Data Architecture', desc: 'MDM & Data Quality', icon: 'database', category: 'data' },
   { name: 'Aura Components', desc: 'Legacy Framework', icon: 'layers', category: 'frontend' },
   { name: 'Flows & Automations', desc: 'Process Automation', icon: 'settings', category: 'automation' },
-  { name: 'Data Migration', desc: 'ETL & Data Quality', icon: 'database', category: 'data' },
-  { name: 'System Architecture', desc: 'Solution Design', icon: 'architecture', category: 'architecture' },
-  { name: 'Integration', desc: 'API & Middleware', icon: 'integration_instructions', category: 'integration' },
+  { name: 'REST/SOAP APIs', desc: 'Integration Architecture', icon: 'integration_instructions', category: 'integration' },
+  { name: 'CI/CD & DevOps', desc: 'Pipelines & Governance', icon: 'rocket_launch', category: 'devops' },
   { name: 'Administration', desc: 'Platform Management', icon: 'admin_panel_settings', category: 'platform' },
-  { name: 'Security', desc: 'Data Protection & Compliance', icon: 'security', category: 'security' },
-  { name: 'Digital Marketing & SEO', desc: 'Online Visibility', icon: 'ads_click', category: 'marketing' },
-  { name: 'Web Development', desc: 'Full Stack', icon: 'web', category: 'frontend' },
-  { name: 'Java', desc: 'Object-Oriented Programming', icon: 'code_blocks', category: 'backend' },
+  { name: 'Web Development', desc: 'React & Full Stack', icon: 'web', category: 'frontend' },
 ]
 
 export const features = [
-  { title: 'Org Mergers & Migrations', desc: 'Expert in merging and de-merging Salesforce orgs with seamless data migration, ensuring data integrity and business continuity across complex enterprise environments.', icon: 'cloud_sync' },
-  { title: 'Lightning Web Components', desc: 'Building modern, performant UI experiences with LWC. Creating reusable components that enhance user productivity and system efficiency.', icon: 'web' },
-  { title: 'System Integrations', desc: 'Architecting seamless integrations between Salesforce and external systems, including Braze, loyalty platforms, and custom solutions with focus on data flow optimization.', icon: 'integration_instructions' },
-  { title: 'Data Architecture', desc: 'Certified Data Architect with proven expertise in designing scalable data models, implementing MDM solutions, and ensuring data privacy and compliance across platforms.', icon: 'storage' },
-  { title: 'Einstein AI Implementation', desc: 'Leveraging Salesforce Einstein to deliver intelligent automation, predictive insights, and enhanced customer experiences for retail and enterprise clients.', icon: 'psychology' },
+  { title: 'Agentforce & AI Service Agents', desc: 'Pioneered one of the earliest Agentforce production implementations in Australian fintech — architecting both customer-facing and employee-facing AI service agents that deliver real-time responsiveness and reduce manual case handling overhead at scale.', icon: 'smart_toy' },
+  { title: 'Enterprise Security Architecture', desc: 'Led enterprise security architecture design — identifying platform vulnerabilities, engineering comprehensive security models to remediate breach risk, and overseeing end-to-end implementation across all integrated systems. IAM background informs every platform design decision.', icon: 'security' },
+  { title: 'Org Mergers & De-mergers', desc: 'Expert in merging and de-merging Salesforce orgs at enterprise scale — from Webcentral Group consolidation to Country Road Group / David Jones de-merger — ensuring data integrity, business continuity, and zero downtime.', icon: 'cloud_sync' },
+  { title: 'Amazon Connect & Omni-Channel', desc: 'Architected and delivered omni-channel contact centre solutions integrating Amazon Connect for telephony with Salesforce Service Cloud — enabling seamless voice, messaging, and digital service experiences across enterprise retail and fintech clients.', icon: 'headset_mic' },
+  { title: 'Data Architecture & MDM', desc: 'Certified Data Architect with expertise in designing scalable data models, implementing Master Data Management (MDM) solutions, and establishing single-source-of-truth customer data across multi-brand enterprise environments.', icon: 'storage' },
+  { title: 'REST API & Integration Architecture', desc: 'Designed and built complex REST API integrations with external systems via middleware and webhooks — including Braze, lending platforms, loyalty systems, and Amazon Connect — ensuring secure, reliable, and auditable data flows.', icon: 'integration_instructions' },
 ]
 
 export const projects = [
@@ -146,6 +158,19 @@ export const openSourceProjects = [
 ]
 
 export const caseStudies = [
+  {
+    title: 'Agentforce Implementation — OurMoneyMarket Fintech',
+    icon: 'smart_toy',
+    challenge: 'OurMoneyMarket needed to modernise customer service for loan applicants at scale while also addressing a security breach risk across their Salesforce platform and integrated systems.',
+    solution: 'Pioneered one of Australia\u2019s earliest Agentforce production implementations — architecting both a customer-facing AI agent connected to a custom portal and an internal employee-facing agent. Simultaneously led enterprise security architecture to identify vulnerabilities, design a comprehensive security model, and oversee remediation across all integrated systems.',
+    tech: ['Agentforce', 'Service Cloud', 'Braze', 'REST APIs', 'Webhooks', 'CI/CD', 'Enterprise Security', 'Middleware'],
+    results: [
+      { value: 'First', label: 'Agentforce in AU Fintech' },
+      { value: '100%', label: 'Security Breach Remediated' },
+      { value: 'Real-Time', label: 'Loan Applicant Response' },
+      { value: '40%', label: 'Manual Case Reduction' },
+    ],
+  },
   {
     title: 'Webcentral Group & Netregistry Org Merger',
     icon: 'cloud_sync',
@@ -261,11 +286,11 @@ export const appExchangeProducts = [
 ]
 
 export const stats = [
+  { value: 8, suffix: '+', label: 'Years Experience', icon: 'workspace_premium' },
   { value: 25, label: 'Projects Completed', icon: 'code' },
   { value: 10, label: 'Org Migrations', icon: 'group' },
   { value: 5, suffix: 'M+', label: 'Records Migrated', icon: 'database' },
-  { value: 30, label: 'Integrations Built', icon: 'integration_instructions' },
-  { value: 99, suffix: '.9%', label: 'Data Integrity', icon: 'verified' },
+  { value: 6, label: 'Salesforce Certifications', icon: 'verified' },
   { value: 10, label: 'Clients Served', icon: 'support_agent' },
 ]
 
@@ -276,7 +301,15 @@ export const experience = [
     location: 'Adelaide, Australia',
     startDate: '2025-08-01',
     endDate: null,
-    desc: 'Leading Salesforce development initiatives, implementing Einstein AI, and architecting data solutions for financial services platform.',
+    desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender — owning end-to-end solution design across case management, automation, and customer service operations.',
+    achievements: [
+      'Pioneered one of the earliest Agentforce production integrations in Australian fintech — architecting an AI-driven service agent connected to a custom customer portal for real-time loan applicant responsiveness at scale.',
+      'Architected and implemented an employee-facing Agentforce service agent — extending AI-driven automation to internal operations and significantly reducing manual case handling overhead.',
+      'Led enterprise security architecture — identified platform vulnerabilities, designed a comprehensive security model to remediate breach risk, and oversaw end-to-end implementation across all integrated systems.',
+      'Designed and delivered a Braze integration with Salesforce — architecting the full customer engagement data flow for personalised, real-time communications across the lending platform.',
+      'Built complex REST API integrations with external lending systems via middleware and webhooks, ensuring secure, reliable, and auditable data flows.',
+      'Established CI/CD pipelines and automated testing frameworks, materially reducing deployment risk and improving release velocity.',
+    ],
   },
   {
     title: 'Senior Salesforce Developer & Customer Domain SME',
@@ -284,15 +317,27 @@ export const experience = [
     location: 'Melbourne, Australia',
     startDate: '2023-02-01',
     endDate: '2025-05-31',
-    desc: 'Spearheaded org de-merger, loyalty platform implementation, Braze integration, and data privacy solutions for leading retail group.',
+    desc: 'Played a lead technical role in the high-stakes de-merging of Country Road Group\u2019s Salesforce orgs — spanning cross-functional teams, data integrity assurance, and custom solution development.',
+    achievements: [
+      'Architected and delivered the end-to-end Service Cloud implementation — integrating Amazon Connect for telephony and a messaging platform to enable omni-channel customer service at enterprise scale.',
+      'Architected and implemented the organisation\u2019s loyalty platform on Salesforce — designing the data model, integration layer, and automation framework across retail brands.',
+      'Designed and delivered the Master Data Management (MDM) architecture — establishing a single source of truth for customer data across multiple brands and systems.',
+      'Architected and implemented the Braze marketing solution integrated with Salesforce — enabling data-driven, personalised customer engagement across the retail customer base.',
+      'Served as internal Salesforce consultant to business unit stakeholders — translating competing requirements into prioritised delivery backlogs and providing executive-level progress visibility.',
+    ],
   },
   {
-    title: 'Senior Salesforce Developer',
+    title: 'Salesforce Developer',
     company: 'Webcentral Group',
     location: 'Melbourne, Australia',
-    startDate: '2021-10-01',
+    startDate: '2021-12-01',
     endDate: '2023-02-28',
-    desc: 'Led successful merger of Service Cloud and Sales Cloud orgs, developed custom LWC solutions, and optimized business processes.',
+    desc: 'Led the technical execution of a complex org merge — consolidating Sales Cloud and Service Cloud instances across cross-functional teams with full accountability for custom solution development and data integrity.',
+    achievements: [
+      'Architected and delivered the complete Service Cloud implementation — integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent for intelligent omni-channel service.',
+      'Designed and implemented custom Salesforce solutions including automated workflows, Apex customisations, Visualforce pages, and SOQL-driven logic aligned to enterprise business requirements.',
+      'Acted as trusted technical advisor to customers — providing strategic recommendations to streamline processes, enhance productivity, and scale Salesforce operations.',
+    ],
   },
   {
     title: 'Developer Success Engineer',
@@ -300,15 +345,23 @@ export const experience = [
     location: 'Hyderabad, India',
     startDate: '2020-10-01',
     endDate: '2021-11-30',
-    desc: 'Provided technical support and development assistance for Sales Cloud, Service Cloud, and Community Cloud implementations.',
+    desc: 'Worked within Salesforce\u2019s product organisation — developing Apex customisations, workflows, Visualforce pages, and SOQL queries to address complex enterprise customer requirements across Sales, Service, and Community Cloud.',
+    achievements: [
+      'Provided expert-level technical troubleshooting and end-user support to Salesforce\u2019s enterprise customer base, resolving platform defects and implementing targeted enhancements.',
+      'Consulted directly with enterprise customers to evaluate platform usage and deliver actionable recommendations to improve process efficiency, scalability, and adoption.',
+    ],
   },
   {
-    title: 'Software Developer',
+    title: 'Software Engineer — Identity & Access Management',
     company: 'ISSQUARED INC',
     location: 'Hyderabad, India',
-    startDate: '2017-10-01',
+    startDate: '2017-11-01',
     endDate: '2020-09-30',
-    desc: 'Developed identity management solutions integrating Salesforce with IBM Security Identity Manager and various backend systems.',
+    desc: 'Built IAM provisioning solutions using IBM Security Identity Manager (ISIM), Tivoli Directory Integrator (TDI), and EIMS — automating user access lifecycle governance across enterprise systems.',
+    achievements: [
+      'Integrated Salesforce.com with internal back-end systems via ISIM, building connectors using JavaScript, Java, Apex, and Visualforce to meet enterprise security and access requirements.',
+      'Gathered and reported integration vulnerabilities and security findings, delivering improvement recommendations to engineering and security leadership teams.',
+    ],
   },
 ]
 

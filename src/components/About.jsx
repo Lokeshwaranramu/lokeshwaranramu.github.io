@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { personalInfo, aboutParagraphs } from '../data'
+import { personalInfo, aboutParagraphs, aboutHighlights } from '../data'
 import { useSectionParallax, staggerContainer, fadeUp, slideInLeft, slideInRight } from '../hooks/useMotion'
 
 function getYearsOfExperience() {
@@ -35,7 +35,7 @@ export default function About() {
             About Me
           </motion.h2>
           <motion.p className="section-subtitle" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            Salesforce expert with {years}+ years of enterprise experience
+            Salesforce architect, Agentforce pioneer &amp; enterprise security specialist
           </motion.p>
         </motion.div>
 
@@ -44,6 +44,28 @@ export default function About() {
             {aboutParagraphs.map((p, i) => (
               <motion.p key={i} variants={fadeUp}>{p.replace('{years}', String(years))}</motion.p>
             ))}
+            <motion.div
+              className="about-highlights"
+              variants={staggerContainer(0.4, 0.07)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              {aboutHighlights.map((h) => (
+                <motion.div
+                  key={h.label}
+                  className="about-highlight-chip"
+                  variants={fadeUp}
+                  whileHover={{ y: -3, boxShadow: '0 6px 20px rgba(2,132,199,0.18)' }}
+                >
+                  <span className="material-symbols-outlined">{h.icon}</span>
+                  <div>
+                    <strong>{h.label}</strong>
+                    <span>{h.desc}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
           <motion.div className="about-details" variants={staggerContainer(0.3, 0.1)} initial="hidden" whileInView="show" viewport={{ once: true }}>

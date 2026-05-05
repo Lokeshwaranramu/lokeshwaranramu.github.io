@@ -9,6 +9,10 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
+        // Content-hash every file so browsers never serve stale bundles
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash][extname]',
         manualChunks: {
           vendor: ['react', 'react-dom'],
           motion: ['motion'],
