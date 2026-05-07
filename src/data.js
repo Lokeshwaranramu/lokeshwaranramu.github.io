@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: 'Lokeshwaran Ramu',
   title: 'Senior Salesforce Developer | Consultant | Solution Architect',
-  roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior SF Developer', 'Data Architect', 'Security Architecture'],
+  roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior Ssalesforce Developer', 'Data Architect', 'Salesforce Security Architect'],
   email: 'lokeshramu16@gmail.com',
   phone: '+61 410 076 060',
   location: 'Adelaide, Australia',
@@ -28,14 +28,14 @@ export const aboutParagraphs = [
 ]
 
 export const aboutHighlights = [
-  { icon: 'smart_toy', label: 'Agentforce Pioneer', desc: 'First in AU fintech' },
+  { icon: 'smart_toy', label: 'Agentforce Solution', desc: 'In AU fintech' },
   { icon: 'security', label: 'Security Architecture', desc: 'Breach risk remediation' },
   { icon: 'cloud_sync', label: 'Org Merge & De-merge', desc: 'Enterprise scale' },
   { icon: 'storage', label: 'Data Architect', desc: 'Certified, MDM expert' },
   { icon: 'headset_mic', label: 'Amazon Connect', desc: 'Omni-channel CTI' },
   { icon: 'campaign', label: 'Braze Integration', desc: 'Marketing automation' },
   { icon: 'verified', label: '6 Certifications', desc: 'Incl. PD II & Data Arch' },
-  { icon: 'rocket_launch', label: 'CI/CD & DevOps', desc: 'Pipeline governance' },
+  { icon: 'rocket_launch', label: 'SF CI/CD & DevOps', desc: 'Pipeline governance' },
 ]
 
 export const skills = [
