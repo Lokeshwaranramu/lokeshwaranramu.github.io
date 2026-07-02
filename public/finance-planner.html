@@ -175,6 +175,7 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
   <button class="tab active" role="tab" data-t="t1"><span class="tno">I</span>Salary &amp; Take-home</button>
   <button class="tab" role="tab" data-t="t2"><span class="tno">II</span>Buying Power &amp; Stamp Duty</button>
   <button class="tab" role="tab" data-t="t3"><span class="tno">III</span>Pay It Off Early</button>
+  <button class="tab" role="tab" data-t="t4"><span class="tno">IV</span>Tax Return</button>
 </div></nav>
 
 <main>
@@ -439,6 +440,96 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
     </div>
   </div>
 </section>
+<!-- ================= TAB 4 : TAX RETURN ================= -->
+<section class="panel" id="t4">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Your income statement</h2>
+        <div class="sub">Returns for FY2025–26 opened 1 July 2026 — lodge by 31 October (or later via a tax agent).</div>
+        <div class="field">
+          <label>Return for financial year</label>
+          <select id="rFy">
+            <option value="2026" selected>2025–26 — the return you lodge now</option>
+            <option value="2027">2026–27 — plan ahead (ends 30 Jun 2027)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Gross salary / wages <span class="hint">auto from Tab I — editable</span></label>
+          <input type="number" id="rSalary" value="150000" step="500">
+        </div>
+        <div class="field">
+          <label>Other income <span class="hint">bank interest, dividends etc. $</span></label>
+          <input type="number" id="rOther" value="0" min="0" step="100">
+        </div>
+        <div class="switchrow"><span>Estimate PAYG withheld for me<span class="desc">Approximates what payroll took out over the year</span></span>
+          <span class="switch"><input type="checkbox" id="rAuto" checked><span class="slider"></span></span></div>
+        <div class="field" style="margin-top:10px">
+          <label>Tax withheld (PAYG) <span class="hint">from your income statement in myGov</span></label>
+          <input type="number" id="rWithheld" value="0" min="0" step="100" disabled>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Deductions</h2>
+        <div class="sub">Each dollar deducted returns ~your marginal rate. Keep records for everything.</div>
+        <div class="inline">
+          <div class="field">
+            <label>WFH hours / week <span class="hint">fixed rate 70c/hr</span></label>
+            <input type="number" id="rWfhHrs" value="0" min="0" max="60" step="1">
+          </div>
+          <div class="field">
+            <label>Weeks worked from home</label>
+            <input type="number" id="rWfhWks" value="48" min="0" max="52" step="1">
+          </div>
+        </div>
+        <div class="field">
+          <label>Other work-related expenses <span class="hint">tools, self-education, phone %, travel $</span></label>
+          <input type="number" id="rWork" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Charity donations <span class="hint">$2+ to registered DGRs</span></label>
+          <input type="number" id="rDonate" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Personal super contribution claimed <span class="hint">after-tax → notice of intent lodged</span></label>
+          <input type="number" id="rSuper" value="0" min="0" step="500">
+        </div>
+        <div class="note" id="rCapNote"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="payslip" id="rHero">
+        <div class="plabel" id="rHeadline">Estimated refund</div>
+        <div class="big num" id="rMain">$0</div>
+        <div class="prow">
+          <div><div class="k">Taxable income</div><div class="v num" id="rTi">–</div></div>
+          <div><div class="k">Total liability</div><div class="v num" id="rLiab">–</div></div>
+          <div><div class="k">Tax withheld</div><div class="v num" id="rWh">–</div></div>
+          <div><div class="k">Deductions claimed</div><div class="v num goldl" id="rDed">–</div></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>How the ATO will work it out</h2>
+        <table class="ledger" id="rLedger"></table>
+      </div>
+
+      <div class="card">
+        <h2>Refund boosters for a full-time employee</h2>
+        <table class="ledger">
+          <tr><th>Lever</th><th></th></tr>
+          <tr><td style="font-weight:600">Working-from-home days</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">The fixed-rate method pays 70c per hour and covers energy, internet, phone and stationery. Keep a diary or timesheet of actual hours — estimates without records get rejected.</td></tr>
+          <tr><td style="font-weight:600">Deductible super contribution</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Contribute after-tax money to super, lodge a "notice of intent", and deduct it. You get your marginal rate back (39% for you) and the fund pays only 15% — a ~24c-per-dollar arbitrage. Watch the concessional cap below.</td></tr>
+          <tr><td style="font-weight:600">Time big deductions before 30 June</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">A laptop, tools or prepaid subscriptions bought in June land in this return; bought in July, you wait a year for the refund.</td></tr>
+          <tr><td style="font-weight:600">Spouse super contribution offset</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">With your wife not earning, contributing $3,000 to <b>her</b> super returns a $540 tax offset — the maximum — plus builds her balance. Worth doing every year she's home.</td></tr>
+          <tr><td style="font-weight:600">Point the refund at the loan</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Drop the number below into "Annual lump sum" in Tab III — a recurring refund is the cheapest extra repayment you'll ever make.</td></tr>
+        </table>
+        <div class="alert ok" id="rTip" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -541,7 +632,10 @@ function calcSalary(){
    : `As a single, the MLS kicks in above ${fm(D.mlsS[0])} without private hospital cover — currently ${surch?fm(surch)+'/yr. Hospital cover may cost less.':'not applicable.'}`;
   // sync to tab 2
   if(!$('bpNet').dataset.touched){$('bpNet').value=Math.round(net);}
+  // sync to tab 4 (gross salary; withheld re-estimates)
+  if(!$('rSalary').dataset.touched){$('rSalary').value=Math.round(base);}
   calcBuy();
+  calcReturn();
 }
 
 /* ================= VIC STAMP DUTY ================= */
@@ -718,13 +812,77 @@ function drawChart(a,b,term){
     +line(a,'#9AA8A0',2.5,true)+line(b,'#0E5A47',3);
 }
 
-/* ---------- wiring ---------- */
-['sal','sgRate','fy','salSac','deduct','inclSuper','family','phi','hecs','kids'].forEach(id=>$(id).addEventListener('input',calcSalary));
-['price','depPct','savings','fhbDuty','fhog','fhg','expenses','rate2','otherDebt','ccLimit'].forEach(id=>$(id).addEventListener('input',calcBuy));
 $('bpNet').addEventListener('input',()=>{$('bpNet').dataset.touched=1;calcBuy();});
 $('pLoan').addEventListener('input',()=>{$('pLoan').dataset.touched=1;calcPay();});
 $('pRate').addEventListener('input',()=>{$('pRate').dataset.touched=1;calcPay();});
 ['pTerm','xMonthly','offset','lump','rateCut','fortnightly'].forEach(id=>$(id).addEventListener('input',calcPay));
+/* ================= TAB 4 : TAX RETURN ================= */
+const CONC_CAP={2026:30000,2027:32500};
+function calcReturn(){
+  const fy=+$('rFy').value, D=FYDATA[fy];
+  const salary=+$('rSalary').value||0, other=+$('rOther').value||0;
+  const salSac=Math.min(+$('salSac').value||0,salary);
+  const family=$('family').checked, kids=+$('kids').value||0, phi=$('phi').checked, hasHecs=$('hecs').checked;
+  // deductions
+  const wfh=Math.round((+$('rWfhHrs').value||0)*(+$('rWfhWks').value||0)*0.70);
+  const work=+$('rWork').value||0, donate=+$('rDonate').value||0, pSuper=+$('rSuper').value||0;
+  const ded=wfh+work+donate+pSuper;
+  const ti=Math.max(0,salary-salSac+other-ded);
+  const mlsInc=ti+salSac+pSuper; // reportable super counts
+  const tax=incomeTax(ti,fy);
+  const off=Math.min(lito(ti),tax);
+  const med=medicare(ti,fy);
+  const surch=mls(mlsInc,family,kids,phi,fy);
+  const help=hasHecs?hecsRepay(mlsInc,fy):0;
+  const liab=tax-off+med+surch+help;
+  // PAYG withheld estimate: payroll withholds on salary alone (no deductions/other income)
+  const baseTi=Math.max(0,salary-salSac);
+  const whEst=Math.round(Math.max(0,incomeTax(baseTi,fy)-Math.min(lito(baseTi),incomeTax(baseTi,fy))+medicare(baseTi,fy)+(hasHecs?hecsRepay(baseTi+salSac,fy):0)));
+  if($('rAuto').checked){$('rWithheld').value=whEst;$('rWithheld').disabled=true;}
+  else{$('rWithheld').disabled=false;}
+  const wh=+$('rWithheld').value||0;
+  const result=wh-liab; // + refund, − owing
+  const hero=$('rHero');
+  $('rHeadline').textContent=result>=0?'Estimated refund':'Estimated amount owing';
+  $('rMain').textContent=(result<0?'−':'')+fm(Math.abs(result));
+  hero.style.background=result>=0?'var(--euca)':'var(--clay)';
+  $('rTi').textContent=fm(ti); $('rLiab').textContent=fm(liab);
+  $('rWh').textContent=fm(wh); $('rDed').textContent=fm(ded);
+  const rows=[
+    ['Salary / wages',salary,''],
+    salSac?['Salary sacrifice (pre-tax)',-salSac,'neg']:null,
+    other?['Other income',other,'']:null,
+    wfh?['WFH fixed rate (70c × hours)',-wfh,'pos']:null,
+    work?['Work-related expenses',-work,'pos']:null,
+    donate?['Donations',-donate,'pos']:null,
+    pSuper?['Personal super deduction',-pSuper,'pos']:null,
+    ['— Taxable income —',ti,''],
+    ['Income tax on above',-tax,'neg'],
+    off?['Low Income Tax Offset',off,'pos']:null,
+    ['Medicare levy',-med,'neg'],
+    surch?['Medicare Levy Surcharge',-surch,'neg']:null,
+    help?['HECS/HELP repayment',-help,'neg']:null,
+    ['PAYG already withheld',wh,'pos']
+  ].filter(Boolean);
+  $('rLedger').innerHTML='<tr><th>Item</th><th>$</th></tr>'+
+    rows.map(r=>`<tr class="${r[2]}"><td>${r[0]}</td><td class="amt num">${r[1]<0?'−':''}${fm(Math.abs(r[1]))}</td></tr>`).join('')+
+    `<tr class="total"><td>${result>=0?'Refund to your bank account':'Payable to the ATO'}</td><td class="num">${fm(Math.abs(result))}</td></tr>`;
+  // concessional cap note
+  const cap=CONC_CAP[fy], sg=(+$('sgRate').value||12)/100;
+  const conc=Math.round(salary*sg)+salSac+pSuper;
+  $('rCapNote').innerHTML= conc>cap
+   ? `<b>Over the cap:</b> employer super + salary sacrifice + this deduction = ${fm(conc)}, above the FY concessional cap of ${fm(cap)}. The excess is taxed at your marginal rate — trim the personal contribution by ${fm(conc-cap)}.`
+   : `<b>Concessional cap check:</b> employer super + salary sacrifice + this deduction = ${fm(conc)} of the ${fm(cap)} cap — <b>${fm(cap-conc)} of room left</b>${fy===2027?' (cap rose to $32,500 this year)':''}. Unused cap since 2019–20 may also be carried forward if your super balance is under $500k.`;
+  // tip: marginal value of deductions + lump-sum link
+  const marg=Math.round((marginalRate(ti,fy)/100 + (hasHecs&&mlsInc>D.hecs1?(mlsInc>D.hecs2?0.17:0.15):0))*100);
+  const tip=$('rTip'); tip.style.display='block';
+  tip.innerHTML= result>0
+   ? `At your income, every extra $100 of legitimate deductions adds about <b>$${marg}</b> to this refund. Redirected into the loan each year, a ${fm(result)} refund saves roughly ${fm(result*7)}–${fm(result*9)} in lifetime interest (see Tab III, Strategy 3).`
+   : `Every extra $100 of legitimate deductions cuts what you owe by about <b>$${marg}</b>. WFH hours and a deductible super contribution are the fastest levers before you lodge.`;
+}
+['rFy','rSalary','rOther','rAuto','rWithheld','rWfhHrs','rWfhWks','rWork','rDonate','rSuper'].forEach(id=>$(id).addEventListener('input',calcReturn));
+$('rSalary').addEventListener('input',()=>{$('rSalary').dataset.touched=1;});
+
 calcSalary();
 </script>
 </body>
