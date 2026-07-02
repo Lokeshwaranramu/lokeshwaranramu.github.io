@@ -3,18 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance Planner — Salary, Home Loan &amp; Payoff Calculator (VIC)</title>
-<meta name="description" content="Australian salary take-home calculator, buying power estimator with VIC stamp duty and first-home-buyer concessions, and mortgage payoff strategy planner. Runs entirely in your browser.">
-<link rel="canonical" href="https://lokeshwaranramu.com/finance-planner.html">
-<meta property="og:title" content="Finance Planner — Salary, Home Loan &amp; Payoff Calculator (VIC)">
-<meta property="og:description" content="Australian salary take-home, buying power &amp; mortgage payoff planner. VIC stamp duty &amp; FHOG included. Runs entirely in your browser.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lokeshwaranramu.com/finance-planner.html">
-<meta name="twitter:card" content="summary">
-<meta name="robots" content="index,follow">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N5V9X2G4PX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-N5V9X2G4PX');</script>
+<title>Salary, Home Loan & Payoff Planner (VIC)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -175,7 +164,7 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
 <body>
 <header>
   <div class="hwrap">
-    <div class="eyebrow">Victoria · FY selector inside · all figures update live</div>
+    <div class="eyebrow">Melbourne West · Werribee / Mambourin / Wyndham Vale · FY selector inside</div>
     <h1>Salary, Buying Power &amp; Loan Payoff Planner</h1>
     <p>Built around a single-income family (partner at home, one toddler) but every number is adjustable — salary, rates, grants and prices all update live.</p>
     <span class="privacy">🔒 Runs entirely in your browser — nothing you type is stored or sent anywhere</span>
@@ -208,9 +197,9 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
           <div class="field">
             <label>Financial year</label>
             <select id="fy">
-              <option value="2026" selected>2025–26 (current)</option>
-              <option value="2027">2026–27 (16%→15%)</option>
-              <option value="2028">2027–28 (→14%)</option>
+              <option value="2027" selected>2026–27 (current — 15%)</option>
+              <option value="2026">2025–26 (last year — 16%)</option>
+              <option value="2028">2027–28 (from 1 Jul 2027 — 14%)</option>
             </select>
           </div>
         </div>
@@ -226,13 +215,13 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
       <div class="card">
         <h2>Household</h2>
         <div class="sub">These drive Medicare Levy Surcharge &amp; HECS.</div>
-        <div class="switchrow"><span>Package includes super<span class="desc">On = salary above is a "package", base is derived</span></span>
+        <div class="switchrow"><span>Package includes super<span class="desc">On = salary above is a “package”, base is derived</span></span>
           <span class="switch"><input type="checkbox" id="inclSuper"><span class="slider"></span></span></div>
         <div class="switchrow"><span>Dependent spouse / family<span class="desc">Family MLS threshold applies (yours: family of 3)</span></span>
           <span class="switch"><input type="checkbox" id="family" checked><span class="slider"></span></span></div>
         <div class="switchrow"><span>Private hospital cover<span class="desc">Avoids MLS if income above threshold</span></span>
           <span class="switch"><input type="checkbox" id="phi"><span class="slider"></span></span></div>
-        <div class="switchrow"><span>HECS / HELP debt<span class="desc">2025–26 marginal system, threshold $67k</span></span>
+        <div class="switchrow"><span>HECS / HELP debt<span class="desc">Marginal system — 2026–27 threshold $69,528</span></span>
           <span class="switch"><input type="checkbox" id="hecs"><span class="slider"></span></span></div>
         <div class="field" style="margin-top:10px">
           <label>Dependent children <span class="hint">for MLS threshold</span></label>
@@ -283,7 +272,7 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
     <div>
       <div class="card">
         <h2>The property</h2>
-        <div class="sub">Melbourne west price points — tap a suburb to prefill, or enter your own.</div>
+        <div class="sub">Typical Melbourne-west price points — tap a suburb to prefill.</div>
         <div class="chips">
           <button class="chip" data-price="650000">Werribee <span class="sml">house ~$650k</span></button>
           <button class="chip" data-price="600000">Wyndham Vale <span class="sml">~$600k</span></button>
@@ -453,7 +442,7 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
 </main>
 
 <footer>
-  <b>How to read this.</b> General information only, not personal financial or credit advice — figures are estimates using FY2025–26 ATO resident rates (16/30/37/45% + 2% Medicare levy, LITO), 12% super guarantee, Victorian SRO duty rates and first-home-buyer concessions, the federal 5% Deposit Scheme (Melbourne cap $950,000), and the $10,000 Victorian FHOG for new homes ≤ $750,000. Borrowing power is a simplified serviceability model (rate + 3% buffer); each lender's calculator will differ. Suburb prices are indicative medians, not quotes. Verify current rules at ato.gov.au, sro.vic.gov.au and housingaustralia.gov.au, and speak to a licensed mortgage broker or adviser before acting.
+  <b>How to read this.</b> General information only, not personal financial or credit advice — figures use FY2026–27 ATO resident rates (15/30/37/45% + 2% Medicare levy, LITO; the year selector also covers 2025–26 and the legislated 14% rate from 1 July 2027), official 2026–27 MLS tiers (single $105k / family $210k base), the 2026–27 HECS marginal system (threshold $69,528; the second band is indexed pro-rata as the ATO figure), the 12% super guarantee, Victorian SRO duty rates and first-home-buyer concessions, the federal 5% Deposit Scheme (Melbourne cap $950,000 — check housingaustralia.gov.au for any new-year cap changes), and the $10,000 Victorian FHOG for new homes ≤ $750,000. Borrowing power is a simplified serviceability model (rate + 3% buffer); each lender's calculator will differ. Suburb prices are indicative medians, not quotes. Verify current rules at ato.gov.au, sro.vic.gov.au and housingaustralia.gov.au, and speak to a licensed mortgage broker or adviser before acting.
 </footer>
 <script>
 "use strict";
@@ -469,20 +458,28 @@ document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
   b.classList.add('active'); $(b.dataset.t).classList.add('active');
 }));
 
-/* ================= TAX ENGINE (FY2025-26 + legislated cuts) ================= */
+/* ================= TAX ENGINE — year-indexed thresholds =================
+   FY2026-27 (current): 15% bracket · MLS single 105k / family 210k tiers ·
+   HECS threshold $69,528 · Medicare phase-in $29,207–$36,509.            */
+const FYDATA={
+ 2026:{medLo:27222,medHi:34027,hecs1:67000,hecs2:125000,mlsS:[101000,118000,158000],mlsF:[202000,236000,316000]},
+ 2027:{medLo:29207,medHi:36509,hecs1:69528,hecs2:129716,mlsS:[105000,123000,164000],mlsF:[210000,246000,328000]},
+ 2028:{medLo:29207,medHi:36509,hecs1:69528,hecs2:129716,mlsS:[105000,123000,164000],mlsF:[210000,246000,328000]} // 27-28 thresholds not yet indexed — 26-27 shown
+};
 function brackets(fy){const lo=fy>=2028?0.14:fy>=2027?0.15:0.16;
   return[[18200,0],[45000,lo],[135000,.30],[190000,.37],[Infinity,.45]];}
 function incomeTax(ti,fy){let t=0,p=0;for(const[c,r]of brackets(fy)){if(ti>p)t+=(Math.min(ti,c)-p)*r;p=c;if(ti<=c)break;}return Math.max(0,t);}
 function lito(ti){if(ti<=37500)return 700;if(ti<=45000)return 700-(ti-37500)*.05;
   if(ti<=66667)return Math.max(0,325-(ti-45000)*.015);return 0;}
-function medicare(ti){if(ti<=27222)return 0;if(ti<=34027)return(ti-27222)*.10;return ti*.02;}
-function mls(inc,family,kids,phi){if(phi)return 0;
-  const ex=family&&kids>1?(kids-1)*1500:0;
-  const T=family?[202000+ex,236000+ex,288000+ex]:[101000,118000,144000];
+function medicare(ti,fy){const D=FYDATA[fy];if(ti<=D.medLo)return 0;
+  return Math.min((ti-D.medLo)*.10, ti*.02);}
+function mls(inc,family,kids,phi,fy){if(phi)return 0;
+  const D=FYDATA[fy], ex=family&&kids>1?(kids-1)*1500:0;
+  const T=family?D.mlsF.map(t=>t+ex):D.mlsS;
   if(inc<=T[0])return 0;if(inc<=T[1])return inc*.01;if(inc<=T[2])return inc*.0125;return inc*.015;}
-function hecsRepay(inc){if(inc<=67000)return 0;
-  return .15*(Math.min(inc,125000)-67000)+(inc>125000?.17*(inc-125000):0);}
-function marginalRate(ti,fy){const t1=incomeTax(ti,fy)+medicare(ti),t2=incomeTax(ti+100,fy)+medicare(ti+100);return(t2-t1);}
+function hecsRepay(inc,fy){const D=FYDATA[fy];if(inc<=D.hecs1)return 0;
+  return .15*(Math.min(inc,D.hecs2)-D.hecs1)+(inc>D.hecs2?.17*(inc-D.hecs2):0);}
+function marginalRate(ti,fy){const t1=incomeTax(ti,fy)+medicare(ti,fy),t2=incomeTax(ti+100,fy)+medicare(ti+100,fy);return(t2-t1);}
 
 /* ================= TAB 1 ================= */
 let lastNet=110162, lastMarg=0.39;
@@ -493,14 +490,15 @@ function calcSalary(){
   const taxable=Math.max(0,base-salSac-ded);
   const superAnn=base*sg+salSac;
   const family=$('family').checked, kids=+$('kids').value||0, phi=$('phi').checked;
+  const D=FYDATA[fy];
   const mlsInc=taxable+salSac; // reportable super counts for MLS
   const tax=incomeTax(taxable,fy);
   const off=Math.min(lito(taxable),tax);
-  const med=medicare(taxable);
-  const surch=mls(mlsInc,family,kids,phi);
-  const help=$('hecs').checked?hecsRepay(mlsInc):0;
+  const med=medicare(taxable,fy);
+  const surch=mls(mlsInc,family,kids,phi,fy);
+  const help=$('hecs').checked?hecsRepay(mlsInc,fy):0;
   const totalTax=tax-off+med+surch+help;
-  lastMarg=Math.min(0.60,Math.max(0,marginalRate(taxable,fy)/100 + (help&&mlsInc>67000?(mlsInc>125000?0.17:0.15):0)));
+  lastMarg=Math.min(0.60,Math.max(0,marginalRate(taxable,fy)/100 + (help&&mlsInc>D.hecs1?(mlsInc>D.hecs2?0.17:0.15):0)));
   const net=taxable-totalTax + ded; // deductions reduce tax, not cash in hand
   lastNet=net;
   // payslip
@@ -511,7 +509,7 @@ function calcSalary(){
   $('kTax').textContent=fm(totalTax);
   $('kTaxS').textContent='incl. Medicare'+(surch?' + MLS':'')+(help?' + HECS':'');
   $('kEff').textContent=pc(base>0?totalTax/base*100:0);
-  $('kMarg').textContent='marginal '+pc(marginalRate(taxable,fy)+ (help&&mlsInc>67000?(mlsInc>125000?17:15):0));
+  $('kMarg').textContent='marginal '+pc(marginalRate(taxable,fy)+ (help&&mlsInc>D.hecs1?(mlsInc>D.hecs2?17:15):0));
   $('kSuper').textContent=fm(superAnn);
   // stack
   const segs=[['Take-home',net,'#0E5A47'],['Income tax',tax-off,'#B4552D'],['Medicare'+(surch?' + MLS':''),med+surch,'#C9A227']];
@@ -537,9 +535,10 @@ function calcSalary(){
     P.map(([n,d])=>`<tr><td>${n}</td><td class="num">${d>52?fm2(base/d):fm(base/d)}</td><td class="num" style="color:var(--clay)">${d>52?fm2(totalTax/d):fm(totalTax/d)}</td><td class="num" style="color:var(--euca);font-weight:700">${d>52?fm2(net/d):fm(net/d)}</td></tr>`).join('');
   // MLS note
   const ex=family&&kids>1?(kids-1)*1500:0;
+  const fyLbl=(fy-1)+'–'+String(fy).slice(2);
   $('mlsNote').innerHTML= family
-   ? `<b>Family advantage:</b> with a dependent spouse${kids?` and ${kids} child${kids>1?'ren':''}`:''}, the <b>family</b> MLS threshold of ${fm(202000+ex)} applies — so at ${fm(mlsInc)} you pay <b>no Medicare Levy Surcharge</b> even without private hospital cover.`
-   : `As a single, the MLS kicks in above $101,000 without private hospital cover — currently ${surch?fm(surch)+'/yr. Hospital cover may cost less.':'not applicable.'}`;
+   ? `<b>Family advantage (FY${fyLbl}):</b> with a dependent spouse${kids?` and ${kids} child${kids>1?'ren':''}`:''}, the <b>family</b> MLS threshold of ${fm(D.mlsF[0]+ex)} applies — so at ${fm(mlsInc)} you pay <b>no Medicare Levy Surcharge</b> even without private hospital cover.`
+   : `As a single, the MLS kicks in above ${fm(D.mlsS[0])} without private hospital cover — currently ${surch?fm(surch)+'/yr. Hospital cover may cost less.':'not applicable.'}`;
   // sync to tab 2
   if(!$('bpNet').dataset.touched){$('bpNet').value=Math.round(net);}
   calcBuy();
