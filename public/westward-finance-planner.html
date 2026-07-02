@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary, Home Loan & Payoff Planner (VIC)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12211C;
+  --paper:#F4F6F3;
+  --card:#FFFFFF;
+  --euca:#0E5A47;        /* deep eucalypt green — primary */
+  --euca-deep:#0A4536;
+  --euca-tint:#E3EFE9;
+  --wattle:#C9A227;      /* gold accent */
+  --wattle-soft:#F5ECD2;
+  --clay:#B4552D;        /* warning / cost */
+  --clay-soft:#F7E6DD;
+  --line:#D8DFD9;
+  --mut:#5B6B63;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(18,33,28,.06), 0 8px 24px rgba(18,33,28,.07);
+  --mono-nums:'Archivo',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Archivo',system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1}
+h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif}
+
+/* ---------- header ---------- */
+header{background:var(--euca-deep);color:#EAF3EE;padding:26px 20px 20px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, rgba(201,162,39,.28), transparent 65%);pointer-events:none}
+.hwrap{max-width:1140px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9CC4B2;font-weight:600}
+header h1{font-size:clamp(24px,4vw,34px);font-weight:600;margin:6px 0 4px}
+header p{color:#B9D4C7;font-size:14px;max-width:640px}
+.privacy{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:#D9C87E;background:rgba(201,162,39,.14);
+  border:1px solid rgba(201,162,39,.35);padding:4px 10px;border-radius:999px}
+
+/* ---------- tabs ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.tabs{max-width:1140px;margin:0 auto;display:flex;gap:4px;padding:10px 12px;overflow-x:auto}
+.tab{appearance:none;border:1px solid transparent;background:transparent;color:var(--mut);font:600 14px 'Archivo';padding:10px 16px;
+  border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .18s}
+.tab:hover{color:var(--euca)}
+.tab.active{background:var(--euca);color:#fff;box-shadow:var(--shadow)}
+.tab:focus-visible{outline:2px solid var(--wattle);outline-offset:2px}
+.tab .tno{font-family:'Fraunces';font-weight:700;margin-right:6px;opacity:.65}
+
+main{max-width:1140px;margin:0 auto;padding:22px 16px 80px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){section.panel.active{animation:none}}
+
+.grid{display:grid;grid-template-columns:380px 1fr;gap:18px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* ---------- cards & inputs ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card h2{font-size:19px;font-weight:600;margin-bottom:2px}
+.card .sub{font-size:12.5px;color:var(--mut);margin-bottom:14px}
+.card + .card{margin-top:16px}
+fieldset{border:0}
+.field{margin-bottom:14px}
+label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+label .hint{font-weight:400;color:var(--mut);font-size:11.5px}
+input[type=number],select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:500 15px var(--mono-nums);
+  background:#FBFCFB;color:var(--ink)}
+input[type=number]:focus,select:focus{outline:2px solid var(--euca);outline-offset:1px;border-color:var(--euca)}
+input[type=range]{width:100%;accent-color:var(--euca);margin-top:4px}
+.inline{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.switchrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px dashed var(--line);font-size:13.5px;font-weight:500}
+.switchrow:first-of-type{border-top:0}
+.switchrow .desc{color:var(--mut);font-weight:400;font-size:11.5px;display:block}
+.switch{position:relative;width:42px;height:24px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#CBD6CF;border-radius:99px;transition:.2s;cursor:pointer}
+.slider::before{content:"";position:absolute;height:18px;width:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.switch input:checked + .slider{background:var(--euca)}
+.switch input:checked + .slider::before{transform:translateX(18px)}
+.switch input:focus-visible + .slider{outline:2px solid var(--wattle);outline-offset:2px}
+
+/* ---------- payslip hero (signature) ---------- */
+.payslip{background:var(--euca);color:#F2F8F4;border-radius:var(--radius);padding:22px 22px 18px;position:relative;box-shadow:var(--shadow)}
+.payslip::before,.payslip::after{content:"";position:absolute;width:22px;height:22px;background:var(--paper);border-radius:50%;top:calc(50% - 11px)}
+.payslip::before{left:-11px}.payslip::after{right:-11px}
+.payslip .plabel{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#A7CBB8;font-weight:600}
+.payslip .big{font-family:'Fraunces';font-size:clamp(38px,6vw,56px);font-weight:700;line-height:1.05;margin:4px 0 2px}
+.payslip .big small{font-size:.42em;font-weight:600;color:#BFDCCC}
+.payslip .prow{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.28)}
+.payslip .prow div{min-width:96px}
+.payslip .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9CC4B2}
+.payslip .v{font-family:var(--mono-nums);font-weight:700;font-size:16.5px}
+.gold{color:var(--wattle)} .goldl{color:#E8CE6E}
+
+/* ---------- ledger tables ---------- */
+table.ledger{width:100%;border-collapse:collapse;font-size:14px}
+.ledger th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-align:right;padding:8px 10px;border-bottom:2px solid var(--ink);font-weight:600}
+.ledger th:first-child,.ledger td:first-child{text-align:left}
+.ledger td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono-nums)}
+.ledger td:first-child{font-family:'Archivo';font-weight:500}
+.ledger tr.total td{border-top:2px solid var(--ink);border-bottom:0;font-weight:700;background:var(--euca-tint)}
+.ledger tr.neg td.amt{color:var(--clay)}
+.ledger tr.pos td.amt{color:var(--euca);font-weight:600}
+.stack{display:flex;height:14px;border-radius:99px;overflow:hidden;margin:10px 0 6px;border:1px solid var(--line)}
+.stack i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:11.5px;color:var(--mut)}
+.legend b{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.kpi .v{font-family:'Fraunces';font-size:22px;font-weight:700;margin-top:2px}
+.kpi .s{font-size:11.5px;color:var(--mut)}
+.kpi.good{border-color:var(--euca);background:var(--euca-tint)}
+.kpi.warn{border-color:var(--clay);background:var(--clay-soft)}
+.kpi.goldc{border-color:var(--wattle);background:var(--wattle-soft)}
+
+/* ---------- compare cards ---------- */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:760px){.compare{grid-template-columns:1fr}}
+.house{border:1.5px solid var(--line);border-radius:var(--radius);background:var(--card);overflow:hidden}
+.house.win{border-color:var(--wattle);box-shadow:0 0 0 3px var(--wattle-soft)}
+.house .head{padding:12px 16px;background:var(--euca-tint);display:flex;justify-content:space-between;align-items:center}
+.house .head h3{font-size:16px}
+.badge{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;background:var(--wattle);color:#3E3106;padding:3px 9px;border-radius:99px}
+.house .body{padding:6px 16px 14px}
+.house .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.house .row:last-child{border-bottom:0}
+.house .row .amt{font-family:var(--mono-nums);font-weight:600}
+.house .row.save .amt{color:var(--euca)}
+.house .row.cost .amt{color:var(--clay)}
+.house .foot{padding:12px 16px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;background:#FBFCFB}
+.house .foot .amt{font-family:'Fraunces';font-size:22px;font-weight:700}
+
+.note{font-size:12px;color:var(--mut);background:var(--wattle-soft);border:1px solid #E5D9A8;border-radius:10px;padding:10px 12px;margin-top:12px}
+.note b{color:var(--ink)}
+.alert{font-size:12.5px;border-radius:10px;padding:10px 12px;margin-top:12px;border:1px solid}
+.alert.ok{background:var(--euca-tint);border-color:var(--euca);color:var(--euca-deep)}
+.alert.bad{background:var(--clay-soft);border-color:var(--clay);color:#7C3417}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 2px}
+.chip{appearance:none;cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font:600 12px 'Archivo';color:var(--ink)}
+.chip:hover{border-color:var(--euca);color:var(--euca)}
+.chip .sml{color:var(--mut);font-weight:400}
+
+/* ---------- strategy tab ---------- */
+.strat{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card);margin-top:12px}
+.strat .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.strat h3{font-size:15px}
+.strat .save{font-family:var(--mono-nums);font-weight:700;color:var(--euca);white-space:nowrap;font-size:15px}
+.strat .save small{display:block;font-weight:500;color:var(--mut);font-size:11px;text-align:right}
+.strat p{font-size:12.5px;color:var(--mut);margin:4px 0 8px}
+svg text{font-family:'Archivo'}
+.chartwrap{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color:var(--mut);line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="eyebrow">Melbourne West · Werribee / Mambourin / Wyndham Vale · FY selector inside</div>
+    <h1>Westward — Salary, Buying Power &amp; Loan Payoff Planner</h1>
+    <p>Built around a single-income family (partner at home, one toddler) but every number is adjustable — salary, rates, grants and prices all update live.</p>
+    <span class="privacy">🔒 Runs entirely in your browser — nothing you type is stored or sent anywhere</span>
+  </div>
+</header>
+
+<nav><div class="tabs" role="tablist">
+  <button class="tab active" role="tab" data-t="t1"><span class="tno">I</span>Salary &amp; Take-home</button>
+  <button class="tab" role="tab" data-t="t2"><span class="tno">II</span>Buying Power &amp; Stamp Duty</button>
+  <button class="tab" role="tab" data-t="t3"><span class="tno">III</span>Pay It Off Early</button>
+</div></nav>
+
+<main>
+<!-- ================= TAB 1 : SALARY ================= -->
+<section class="panel active" id="t1">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Your pay</h2>
+        <div class="sub">ATO resident rates. Change the year to preview the legislated tax cuts.</div>
+        <div class="field">
+          <label>Base salary (excl. super) <span class="hint">$ per year</span></label>
+          <input type="number" id="sal" value="150000" min="0" step="1000">
+        </div>
+        <div class="inline">
+          <div class="field">
+            <label>Super rate <span class="hint">% (SG is 12%)</span></label>
+            <input type="number" id="sgRate" value="12" min="0" max="30" step="0.5">
+          </div>
+          <div class="field">
+            <label>Financial year</label>
+            <select id="fy">
+              <option value="2026" selected>2025–26 (current)</option>
+              <option value="2027">2026–27 (16%→15%)</option>
+              <option value="2028">2027–28 (→14%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Salary sacrifice to super <span class="hint">$ / yr (taxed 15% in fund)</span></label>
+          <input type="number" id="salSac" value="0" min="0" step="500">
+        </div>
+        <div class="field">
+          <label>Deductions (work expenses etc.) <span class="hint">$ / yr</span></label>
+          <input type="number" id="deduct" value="0" min="0" step="100">
+        </div>
+      </div>
+      <div class="card">
+        <h2>Household</h2>
+        <div class="sub">These drive Medicare Levy Surcharge &amp; HECS.</div>
+        <div class="switchrow"><span>Package includes super<span class="desc">On = salary above is a “package”, base is derived</span></span>
+          <span class="switch"><input type="checkbox" id="inclSuper"><span class="slider"></span></span></div>
+        <div class="switchrow"><span>Dependent spouse / family<span class="desc">Family MLS threshold applies (yours: family of 3)</span></span>
+          <span class="switch"><input type="checkbox" id="family" checked><span class="slider"></span></span></div>
+        <div class="switchrow"><span>Private hospital cover<span class="desc">Avoids MLS if income above threshold</span></span>
+          <span class="switch"><input type="checkbox" id="phi"><span class="slider"></span></span></div>
+        <div class="switchrow"><span>HECS / HELP debt<span class="desc">2025–26 marginal system, threshold $67k</span></span>
+          <span class="switch"><input type="checkbox" id="hecs"><span class="slider"></span></span></div>
+        <div class="field" style="margin-top:10px">
+          <label>Dependent children <span class="hint">for MLS threshold</span></label>
+          <input type="number" id="kids" value="1" min="0" max="10">
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="payslip" id="payslip">
+        <div class="plabel">Your take-home pay</div>
+        <div class="big num" id="psMain">$0<small> /fortnight</small></div>
+        <div class="prow">
+          <div><div class="k">Monthly</div><div class="v num" id="psMo">–</div></div>
+          <div><div class="k">Weekly</div><div class="v num" id="psWk">–</div></div>
+          <div><div class="k">Per calendar day</div><div class="v num goldl" id="psCd">–</div></div>
+          <div><div class="k">Per working day</div><div class="v num" id="psWd">–</div></div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="k">Gross (excl. super)</div><div class="v num" id="kGross">–</div></div>
+        <div class="kpi"><div class="k">Total tax + levies</div><div class="v num" id="kTax">–</div><div class="s" id="kTaxS"></div></div>
+        <div class="kpi"><div class="k">Effective tax rate</div><div class="v num" id="kEff">–</div><div class="s" id="kMarg"></div></div>
+        <div class="kpi goldc"><div class="k">Employer super</div><div class="v num" id="kSuper">–</div><div class="s">paid into your fund</div></div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>Where each dollar goes</h2>
+        <div class="stack" id="stackBar"></div>
+        <div class="legend" id="stackLegend"></div>
+        <table class="ledger" style="margin-top:14px" id="taxLedger"></table>
+      </div>
+
+      <div class="card">
+        <h2>Every pay cycle, side by side</h2>
+        <div class="sub">Calendar-day column divides by 365; working-day by 260 (Mon–Fri).</div>
+        <table class="ledger" id="periodTable"></table>
+        <div class="note" id="mlsNote"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB 2 : BUYING POWER ================= -->
+<section class="panel" id="t2">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>The property</h2>
+        <div class="sub">Typical Melbourne-west price points — tap a suburb to prefill.</div>
+        <div class="chips">
+          <button class="chip" data-price="650000">Werribee <span class="sml">house ~$650k</span></button>
+          <button class="chip" data-price="600000">Wyndham Vale <span class="sml">~$600k</span></button>
+          <button class="chip" data-price="680000">Mambourin <span class="sml">H&amp;L ~$680k</span></button>
+        </div>
+        <div class="field" style="margin-top:10px">
+          <label>Property price <span class="hint num" id="priceLbl">$650,000</span></label>
+          <input type="range" id="price" min="400000" max="950000" step="5000" value="650000">
+        </div>
+        <div class="field">
+          <label>Deposit <span class="hint num" id="depLbl">5% = $32,500</span></label>
+          <input type="range" id="depPct" min="2" max="40" step="1" value="5">
+        </div>
+        <div class="field">
+          <label>Savings available <span class="hint">$ for deposit + costs</span></label>
+          <input type="number" id="savings" value="40000" min="0" step="1000">
+        </div>
+      </div>
+      <div class="card">
+        <h2>First home buyer benefits</h2>
+        <div class="sub">All optional — toggle off anything you're not eligible for.</div>
+        <div class="switchrow"><span>VIC stamp duty relief<span class="desc">$0 duty ≤ $600k · sliding concession to $750k</span></span>
+          <span class="switch"><input type="checkbox" id="fhbDuty" checked><span class="slider"></span></span></div>
+        <div class="switchrow"><span>$10,000 FHOG<span class="desc">New homes ≤ $750k only</span></span>
+          <span class="switch"><input type="checkbox" id="fhog" checked><span class="slider"></span></span></div>
+        <div class="switchrow"><span>5% Deposit Scheme (FHG)<span class="desc">No LMI · no income cap · Melb cap $950k</span></span>
+          <span class="switch"><input type="checkbox" id="fhg" checked><span class="slider"></span></span></div>
+      </div>
+      <div class="card">
+        <h2>Borrowing power inputs</h2>
+        <div class="sub">Lenders assess you at your rate + 3% APRA buffer.</div>
+        <div class="field">
+          <label>Net annual income <span class="hint">auto from Tab I — editable</span></label>
+          <input type="number" id="bpNet" value="110000" step="500">
+        </div>
+        <div class="inline">
+          <div class="field">
+            <label>Living expenses <span class="hint">$ / month</span></label>
+            <input type="number" id="expenses" value="4500" step="100">
+          </div>
+          <div class="field">
+            <label>Interest rate <span class="hint">% p.a.</span></label>
+            <input type="number" id="rate2" value="6.10" step="0.05">
+          </div>
+        </div>
+        <div class="inline">
+          <div class="field">
+            <label>Other loan repayments <span class="hint">$ / month</span></label>
+            <input type="number" id="otherDebt" value="0" step="50">
+          </div>
+          <div class="field">
+            <label>Credit card limits <span class="hint">total $</span></label>
+            <input type="number" id="ccLimit" value="0" step="500">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="kpis" style="margin-top:0">
+        <div class="kpi good"><div class="k">Est. borrowing power</div><div class="v num" id="bpVal">–</div><div class="s" id="bpS">assessed @ – %</div></div>
+        <div class="kpi"><div class="k">Loan for this price</div><div class="v num" id="loanVal">–</div><div class="s" id="lvrS">LVR –</div></div>
+        <div class="kpi"><div class="k">Repayment</div><div class="v num" id="repayVal">–</div><div class="s">/month · 30 yrs P&amp;I</div></div>
+        <div class="kpi" id="servKpi"><div class="k">Serviceability</div><div class="v" id="servVal">–</div><div class="s" id="servS"></div></div>
+      </div>
+
+      <div class="compare" id="compareWrap">
+        <!-- new vs established injected -->
+      </div>
+      <div class="alert" id="cashAlert" style="display:none"></div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>Stamp duty at any price — new vs established</h2>
+        <div class="sub">First-home-buyer duty relief applies to both; the FHOG ($10k) is new-builds only. For house &amp; land, duty is usually charged on the land component only — often near $0.</div>
+        <table class="ledger" id="dutyTable"></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB 3 : PAYOFF ================= -->
+<section class="panel" id="t3">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Your loan</h2>
+        <div class="sub">Auto-filled from Tab II — change anything.</div>
+        <div class="field"><label>Loan amount <span class="hint">$</span></label><input type="number" id="pLoan" value="617500" step="1000"></div>
+        <div class="inline">
+          <div class="field"><label>Rate <span class="hint">% p.a.</span></label><input type="number" id="pRate" value="6.10" step="0.05"></div>
+          <div class="field"><label>Term <span class="hint">years</span></label><input type="number" id="pTerm" value="30" min="5" max="30"></div>
+        </div>
+        <div class="note" id="capacityNote"></div>
+      </div>
+      <div class="card">
+        <h2>Stack your strategies</h2>
+        <div class="sub">Each slider shows its own saving; the chart shows all combined.</div>
+        <div class="field">
+          <label>1 · Extra repayment <span class="hint num" id="xLbl">$300 /month</span></label>
+          <input type="range" id="xMonthly" min="0" max="2500" step="50" value="300">
+        </div>
+        <div class="field">
+          <label>2 · Money parked in offset <span class="hint num" id="oLbl">$10,000 avg</span></label>
+          <input type="range" id="offset" min="0" max="100000" step="1000" value="10000">
+        </div>
+        <div class="field">
+          <label>3 · Annual lump sum (e.g. tax refund) <span class="hint num" id="lLbl">$0 /yr</span></label>
+          <input type="range" id="lump" min="0" max="20000" step="500" value="0">
+        </div>
+        <div class="field">
+          <label>4 · Rate cut from negotiating / refinancing <span class="hint num" id="rLbl">−0.00%</span></label>
+          <input type="range" id="rateCut" min="0" max="100" step="5" value="0">
+        </div>
+        <div class="switchrow"><span>5 · Pay fortnightly halves<span class="desc">26 half-payments = one extra month per year</span></span>
+          <span class="switch"><input type="checkbox" id="fortnightly"><span class="slider"></span></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="payslip">
+        <div class="plabel">Combined result</div>
+        <div class="big num" id="totSave">$0<small> interest saved</small></div>
+        <div class="prow">
+          <div><div class="k">Loan paid off in</div><div class="v num" id="newTerm">–</div></div>
+          <div><div class="k">Time cut</div><div class="v num goldl" id="timeCut">–</div></div>
+          <div><div class="k">Baseline interest</div><div class="v num" id="baseInt">–</div></div>
+          <div><div class="k">Your interest</div><div class="v num" id="newInt">–</div></div>
+        </div>
+      </div>
+
+      <div class="chartwrap">
+        <h2 style="font-size:17px;margin-bottom:4px">Loan balance over time</h2>
+        <div class="sub" style="font-size:12px;color:var(--mut)">Grey = minimum repayments only · Green = your strategy stack</div>
+        <svg id="chart" viewBox="0 0 720 300" width="100%" role="img" aria-label="Loan balance chart"></svg>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>The offset account, explained &amp; managed</h2>
+        <div class="sub">Live figures below use your loan, rate and the offset slider (Strategy 2).</div>
+        <div class="kpis" style="margin-top:4px">
+          <div class="kpi"><div class="k">Daily interest — no offset</div><div class="v num" id="oxNo">–</div></div>
+          <div class="kpi good"><div class="k">With your offset</div><div class="v num" id="oxYes">–</div><div class="s" id="oxDaily"></div></div>
+          <div class="kpi goldc"><div class="k">Saving per year</div><div class="v num" id="oxYr">–</div><div class="s">tax-free &amp; withdrawable</div></div>
+          <div class="kpi"><div class="k">Equals a savings rate of</div><div class="v num" id="oxEq">–</div><div class="s" id="oxEqS">before tax, at your marginal rate</div></div>
+        </div>
+        <table class="ledger" style="margin-top:14px">
+          <tr><th>How it works</th><th></th></tr>
+          <tr><td style="font-weight:600">Interest is charged daily</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">on (loan balance − offset balance) × rate ÷ 365. Money parked even for a few days between pays reduces interest.</td></tr>
+          <tr><td style="font-weight:600">Offset vs redraw</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Both cut interest the same way, but offset money is <b>your</b> money in <b>your</b> account — instantly accessible. Redraw sits inside the loan; banks can restrict or absorb it, and redrawing from an investment-linked loan has tax consequences.</td></tr>
+          <tr><td style="font-weight:600">Offset vs savings account</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Savings interest is taxed at your marginal rate; offset "returns" aren't taxed at all. That's why the equivalent-rate figure above is so high.</td></tr>
+        </table>
+        <table class="ledger" style="margin-top:14px">
+          <tr><th>Managing it — the routine that works</th><th></th></tr>
+          <tr><td style="font-weight:600">1 · Salary lands here</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Have your full pay deposited into the offset, not a separate transaction account. Every day it sits there counts.</td></tr>
+          <tr><td style="font-weight:600">2 · Emergency fund lives here</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Keep 3–6 months of expenses in the offset instead of a savings account — same safety net, better return, zero tax.</td></tr>
+          <tr><td style="font-weight:600">3 · Delay money leaving</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Pay monthly bills as late as their due date, or put spending on a credit card with an interest-free period and sweep it in full each month — cash stays offsetting longer. Only do this if you always pay the card in full.</td></tr>
+          <tr><td style="font-weight:600">4 · Check it's 100% offset</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Some basic loans offer partial offset or none. Package loans with 100% offset often carry a ~$250–$400/yr fee — worth it once your average balance clears roughly $5,000–$7,000 at today's rates.</td></tr>
+          <tr><td style="font-weight:600">5 · Don't let it leak</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Its weakness is accessibility. Set a floor (e.g. never below your emergency fund) and treat anything above it as untouchable loan money. If temptation wins, extra repayments beat offset.</td></tr>
+        </table>
+        <div class="note"><b>For your setup:</b> pay both the $10k buffer and each fortnight's salary into the offset, run the household from it, and let the balance ratchet up. Combined with unchanged repayments after any rate cut, this is how single-income families quietly knock 5–8 years off a loan.</div>
+      </div>
+
+      <div id="stratCards"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <b>How to read this.</b> General information only, not personal financial or credit advice — figures are estimates using FY2025–26 ATO resident rates (16/30/37/45% + 2% Medicare levy, LITO), 12% super guarantee, Victorian SRO duty rates and first-home-buyer concessions, the federal 5% Deposit Scheme (Melbourne cap $950,000), and the $10,000 Victorian FHOG for new homes ≤ $750,000. Borrowing power is a simplified serviceability model (rate + 3% buffer); each lender's calculator will differ. Suburb prices are indicative medians, not quotes. Verify current rules at ato.gov.au, sro.vic.gov.au and housingaustralia.gov.au, and speak to a licensed mortgage broker or adviser before acting.
+</footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const fm=n=>'$'+Math.round(n).toLocaleString('en-AU');
+const fm2=n=>'$'+n.toLocaleString('en-AU',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pc=n=>n.toLocaleString('en-AU',{maximumFractionDigits:1})+'%';
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); $(b.dataset.t).classList.add('active');
+}));
+
+/* ================= TAX ENGINE (FY2025-26 + legislated cuts) ================= */
+function brackets(fy){const lo=fy>=2028?0.14:fy>=2027?0.15:0.16;
+  return[[18200,0],[45000,lo],[135000,.30],[190000,.37],[Infinity,.45]];}
+function incomeTax(ti,fy){let t=0,p=0;for(const[c,r]of brackets(fy)){if(ti>p)t+=(Math.min(ti,c)-p)*r;p=c;if(ti<=c)break;}return Math.max(0,t);}
+function lito(ti){if(ti<=37500)return 700;if(ti<=45000)return 700-(ti-37500)*.05;
+  if(ti<=66667)return Math.max(0,325-(ti-45000)*.015);return 0;}
+function medicare(ti){if(ti<=27222)return 0;if(ti<=34027)return(ti-27222)*.10;return ti*.02;}
+function mls(inc,family,kids,phi){if(phi)return 0;
+  const ex=family&&kids>1?(kids-1)*1500:0;
+  const T=family?[202000+ex,236000+ex,288000+ex]:[101000,118000,144000];
+  if(inc<=T[0])return 0;if(inc<=T[1])return inc*.01;if(inc<=T[2])return inc*.0125;return inc*.015;}
+function hecsRepay(inc){if(inc<=67000)return 0;
+  return .15*(Math.min(inc,125000)-67000)+(inc>125000?.17*(inc-125000):0);}
+function marginalRate(ti,fy){const t1=incomeTax(ti,fy)+medicare(ti),t2=incomeTax(ti+100,fy)+medicare(ti+100);return(t2-t1);}
+
+/* ================= TAB 1 ================= */
+let lastNet=110162, lastMarg=0.39;
+function calcSalary(){
+  const raw=+$('sal').value||0, sg=(+$('sgRate').value||0)/100, fy=+$('fy').value;
+  const base=$('inclSuper').checked? raw/(1+sg): raw;
+  const salSac=Math.min(+$('salSac').value||0,base), ded=+$('deduct').value||0;
+  const taxable=Math.max(0,base-salSac-ded);
+  const superAnn=base*sg+salSac;
+  const family=$('family').checked, kids=+$('kids').value||0, phi=$('phi').checked;
+  const mlsInc=taxable+salSac; // reportable super counts for MLS
+  const tax=incomeTax(taxable,fy);
+  const off=Math.min(lito(taxable),tax);
+  const med=medicare(taxable);
+  const surch=mls(mlsInc,family,kids,phi);
+  const help=$('hecs').checked?hecsRepay(mlsInc):0;
+  const totalTax=tax-off+med+surch+help;
+  lastMarg=Math.min(0.60,Math.max(0,marginalRate(taxable,fy)/100 + (help&&mlsInc>67000?(mlsInc>125000?0.17:0.15):0)));
+  const net=taxable-totalTax + ded; // deductions reduce tax, not cash in hand
+  lastNet=net;
+  // payslip
+  $('psMain').innerHTML=fm(net/26)+'<small> /fortnight</small>';
+  $('psMo').textContent=fm(net/12); $('psWk').textContent=fm(net/52);
+  $('psCd').textContent=fm2(net/365); $('psWd').textContent=fm2(net/260);
+  $('kGross').textContent=fm(base);
+  $('kTax').textContent=fm(totalTax);
+  $('kTaxS').textContent='incl. Medicare'+(surch?' + MLS':'')+(help?' + HECS':'');
+  $('kEff').textContent=pc(base>0?totalTax/base*100:0);
+  $('kMarg').textContent='marginal '+pc(marginalRate(taxable,fy)+ (help&&mlsInc>67000?(mlsInc>125000?17:15):0));
+  $('kSuper').textContent=fm(superAnn);
+  // stack
+  const segs=[['Take-home',net,'#0E5A47'],['Income tax',tax-off,'#B4552D'],['Medicare'+(surch?' + MLS':''),med+surch,'#C9A227']];
+  if(help)segs.push(['HECS',help,'#5B6B63']);
+  const tot=segs.reduce((a,s)=>a+Math.max(0,s[1]),0)||1;
+  $('stackBar').innerHTML=segs.map(s=>`<i style="width:${Math.max(0,s[1])/tot*100}%;background:${s[2]}"></i>`).join('');
+  $('stackLegend').innerHTML=segs.map(s=>`<span><b style="background:${s[2]}"></b>${s[0]} ${pc(Math.max(0,s[1])/tot*100)}</span>`).join('');
+  // ledger
+  const rows=[['Gross salary (excl. super)',base,''],
+    salSac?['Salary sacrifice to super',-salSac,'neg']:null,
+    ded?['Deductions claimed',-ded,'neg']:null,
+    ['Income tax',-(tax),'neg'],
+    off?['Low Income Tax Offset',off,'pos']:null,
+    ['Medicare levy (2%)',-med,'neg'],
+    surch?['Medicare Levy Surcharge',-surch,'neg']:null,
+    help?['HECS/HELP repayment',-help,'neg']:null].filter(Boolean);
+  $('taxLedger').innerHTML='<tr><th>Item</th><th>Per year</th></tr>'+
+    rows.map(r=>`<tr class="${r[2]}"><td>${r[0]}</td><td class="amt num">${r[1]<0?'−':''}${fm(Math.abs(r[1]))}</td></tr>`).join('')+
+    `<tr class="total"><td>Take-home pay</td><td class="num">${fm(net)}</td></tr>`;
+  // periods
+  const P=[['Annual',1],['Monthly',12],['Fortnightly',26],['Weekly',52],['Working day (260)',260],['Calendar day (365)',365]];
+  $('periodTable').innerHTML='<tr><th>Period</th><th>Before tax</th><th>Tax &amp; levies</th><th>Take-home</th></tr>'+
+    P.map(([n,d])=>`<tr><td>${n}</td><td class="num">${d>52?fm2(base/d):fm(base/d)}</td><td class="num" style="color:var(--clay)">${d>52?fm2(totalTax/d):fm(totalTax/d)}</td><td class="num" style="color:var(--euca);font-weight:700">${d>52?fm2(net/d):fm(net/d)}</td></tr>`).join('');
+  // MLS note
+  const ex=family&&kids>1?(kids-1)*1500:0;
+  $('mlsNote').innerHTML= family
+   ? `<b>Family advantage:</b> with a dependent spouse${kids?` and ${kids} child${kids>1?'ren':''}`:''}, the <b>family</b> MLS threshold of ${fm(202000+ex)} applies — so at ${fm(mlsInc)} you pay <b>no Medicare Levy Surcharge</b> even without private hospital cover.`
+   : `As a single, the MLS kicks in above $101,000 without private hospital cover — currently ${surch?fm(surch)+'/yr. Hospital cover may cost less.':'not applicable.'}`;
+  // sync to tab 2
+  if(!$('bpNet').dataset.touched){$('bpNet').value=Math.round(net);}
+  calcBuy();
+}
+
+/* ================= VIC STAMP DUTY ================= */
+function dutyGeneral(v){if(v<=25000)return v*.014;if(v<=130000)return 350+(v-25000)*.024;
+  if(v<=960000)return 2870+(v-130000)*.06;if(v<=2000000)return v*.055;return 110000+(v-2000000)*.065;}
+function dutyPPR(v){if(v>130000&&v<=440000)return 2870+(v-130000)*.05;
+  if(v>440000&&v<=550000)return 18370+(v-440000)*.06;return dutyGeneral(v);}
+function dutyFHB(v){if(v<=600000)return 0;if(v<=750000)return dutyPPR(v)*(v-600000)/150000;return dutyPPR(v);}
+function lmiEst(loan,lvr){if(lvr<=80)return 0;if(lvr<=85)return loan*.010;if(lvr<=90)return loan*.021;if(lvr<=95)return loan*.040;return loan*.046;}
+const FEES=3300; // transfer/registration + conveyancing estimate
+
+/* ================= TAB 2 ================= */
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{$('price').value=c.dataset.price;calcBuy();}));
+function annuity(r,n){return r===0?n:(1-Math.pow(1+r,-n))/r;}
+function calcBuy(){
+  const price=+$('price').value, depPct=+$('depPct').value;
+  $('priceLbl').textContent=fm(price);
+  const dep=price*depPct/100;
+  $('depLbl').textContent=depPct+'% = '+fm(dep);
+  const savings=+$('savings').value||0;
+  const useFHB=$('fhbDuty').checked, useFHOG=$('fhog').checked, useFHG=$('fhg').checked;
+  const loan=price-dep, lvr=loan/price*100;
+  // borrowing power
+  const netA=+$('bpNet').value||0, exp=+$('expenses').value||0, rate=+$('rate2').value||6.1;
+  const od=+$('otherDebt').value||0, cc=(+$('ccLimit').value||0)*.038;
+  const surplus=netA/12-exp-od-cc;
+  const assess=rate+3;
+  const bp=Math.max(0,surplus)*annuity(assess/1200,360);
+  $('bpVal').textContent=fm(Math.round(bp/1000)*1000);
+  $('bpS').textContent='assessed @ '+assess.toFixed(2)+'% (rate + 3% buffer)';
+  $('loanVal').textContent=fm(loan);
+  $('lvrS').textContent='LVR '+lvr.toFixed(1)+'%'+(useFHG&&price<=950000?' · FHG: no LMI':'');
+  const pay=loan/annuity(rate/1200,360);
+  $('repayVal').textContent=fm(pay);
+  const stressPay=loan/annuity(assess/1200,360);
+  const k=$('servKpi');
+  k.className='kpi '+(stressPay<=surplus?'good':(pay<=surplus?'warn':'warn'));
+  $('servVal').textContent= stressPay<=surplus?'Pass ✓':(pay<=surplus?'Tight':'Over');
+  $('servS').textContent= stressPay<=surplus
+    ? 'covers repayments even at '+assess.toFixed(1)+'%'
+    : (pay<=surplus? 'OK at '+rate.toFixed(2)+'%, fails the +3% stress test — lenders may decline or lend less'
+                   : 'repayment exceeds monthly surplus of '+fm(Math.max(0,surplus)));
+  // compare new vs established
+  const fhogOK=useFHOG&&price<=750000;
+  const fhgOK=useFHG&&price<=950000;
+  const dutyStd=dutyPPR(price);
+  const duty=useFHB?dutyFHB(price):dutyStd;
+  const lmi=fhgOK?0:lmiEst(loan,lvr);
+  const mk=(title,isNew)=>{
+    const grant=isNew&&fhogOK?10000:0;
+    const cash=dep+duty+FEES+lmi-grant;
+    return {title,isNew,grant,cash,html:`
+    <div class="house" data-cash="${cash}">
+      <div class="head"><h3>${title}</h3><span class="badgeslot"></span></div>
+      <div class="body">
+        <div class="row"><span>Deposit (${depPct}%)</span><span class="amt num">${fm(dep)}</span></div>
+        <div class="row ${duty===0?'save':'cost'}"><span>Stamp duty ${useFHB?'(FHB relief)':''}</span><span class="amt num">${duty===0?'$0 ✓':fm(duty)}</span></div>
+        ${useFHB&&duty<dutyStd?`<div class="row save"><span>&nbsp;&nbsp;↳ duty saved vs standard</span><span class="amt num">−${fm(dutyStd-duty)}</span></div>`:''}
+        ${isNew?`<div class="row save"><span>FHOG $10k ${fhogOK?'✓':'(price > $750k ✗)'}</span><span class="amt num">${fhogOK?'−$10,000':'$0'}</span></div>`:
+                `<div class="row"><span>FHOG</span><span class="amt num" style="color:var(--mut)">n/a (established)</span></div>`}
+        <div class="row ${lmi?'cost':'save'}"><span>LMI ${fhgOK?'(waived — 5% scheme)':''}</span><span class="amt num">${lmi?fm(lmi):'$0 ✓'}</span></div>
+        <div class="row cost"><span>Transfer, legal &amp; inspection (est.)</span><span class="amt num">${fm(FEES)}</span></div>
+        ${isNew?'<div class="row"><span style="color:var(--mut);font-size:12px">House &amp; land package? Duty applies to land only — often ~$0 even above $600k.</span><span></span></div>':''}
+      </div>
+      <div class="foot"><span>Cash needed on settlement</span><span class="amt num">${fm(cash)}</span></div>
+    </div>`};
+  };
+  const a=mk('New build / off-the-plan',true), b=mk('Established home',false);
+  $('compareWrap').innerHTML=a.html+b.html;
+  const houses=[...document.querySelectorAll('#compareWrap .house')];
+  const best=houses.reduce((x,y)=>+x.dataset.cash<=+y.dataset.cash?x:y);
+  if(a.cash!==b.cash){best.classList.add('win');best.querySelector('.badgeslot').outerHTML='<span class="badge">Less cash needed</span>';}
+  // cash check
+  const need=Math.min(a.cash,b.cash), al=$('cashAlert');
+  al.style.display='block';
+  if(savings>=need){al.className='alert ok';
+    al.innerHTML=`<b>Your ${fm(savings)} covers it.</b> Cheapest path needs ${fm(need)} — buffer of ${fm(savings-need)} left over. Consider parking it in an offset account from day one.`;}
+  else{const gapPrice=findAffordable(savings,depPct,useFHB,useFHOG,useFHG);
+    al.className='alert bad';
+    al.innerHTML=`<b>Shortfall of ${fm(need-savings)}</b> at this price. With ${fm(savings)} saved you could settle a <b>new build around ${fm(gapPrice)}</b> — or keep saving ~${fm(need-savings)}. The First Home Super Saver Scheme can also release up to $50k of voluntary super contributions.`;}
+  // duty table
+  const prices=[450000,500000,550000,600000,650000,700000,750000,800000,900000];
+  $('dutyTable').innerHTML='<tr><th>Price</th><th>FHB duty</th><th>Standard duty</th><th>You save</th><th>+FHOG (new)</th></tr>'+
+   prices.map(p=>{const f=dutyFHB(p),s=dutyPPR(p);
+     return `<tr${p===Math.round(price/50000)*50000?' style="background:var(--wattle-soft)"':''}><td>${fm(p)}</td><td class="num" style="color:var(--euca);font-weight:600">${f===0?'$0':fm(f)}</td><td class="num">${fm(s)}</td><td class="num">${fm(s-f)}</td><td class="num">${p<=750000?fm(s-f+10000):fm(s-f)}</td></tr>`;}).join('');
+  // sync to tab 3
+  if(!$('pLoan').dataset.touched){$('pLoan').value=Math.round(loan);}
+  if(!$('pRate').dataset.touched){$('pRate').value=rate.toFixed(2);}
+  calcPay();
+}
+function findAffordable(sav,depPct,fhb,fhog,fhg){
+  for(let p=950000;p>=300000;p-=5000){
+    const dep=p*depPct/100,duty=fhb?dutyFHB(p):dutyPPR(p);
+    const grant=fhog&&p<=750000?10000:0;
+    const lmi=(fhg&&p<=950000)?0:lmiEst(p-dep,(p-dep)/p*100);
+    if(dep+duty+FEES+lmi-grant<=sav)return p;
+  }return 300000;
+}
+
+/* ================= TAB 3 ================= */
+function simulate(P,rate,years,{extra=0,offset=0,lump=0,fortnightly=false,payOverride=null}={}){
+  const r=rate/100/12,n=years*12;
+  const basePay=P/annuity(r,n);
+  const pay=(payOverride??basePay)+extra+(fortnightly?(payOverride??basePay)/12:0);
+  let bal=P,m=0,interest=0;const series=[bal];
+  while(bal>0.5&&m<1200){
+    const int=Math.max(0,bal-offset)*r;interest+=int;
+    bal=bal+int-pay;m++;
+    if(lump>0&&m%12===0)bal-=lump;
+    if(bal<0)bal=0;series.push(bal);
+  }
+  return{months:m,interest,series,basePay};
+}
+const yrs=m=>{const y=Math.floor(m/12),mm=m%12;return y+'y'+(mm?' '+mm+'m':'');};
+function calcPay(){
+  const P=+$('pLoan').value||0,rate=+$('pRate').value||6,term=+$('pTerm').value||30;
+  const x=+$('xMonthly').value,off=+$('offset').value,lump=+$('lump').value,cut=+$('rateCut').value/100,fn=$('fortnightly').checked;
+  $('xLbl').textContent=fm(x)+' /month';$('oLbl').textContent=fm(off)+' avg';
+  $('lLbl').textContent=fm(lump)+' /yr';$('rLbl').textContent='−'+cut.toFixed(2)+'%';
+  const base=simulate(P,rate,term,{});
+  const combo=simulate(P,rate-cut,term,{extra:x,offset:off,lump,fortnightly:fn,payOverride:base.basePay});
+  const saved=Math.max(0,base.interest-combo.interest);
+  $('totSave').innerHTML=fm(saved)+'<small> interest saved</small>';
+  $('newTerm').textContent=yrs(combo.months);
+  $('timeCut').textContent=yrs(Math.max(0,base.months-combo.months))+' earlier';
+  $('baseInt').textContent=fm(base.interest);
+  $('newInt').textContent=fm(combo.interest);
+  drawChart(base.series,combo.series,term);
+  // offset explainer live math
+  const dNo=P*(rate/100)/365, dYes=Math.max(0,P-off)*(rate/100)/365;
+  $('oxNo').textContent=fm2(dNo);
+  $('oxYes').textContent=fm2(dYes);
+  $('oxDaily').textContent=fm2(dNo-dYes)+' less every day';
+  $('oxYr').textContent=fm(Math.min(P,off)*(rate/100));
+  $('oxEq').textContent=(rate/(1-lastMarg)).toFixed(1)+'%';
+  $('oxEqS').textContent='before tax, at your '+Math.round(lastMarg*100)+'% marginal rate';
+  // individual cards
+  const singles=[
+    ['Extra '+fm(x)+'/month',simulate(P,rate,term,{extra:x}),
+     'Every extra dollar goes straight to principal, so the bank charges interest on less for every remaining month. This is the single most reliable lever you control.'],
+    [fm(off)+' sitting in offset',simulate(P,rate,term,{offset:off}),
+     'Interest is charged daily on (balance − offset). Your emergency fund and salary can live here — it works like earning '+rate.toFixed(2)+'% tax-free, and stays withdrawable.'],
+    ['Lump sum '+fm(lump)+' each year',simulate(P,rate,term,{lump}),
+     'Tax refunds and bonuses dropped in annually compound hard — money paid in year 2 saves ~28 years of interest on itself.'],
+    ['Negotiate rate −'+cut.toFixed(2)+'% (keep repayments the same)',simulate(P,rate-cut,term,{payOverride:base.basePay}),
+     'Call your lender yearly and quote the best market variable rates (~5.7–5.9%). If they won\'t move, refinance. Keeping your repayment unchanged converts the whole cut into early payoff.'],
+    ['Fortnightly half-payments',simulate(P,rate,term,{fortnightly:true}),
+     '26 half-payments = 13 full monthly payments per year. You sneak in one extra month annually without feeling it — and it matches most pay cycles.']
+  ];
+  $('stratCards').innerHTML=singles.map(([t,s,d])=>{
+    const sv=Math.max(0,base.interest-s.interest),tc=Math.max(0,base.months-s.months);
+    return `<div class="strat"><div class="top"><h3>${t}</h3><span class="save num">${sv>0?'−'+fm(sv):'—'}<small>${tc>0?yrs(tc)+' sooner':'set slider to see'}</small></span></div><p>${d}</p></div>`;
+  }).join('');
+  // capacity note from earlier tabs
+  const netA=+$('bpNet').value||0,exp=+$('expenses').value||0;
+  const minPay=base.basePay,spare=netA/12-exp-minPay;
+  $('capacityNote').innerHTML= spare>0
+   ? `<b>Your spare capacity:</b> on ${fm(netA)} net with ${fm(exp)}/mo expenses and a ${fm(minPay)}/mo repayment, about <b>${fm(spare)}/month</b> is left. Even directing half of it here as extra repayments transforms this loan.`
+   : `<b>Heads up:</b> minimum repayment ${fm(minPay)}/mo exceeds your current monthly surplus — revisit price or expenses in Tab II before stacking strategies.`;
+}
+function drawChart(a,b,term){
+  const W=720,H=300,pl=52,pb=30,pt=12,pr=10;
+  const maxY=a[0],maxX=Math.max(a.length,b.length);
+  const X=i=>pl+i/(maxX-1)*(W-pl-pr), Y=v=>pt+(1-v/maxY)*(H-pt-pb);
+  const line=(s,c,w,dash)=>`<polyline fill="none" stroke="${c}" stroke-width="${w}" ${dash?'stroke-dasharray="5 4"':''} points="${s.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ')}"/>`;
+  let g='';
+  for(let f=0;f<=1;f+=0.25){const y=Y(maxY*f);
+    g+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="#E4E9E4"/><text x="${pl-8}" y="${y+4}" text-anchor="end" font-size="10" fill="#5B6B63">$${Math.round(maxY*f/1000)}k</text>`;}
+  for(let yr=0;yr<=term;yr+=5){const i=yr*12;if(i>maxX-1)break;
+    g+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="#5B6B63">${yr}yr</text>`;}
+  const fillPts=b.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ');
+  $('chart').innerHTML=g
+    +`<polygon fill="rgba(14,90,71,.08)" points="${X(0)},${Y(0).toFixed(1)} ${fillPts} ${X(b.length-1)},${Y(0)} "/>`
+    +line(a,'#9AA8A0',2.5,true)+line(b,'#0E5A47',3);
+}
+
+/* ---------- wiring ---------- */
+['sal','sgRate','fy','salSac','deduct','inclSuper','family','phi','hecs','kids'].forEach(id=>$(id).addEventListener('input',calcSalary));
+['price','depPct','savings','fhbDuty','fhog','fhg','expenses','rate2','otherDebt','ccLimit'].forEach(id=>$(id).addEventListener('input',calcBuy));
+$('bpNet').addEventListener('input',()=>{$('bpNet').dataset.touched=1;calcBuy();});
+$('pLoan').addEventListener('input',()=>{$('pLoan').dataset.touched=1;calcPay();});
+$('pRate').addEventListener('input',()=>{$('pRate').dataset.touched=1;calcPay();});
+['pTerm','xMonthly','offset','lump','rateCut','fortnightly'].forEach(id=>$(id).addEventListener('input',calcPay));
+calcSalary();
+</script>
+</body>
+</html>
