@@ -159,6 +159,20 @@ table.ledger{width:100%;border-collapse:collapse;font-size:14px}
 svg text{font-family:'Archivo'}
 .chartwrap{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
 footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color:var(--mut);line-height:1.6}
+
+/* ---------- working days calendar ---------- */
+input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:500 15px var(--mono-nums);background:#FBFCFB;color:var(--ink)}
+input[type=date]:focus{outline:2px solid var(--euca);outline-offset:1px;border-color:var(--euca)}
+.cal-wrap{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+.cal-month{min-width:196px;flex:1}
+.cal-month h4{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:7px;text-align:center}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-grid .dh{font-size:9.5px;color:var(--mut);font-weight:700;text-align:center;padding:3px 0}
+.cal-grid .dc{font-size:11px;text-align:center;padding:5px 2px;border-radius:5px;line-height:1}
+.dc.work{background:var(--euca-tint);color:var(--euca);font-weight:700}
+.dc.wknd{background:#F0F2F0;color:var(--mut)}
+.dc.out{color:#D0D8D2;font-size:10px}
+.dc.empty{background:transparent}
 </style>
 </head>
 <body>
@@ -262,6 +276,24 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
         <div class="sub">Calendar-day column divides by 365; working-day by 260 (Mon–Fri).</div>
         <table class="ledger" id="periodTable"></table>
         <div class="note" id="mlsNote"></div>
+      </div>
+
+      <div class="card">
+        <h2>Income for a date range</h2>
+        <div class="sub">Pick any start and end date — the calendar shows working vs weekend days and estimates your after-tax income for that period.</div>
+        <div class="inline">
+          <div class="field">
+            <label>Start date</label>
+            <input type="date" id="wdStart">
+          </div>
+          <div class="field">
+            <label>End date</label>
+            <input type="date" id="wdEnd">
+          </div>
+        </div>
+        <div class="kpis" style="margin-top:4px" id="wdKpis"></div>
+        <div class="cal-wrap" id="wdCal"></div>
+        <div class="note" style="margin-top:10px"><b>Working days</b> = Mon–Fri. Weekends and public holidays are shown grey — deduct VIC public holidays manually if needed. Income estimate uses your after-tax working-day rate from Tab I.</div>
       </div>
     </div>
   </div>
@@ -445,8 +477,8 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
   <div class="grid">
     <div>
       <div class="card">
-        <h2>Your income statement</h2>
-        <div class="sub">Returns for FY2025–26 opened 1 July 2026 — lodge by 31 October (or later via a tax agent).</div>
+        <h2>Your income &amp; employment period</h2>
+        <div class="sub">FY2025–26 return opened 1 Jul 2026 — lodge by 31 Oct or later via a tax agent.</div>
         <div class="field">
           <label>Return for financial year</label>
           <select id="rFy">
@@ -454,47 +486,103 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
             <option value="2027">2026–27 — plan ahead (ends 30 Jun 2027)</option>
           </select>
         </div>
+        <div class="inline">
+          <div class="field">
+            <label>First day worked this FY <span class="hint">your Aug 11 start</span></label>
+            <input type="date" id="rEmpStart">
+          </div>
+          <div class="field">
+            <label>Last day worked this FY</label>
+            <input type="date" id="rEmpEnd">
+          </div>
+        </div>
         <div class="field">
-          <label>Gross salary / wages <span class="hint">auto from Tab I — editable</span></label>
+          <label>Annual salary rate <span class="hint">auto from Tab I — your rate, not actual gross</span></label>
           <input type="number" id="rSalary" value="150000" step="500">
         </div>
-        <div class="field">
-          <label>Other income <span class="hint">bank interest, dividends etc. $</span></label>
+        <div class="note" id="rPeriodNote" style="display:none"></div>
+        <div class="field" style="margin-top:10px">
+          <label>Other income <span class="hint">interest, dividends, rental profit $</span></label>
           <input type="number" id="rOther" value="0" min="0" step="100">
         </div>
-        <div class="switchrow"><span>Estimate PAYG withheld for me<span class="desc">Approximates what payroll took out over the year</span></span>
+        <div class="switchrow"><span>Auto-estimate PAYG withheld<span class="desc">Scales annual payroll withholding by your employment fraction</span></span>
           <span class="switch"><input type="checkbox" id="rAuto" checked><span class="slider"></span></span></div>
         <div class="field" style="margin-top:10px">
-          <label>Tax withheld (PAYG) <span class="hint">from your income statement in myGov</span></label>
+          <label>Tax withheld (PAYG) <span class="hint">exact figure from income statement in myGov</span></label>
           <input type="number" id="rWithheld" value="0" min="0" step="100" disabled>
         </div>
       </div>
+
       <div class="card">
-        <h2>Deductions</h2>
-        <div class="sub">Each dollar deducted returns ~your marginal rate. Keep records for everything.</div>
+        <h2>Work-related deductions</h2>
+        <div class="sub">Every dollar claimed returns ~your marginal rate. Keep all records for 5 years.</div>
         <div class="inline">
           <div class="field">
-            <label>WFH hours / week <span class="hint">fixed rate 70c/hr</span></label>
+            <label>WFH hours / week <span class="hint">70c/hr fixed rate</span></label>
             <input type="number" id="rWfhHrs" value="0" min="0" max="60" step="1">
           </div>
           <div class="field">
-            <label>Weeks worked from home</label>
+            <label>Weeks WFH this FY</label>
             <input type="number" id="rWfhWks" value="48" min="0" max="52" step="1">
           </div>
         </div>
         <div class="field">
-          <label>Other work-related expenses <span class="hint">tools, self-education, phone %, travel $</span></label>
-          <input type="number" id="rWork" value="0" min="0" step="50">
+          <label>Work km driven — D1 <span class="hint num" id="rCarLbl">0 km · $0 · max 5,000 km @ 88c</span></label>
+          <input type="range" id="rCarKm" min="0" max="5000" step="50" value="0">
         </div>
         <div class="field">
-          <label>Charity donations <span class="hint">$2+ to registered DGRs</span></label>
+          <label>Work travel — D2 <span class="hint">flights, hotels, trains — not commuting $</span></label>
+          <input type="number" id="rTravel" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Clothing &amp; laundry — D3 <span class="hint">protective/uniform only · $1/work-only load $</span></label>
+          <input type="number" id="rClothing" value="0" min="0" step="20">
+        </div>
+        <div class="field">
+          <label>Self-education — D4 <span class="hint">must maintain/improve skills in current role $</span></label>
+          <input type="number" id="rSelfEd" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Tools &amp; equipment ≤$300 each — D5 <span class="hint">instant full deduction $</span></label>
+          <input type="number" id="rTools" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Union fees &amp; professional subscriptions — D5 <span class="hint">always fully deductible $</span></label>
+          <input type="number" id="rUnion" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Income protection insurance <span class="hint">premiums paid outside of super $</span></label>
+          <input type="number" id="rIncProt" value="0" min="0" step="50">
+        </div>
+        <div class="field">
+          <label>Charity donations <span class="hint">$2+ to registered DGRs $</span></label>
           <input type="number" id="rDonate" value="0" min="0" step="50">
         </div>
+      </div>
+
+      <div class="card">
+        <h2>Superannuation</h2>
+        <div class="sub">Two independent levers — your deduction and your spouse's offset.</div>
         <div class="field">
-          <label>Personal super contribution claimed <span class="hint">after-tax → notice of intent lodged</span></label>
+          <label>Personal super contribution (s290-180) <span class="hint">lodge Notice of Intent with fund first $</span></label>
           <input type="number" id="rSuper" value="0" min="0" step="500">
         </div>
         <div class="note" id="rCapNote"></div>
+        <div class="switchrow" style="margin-top:10px"><span>Contribute to spouse's super<span class="desc">$3,000 → $540 direct tax offset (spouse earns $0 → full amount)</span></span>
+          <span class="switch"><input type="checkbox" id="rSpouseToggle"><span class="slider"></span></span></div>
+        <div id="rSpouseFields" style="display:none;margin-top:10px">
+          <div class="inline">
+            <div class="field">
+              <label>Amount to spouse's super <span class="hint">$3,000 = max $540 offset</span></label>
+              <input type="number" id="rSpouseContr" value="3000" min="0" max="3000" step="500">
+            </div>
+            <div class="field">
+              <label>Spouse income <span class="hint">assessable + reportable items $</span></label>
+              <input type="number" id="rSpouseInc" value="0" min="0" step="500">
+            </div>
+          </div>
+          <div class="note" id="rSpouseNote"></div>
+        </div>
       </div>
     </div>
 
@@ -504,27 +592,22 @@ footer{max-width:1140px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color
         <div class="big num" id="rMain">$0</div>
         <div class="prow">
           <div><div class="k">Taxable income</div><div class="v num" id="rTi">–</div></div>
-          <div><div class="k">Total liability</div><div class="v num" id="rLiab">–</div></div>
-          <div><div class="k">Tax withheld</div><div class="v num" id="rWh">–</div></div>
-          <div><div class="k">Deductions claimed</div><div class="v num goldl" id="rDed">–</div></div>
+          <div><div class="k">Total tax liability</div><div class="v num" id="rLiab">–</div></div>
+          <div><div class="k">PAYG withheld</div><div class="v num" id="rWh">–</div></div>
+          <div><div class="k">Total deductions</div><div class="v num goldl" id="rDed">–</div></div>
         </div>
       </div>
 
       <div class="card" style="margin-top:16px">
-        <h2>How the ATO will work it out</h2>
+        <h2>How the ATO calculates it</h2>
+        <div class="sub" id="rFyNote"></div>
         <table class="ledger" id="rLedger"></table>
       </div>
 
       <div class="card">
-        <h2>Refund boosters for a full-time employee</h2>
-        <table class="ledger">
-          <tr><th>Lever</th><th></th></tr>
-          <tr><td style="font-weight:600">Working-from-home days</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">The fixed-rate method pays 70c per hour and covers energy, internet, phone and stationery. Keep a diary or timesheet of actual hours — estimates without records get rejected.</td></tr>
-          <tr><td style="font-weight:600">Deductible super contribution</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Contribute after-tax money to super, lodge a "notice of intent", and deduct it. You get your marginal rate back (39% for you) and the fund pays only 15% — a ~24c-per-dollar arbitrage. Watch the concessional cap below.</td></tr>
-          <tr><td style="font-weight:600">Time big deductions before 30 June</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">A laptop, tools or prepaid subscriptions bought in June land in this return; bought in July, you wait a year for the refund.</td></tr>
-          <tr><td style="font-weight:600">Spouse super contribution offset</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">With your wife not earning, contributing $3,000 to <b>her</b> super returns a $540 tax offset — the maximum — plus builds her balance. Worth doing every year she's home.</td></tr>
-          <tr><td style="font-weight:600">Point the refund at the loan</td><td style="text-align:left;font-family:'Archivo';color:var(--mut)">Drop the number below into "Annual lump sum" in Tab III — a recurring refund is the cheapest extra repayment you'll ever make.</td></tr>
-        </table>
+        <h2>Refund maximiser — live analysis</h2>
+        <div class="sub">Each panel shows an unclaimed opportunity based on your current inputs.</div>
+        <div id="rMaximiser"></div>
         <div class="alert ok" id="rTip" style="display:none"></div>
       </div>
     </div>
@@ -812,78 +895,247 @@ function drawChart(a,b,term){
     +line(a,'#9AA8A0',2.5,true)+line(b,'#0E5A47',3);
 }
 
+['sal','sgRate','fy','salSac','deduct','inclSuper','family','phi','hecs','kids'].forEach(id=>$(id).addEventListener('input',calcSalary));
+['price','depPct','savings','fhbDuty','fhog','fhg','expenses','rate2','otherDebt','ccLimit'].forEach(id=>$(id).addEventListener('input',calcBuy));
 $('bpNet').addEventListener('input',()=>{$('bpNet').dataset.touched=1;calcBuy();});
 $('pLoan').addEventListener('input',()=>{$('pLoan').dataset.touched=1;calcPay();});
 $('pRate').addEventListener('input',()=>{$('pRate').dataset.touched=1;calcPay();});
 ['pTerm','xMonthly','offset','lump','rateCut','fortnightly'].forEach(id=>$(id).addEventListener('input',calcPay));
 /* ================= TAB 4 : TAX RETURN ================= */
 const CONC_CAP={2026:30000,2027:32500};
+const FY_DATES={2026:{start:'2025-07-01',end:'2026-06-30'},2027:{start:'2026-07-01',end:'2027-06-30'}};
+
 function calcReturn(){
   const fy=+$('rFy').value, D=FYDATA[fy];
-  const salary=+$('rSalary').value||0, other=+$('rOther').value||0;
-  const salSac=Math.min(+$('salSac').value||0,salary);
+  const fyd=FY_DATES[fy]||FY_DATES[2026];
+  const fyStart=new Date(fyd.start+'T00:00:00'), fyEnd=new Date(fyd.end+'T00:00:00');
+  const fyDays=Math.round((fyEnd-fyStart)/86400000)+1;
+
+  // Employment period
+  const esVal=$('rEmpStart').value||fyd.start, eeVal=$('rEmpEnd').value||fyd.end;
+  const empStart=new Date(esVal+'T00:00:00'), empEnd=new Date(eeVal+'T00:00:00');
+  const wkStart=empStart<fyStart?fyStart:empStart;
+  const wkEnd=empEnd>fyEnd?fyEnd:empEnd;
+  const daysWorked=Math.max(1,Math.round((wkEnd-wkStart)/86400000)+1);
+  const fraction=Math.min(1,daysWorked/fyDays);
+  const gapDays=Math.max(0,Math.round((wkStart-fyStart)/86400000));
+
+  // Period note
+  const pNote=$('rPeriodNote');
+  if(fraction<0.99){
+    const d1=wkStart.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+    const d2=wkEnd.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+    const annRate_=+$('rSalary').value||0;
+    let n=`<b>Partial year (${daysWorked}/${fyDays} days = ${(fraction*100).toFixed(0)}%):</b> ${d1} – ${d2}. Actual gross for this FY ≈ ${fm(Math.round(annRate_*fraction))}.`;
+    if(gapDays>0)n+=` The <b>${gapDays}-day gap</b> at FY start (no income, no PAYG) is the main reason for a larger refund — your employer withheld PAYG each paycheck at the full annual rate, but your total FY income is only ${(fraction*100).toFixed(0)}% of that rate.`;
+    pNote.innerHTML=n; pNote.style.display='block';
+  } else { pNote.style.display='none'; }
+
+  const annRate=+$('rSalary').value||0;
+  const actualGross=Math.round(annRate*fraction);
+  const other=+$('rOther').value||0;
+  const sg=(+$('sgRate').value||12)/100;
+  const annSalSac=+$('salSac').value||0;
+  const salSacFY=Math.min(Math.round(annSalSac*fraction),actualGross);
   const family=$('family').checked, kids=+$('kids').value||0, phi=$('phi').checked, hasHecs=$('hecs').checked;
-  // deductions
+
+  // Work-related deductions (D1-D5)
   const wfh=Math.round((+$('rWfhHrs').value||0)*(+$('rWfhWks').value||0)*0.70);
-  const work=+$('rWork').value||0, donate=+$('rDonate').value||0, pSuper=+$('rSuper').value||0;
-  const ded=wfh+work+donate+pSuper;
-  const ti=Math.max(0,salary-salSac+other-ded);
-  const mlsInc=ti+salSac+pSuper; // reportable super counts
+  const carKm=Math.min(+$('rCarKm').value||0,5000);
+  const carDed=Math.round(carKm*0.88);
+  $('rCarLbl').textContent=`${carKm} km · ${fm(carDed)} · max 5,000 km @ 88c`;
+  const travel=+$('rTravel').value||0;
+  const clothing=+$('rClothing').value||0;
+  const selfEd=+$('rSelfEd').value||0;
+  const tools=+$('rTools').value||0;
+  const union_=+$('rUnion').value||0;
+  const incProt=+$('rIncProt').value||0;
+  const donate=+$('rDonate').value||0;
+  const pSuper=+$('rSuper').value||0;
+  const workDed=wfh+carDed+travel+clothing+selfEd+tools+union_+incProt+donate;
+  const totalDed=workDed+pSuper;
+
+  const ti=Math.max(0,actualGross-salSacFY+other-workDed-pSuper);
+  const mlsInc=ti+salSacFY+pSuper;
   const tax=incomeTax(ti,fy);
-  const off=Math.min(lito(ti),tax);
+  const lito_off=Math.min(lito(ti),tax);
   const med=medicare(ti,fy);
   const surch=mls(mlsInc,family,kids,phi,fy);
   const help=hasHecs?hecsRepay(mlsInc,fy):0;
-  const liab=tax-off+med+surch+help;
-  // PAYG withheld estimate: payroll withholds on salary alone (no deductions/other income)
-  const baseTi=Math.max(0,salary-salSac);
-  const whEst=Math.round(Math.max(0,incomeTax(baseTi,fy)-Math.min(lito(baseTi),incomeTax(baseTi,fy))+medicare(baseTi,fy)+(hasHecs?hecsRepay(baseTi+salSac,fy):0)));
+
+  // Spouse super contribution offset (non-refundable)
+  let spouseOff=0;
+  if($('rSpouseToggle').checked){
+    const sc=Math.min(+$('rSpouseContr').value||0,3000);
+    const si=+$('rSpouseInc').value||0;
+    if(si<40000){
+      const elig=si>37000?Math.max(0,sc*(1-(si-37000)/3000)):sc;
+      spouseOff=Math.min(Math.round(Math.min(elig,3000)*0.18),540);
+      $('rSpouseNote').textContent=`Offset = ${fm(spouseOff)} (18% of ${fm(Math.round(Math.min(elig,3000)))}${si>37000?' — reduced: spouse income > $37,000':''}).`;
+    } else {
+      spouseOff=0;
+      $('rSpouseNote').textContent='Spouse income ≥ $40,000 — offset is nil.';
+    }
+  }
+
+  const taxAfterOff=Math.max(0,tax-lito_off-spouseOff);
+  const liab=taxAfterOff+med+surch+help;
+
+  // PAYG auto-estimate: employer withholds per paycheck at annualised rate, scaled by fraction
+  const annTaxBase=Math.max(0,annRate-annSalSac);
+  const annTax=incomeTax(annTaxBase,fy);
+  const annLito=Math.min(lito(annTaxBase),annTax);
+  const annMed=medicare(annTaxBase,fy);
+  const annHECS=hasHecs?hecsRepay(annTaxBase,fy):0;
+  const whEst=Math.round(Math.max(0,(annTax-annLito+annMed+annHECS)*fraction));
   if($('rAuto').checked){$('rWithheld').value=whEst;$('rWithheld').disabled=true;}
-  else{$('rWithheld').disabled=false;}
+  else $('rWithheld').disabled=false;
   const wh=+$('rWithheld').value||0;
-  const result=wh-liab; // + refund, − owing
-  const hero=$('rHero');
+  const result=wh-liab;
+
   $('rHeadline').textContent=result>=0?'Estimated refund':'Estimated amount owing';
   $('rMain').textContent=(result<0?'−':'')+fm(Math.abs(result));
-  hero.style.background=result>=0?'var(--euca)':'var(--clay)';
+  $('rHero').style.background=result>=0?'var(--euca)':'var(--clay)';
   $('rTi').textContent=fm(ti); $('rLiab').textContent=fm(liab);
-  $('rWh').textContent=fm(wh); $('rDed').textContent=fm(ded);
+  $('rWh').textContent=fm(wh); $('rDed').textContent=fm(totalDed);
+
+  const fyLbl=(fy-1)+'–'+String(fy).slice(2);
+  const bracketLbl=fy>=2028?'14%':fy>=2027?'15%':'16%';
+  $('rFyNote').textContent=`FY${fyLbl} · 0/${bracketLbl}/30/37/45% income tax brackets · 2% Medicare levy · LITO up to $700`;
+
+  // ATO-aligned step-by-step ledger
   const rows=[
-    ['Salary / wages',salary,''],
-    salSac?['Salary sacrifice (pre-tax)',-salSac,'neg']:null,
-    other?['Other income',other,'']:null,
-    wfh?['WFH fixed rate (70c × hours)',-wfh,'pos']:null,
-    work?['Work-related expenses',-work,'pos']:null,
-    donate?['Donations',-donate,'pos']:null,
-    pSuper?['Personal super deduction',-pSuper,'pos']:null,
-    ['— Taxable income —',ti,''],
-    ['Income tax on above',-tax,'neg'],
-    off?['Low Income Tax Offset',off,'pos']:null,
-    ['Medicare levy',-med,'neg'],
+    [`Gross wages — ${daysWorked}/${fyDays} days (${(fraction*100).toFixed(0)}% of FY)`,actualGross,''],
+    salSacFY?['Salary sacrifice to super (pre-tax)',-salSacFY,'neg']:null,
+    other?['Other assessable income',other,'']:null,
+    wfh?[`WFH fixed rate — ${+$('rWfhHrs').value}h/wk × ${+$('rWfhWks').value}wks × 70c (D5)`,-wfh,'pos']:null,
+    carDed?[`Car — ${carKm}km × 88c/km (D1)`,-carDed,'pos']:null,
+    travel?['Work travel — flights, hotels, transport (D2)',-travel,'pos']:null,
+    clothing?['Clothing & laundry — protective/uniform (D3)',-clothing,'pos']:null,
+    selfEd?['Self-education (D4)',-selfEd,'pos']:null,
+    tools?['Tools & equipment ≤$300 each (D5)',-tools,'pos']:null,
+    union_?['Union fees & professional subscriptions (D5)',-union_,'pos']:null,
+    incProt?['Income protection insurance premiums',-incProt,'pos']:null,
+    donate?['Charitable donations (DGR)',-donate,'pos']:null,
+    pSuper?['Personal super contribution — s290-180 (D12)',-pSuper,'pos']:null,
+    ['Taxable income',ti,''],
+    ['Income tax on taxable income',-tax,'neg'],
+    lito_off?['Low Income Tax Offset (LITO)',lito_off,'pos']:null,
+    spouseOff?['Spouse super contribution tax offset',spouseOff,'pos']:null,
+    ['Medicare levy (2%)',-med,'neg'],
     surch?['Medicare Levy Surcharge',-surch,'neg']:null,
-    help?['HECS/HELP repayment',-help,'neg']:null,
-    ['PAYG already withheld',wh,'pos']
+    help?['HECS/HELP compulsory repayment',-help,'neg']:null,
+    ['PAYG withheld by employer',wh,'pos']
   ].filter(Boolean);
-  $('rLedger').innerHTML='<tr><th>Item</th><th>$</th></tr>'+
+  $('rLedger').innerHTML='<tr><th>Item</th><th>Amount</th></tr>'+
     rows.map(r=>`<tr class="${r[2]}"><td>${r[0]}</td><td class="amt num">${r[1]<0?'−':''}${fm(Math.abs(r[1]))}</td></tr>`).join('')+
-    `<tr class="total"><td>${result>=0?'Refund to your bank account':'Payable to the ATO'}</td><td class="num">${fm(Math.abs(result))}</td></tr>`;
-  // concessional cap note
-  const cap=CONC_CAP[fy], sg=(+$('sgRate').value||12)/100;
-  const conc=Math.round(salary*sg)+salSac+pSuper;
-  $('rCapNote').innerHTML= conc>cap
-   ? `<b>Over the cap:</b> employer super + salary sacrifice + this deduction = ${fm(conc)}, above the FY concessional cap of ${fm(cap)}. The excess is taxed at your marginal rate — trim the personal contribution by ${fm(conc-cap)}.`
-   : `<b>Concessional cap check:</b> employer super + salary sacrifice + this deduction = ${fm(conc)} of the ${fm(cap)} cap — <b>${fm(cap-conc)} of room left</b>${fy===2027?' (cap rose to $32,500 this year)':''}. Unused cap since 2019–20 may also be carried forward if your super balance is under $500k.`;
-  // tip: marginal value of deductions + lump-sum link
-  const marg=Math.round((marginalRate(ti,fy)/100 + (hasHecs&&mlsInc>D.hecs1?(mlsInc>D.hecs2?0.17:0.15):0))*100);
+    `<tr class="total"><td>${result>=0?'Refund to your bank account':'Tax payable to the ATO'}</td><td class="num">${result<0?'−':''}${fm(Math.abs(result))}</td></tr>`;
+
+  // Concessional super cap check
+  const cap=CONC_CAP[fy]||30000;
+  const sgContrib=Math.round(actualGross*sg);
+  const concUsed=sgContrib+salSacFY+pSuper;
+  const roomLeft=Math.max(0,cap-concUsed);
+  $('rCapNote').innerHTML=concUsed>cap
+   ?`<b>Over the concessional cap:</b> employer SG ~${fm(sgContrib)} + sal sacrifice ${fm(salSacFY)} + personal ${fm(pSuper)} = ${fm(concUsed)}, above the ${fm(cap)} cap. Trim personal contribution by ${fm(concUsed-cap)}.`
+   :`<b>Cap (${fm(cap)}):</b> employer SG ~${fm(sgContrib)} + sal sacrifice ${fm(salSacFY)} + personal ${fm(pSuper)} = ${fm(concUsed)}. <b>${fm(roomLeft)} remaining</b> — a personal deductible contribution up to this amount is still within the cap.`;
+
+  // Marginal effective rate (income tax + HECS)
+  const margRate=Math.round((marginalRate(ti,fy)/100+(hasHecs&&mlsInc>D.hecs1?(mlsInc>D.hecs2?0.17:0.15):0))*100);
+
+  // Refund maximiser panels
+  let mx='';
+  if(gapDays>0){
+    const gapEndDate=new Date(wkStart); gapEndDate.setDate(gapEndDate.getDate()-1);
+    mx+=`<div class="strat"><div class="top"><h3>Employment gap — built-in refund boost</h3><span class="save num">${fm(Math.max(0,result))}<small>total estimated refund</small></span></div><p>You had ${gapDays} days with no income (${fyStart.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})} – ${gapEndDate.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}). Your employer withheld PAYG each fortnight at the full annual rate — but your total FY income is only ${(fraction*100).toFixed(0)}% of that annualised rate. The ATO collected too much, so you get it back.</p></div>`;
+  }
+  if(!wfh){
+    const wks=Math.max(1,Math.ceil(daysWorked/7));
+    const pot=Math.round(40*wks*0.70);
+    mx+=`<div class="strat"><div class="top"><h3>WFH fixed rate — not yet claimed</h3><span class="save num">+${fm(Math.round(pot*margRate/100))}<small>est. refund boost @ 40h/wk</small></span></div><p>The ATO's 70c/hr fixed rate covers electricity, internet, phone and stationery with no receipt needed per item — just a record of hours (diary, timesheet or roster). At 40h/wk for ${wks} working weeks ≈ ${fm(pot)} deduction worth ~${margRate}c per dollar. Enter hours above.</p></div>`;
+  }
+  if(carKm<5000){
+    const pot=Math.round((5000-carKm)*0.88);
+    mx+=`<div class="strat"><div class="top"><h3>Car — D1 cents per km (${carKm?carKm+'km so far':'not claimed'})</h3><span class="save num">+${fm(Math.round(pot*margRate/100))}<small>est. boost at max 5,000 km</small></span></div><p>Any km driven to client sites, training, a second work location or work errands (not your regular commute) qualifies. 88c/km, no receipts needed — just be able to explain how you estimated the km. Slide to your total above.</p></div>`;
+  }
+  if(!$('rSpouseToggle').checked){
+    mx+=`<div class="strat"><div class="top"><h3>Spouse super offset — $540 waiting</h3><span class="save num">+$540<small>direct tax offset, not just a deduction</small></span></div><p>Contribute $3,000 to your spouse’s super and receive a $540 offset directly off your tax payable — dollar for dollar. Your spouse earns $0 so you qualify for the full amount. Enable the toggle in the Superannuation card and action before 30 June ${fy}.</p></div>`;
+  }
+  if(roomLeft>500){
+    const net=Math.round(roomLeft*(margRate/100-0.15));
+    mx+=`<div class="strat"><div class="top"><h3>Personal super top-up — ${fm(roomLeft)} of cap left</h3><span class="save num">+${fm(Math.max(0,net))}<small>net benefit: marginal rate − 15% fund tax</small></span></div><p>Contribute up to ${fm(roomLeft)} more into super and claim a deduction. You get ~${margRate}% back at tax time; the fund pays 15% — net ~${Math.max(0,margRate-15)}c per dollar. Lodge NAT 71121 (Notice of Intent) with your fund before you submit the return. If your super balance is under $500k, you can also carry forward unused cap amounts from 2019–20 onwards.</p></div>`;
+  }
+  if((annRate+Math.round(annRate*sg))>250000){
+    mx+=`<div class="strat" style="border-color:var(--clay)"><div class="top"><h3>Division 293 — extra 15% super tax</h3><span class="save" style="color:var(--clay)">heads up</span></div><p>Your income + employer super likely exceeds $250,000. The ATO imposes an extra 15% tax on concessional contributions above the threshold — reducing (but not eliminating) the personal super deduction benefit. A separate D293 assessment notice arrives after lodgment.</p></div>`;
+  }
+  if(!mx){mx='<div class="note" style="margin:0"><b>All major levers are being used.</b> Consider carry-forward concessional contributions (TSB under $500k) to top up further.</div>';}
+  $('rMaximiser').innerHTML=mx;
+
   const tip=$('rTip'); tip.style.display='block';
-  tip.innerHTML= result>0
-   ? `At your income, every extra $100 of legitimate deductions adds about <b>$${marg}</b> to this refund. Redirected into the loan each year, a ${fm(result)} refund saves roughly ${fm(result*7)}–${fm(result*9)} in lifetime interest (see Tab III, Strategy 3).`
-   : `Every extra $100 of legitimate deductions cuts what you owe by about <b>$${marg}</b>. WFH hours and a deductible super contribution are the fastest levers before you lodge.`;
+  tip.innerHTML=result>0
+   ?`Each extra $100 of legitimate deductions adds ~<b>$${margRate}</b> to this refund. Drop ${fm(result)} into the loan annually — at current rates that saves roughly ${fm(result*7)}–${fm(result*9)} in lifetime interest (Tab III, Strategy 3).`
+   :`Each extra $100 of deductions cuts what you owe by ~<b>$${margRate}</b>. The WFH hours, car km and spouse super offset above are the fastest levers before you lodge.`;
 }
-['rFy','rSalary','rOther','rAuto','rWithheld','rWfhHrs','rWfhWks','rWork','rDonate','rSuper'].forEach(id=>$(id).addEventListener('input',calcReturn));
+
+$('rSpouseToggle').addEventListener('change',()=>{
+  $('rSpouseFields').style.display=$('rSpouseToggle').checked?'block':'none';
+  calcReturn();
+});
+['rFy','rSalary','rOther','rAuto','rWithheld','rWfhHrs','rWfhWks','rCarKm','rTravel','rClothing','rSelfEd','rTools','rUnion','rIncProt','rDonate','rSuper','rEmpStart','rEmpEnd','rSpouseContr','rSpouseInc'].forEach(id=>$(id).addEventListener('input',calcReturn));
 $('rSalary').addEventListener('input',()=>{$('rSalary').dataset.touched=1;});
 
+// Default employment dates
+$('rEmpStart').value='2025-08-11';
+$('rEmpEnd').value='2026-06-30';
+
+/* ================= WORKING DAYS CALENDAR ================= */
+const MNAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function isWorkday(d){const w=d.getDay();return w>0&&w<6;}
+function calcWorkdays(){
+  const sv=$('wdStart').value, ev=$('wdEnd').value;
+  if(!sv||!ev)return;
+  const start=new Date(sv+'T00:00:00'), end=new Date(ev+'T00:00:00');
+  if(start>end){$('wdKpis').innerHTML='<div class="kpi warn"><div class="k">Error</div><div class="v">End before start</div></div>';$('wdCal').innerHTML='';return;}
+  let calDays=0,workDays=0,wkndDays=0;
+  const cur=new Date(start);
+  while(cur<=end){calDays++;if(isWorkday(cur))workDays++;else wkndDays++;cur.setDate(cur.getDate()+1);}
+  const dayRate=lastNet/260, estIncome=workDays*dayRate;
+  $('wdKpis').innerHTML=
+    `<div class="kpi"><div class="k">Calendar days</div><div class="v num">${calDays}</div></div>`+
+    `<div class="kpi good"><div class="k">Working days</div><div class="v num">${workDays}</div><div class="s">${wkndDays} weekend / non-work</div></div>`+
+    `<div class="kpi goldc"><div class="k">Estimated income</div><div class="v num">${fm(estIncome)}</div><div class="s">${fm2(dayRate)} per working day · after tax</div></div>`;
+  // render month grids
+  let html='';
+  let yr=start.getFullYear(), mo=start.getMonth();
+  const eyr=end.getFullYear(), emo=end.getMonth();
+  while(yr<eyr||(yr===eyr&&mo<=emo)){
+    const firstDow=(new Date(yr,mo,1).getDay()+6)%7; // Mon=0
+    const daysInMo=new Date(yr,mo+1,0).getDate();
+    html+=`<div class="cal-month"><h4>${MNAMES[mo]} ${yr}</h4><div class="cal-grid">`;
+    ['M','T','W','T','F','S','S'].forEach(d=>{html+=`<div class="dh">${d}</div>`;});
+    for(let i=0;i<firstDow;i++)html+='<div class="dc empty"></div>';
+    for(let d=1;d<=daysInMo;d++){
+      const dt=new Date(yr,mo,d);
+      const inRange=dt>=start&&dt<=end;
+      const cls=!inRange?'out':(isWorkday(dt)?'work':'wknd');
+      html+=`<div class="dc ${cls}">${d}</div>`;
+    }
+    html+='</div></div>';
+    mo++;if(mo>11){mo=0;yr++;}
+  }
+  $('wdCal').innerHTML=html;
+}
+// defaults: today → end of current month
+(()=>{
+  const t=new Date(), eom=new Date(t.getFullYear(),t.getMonth()+1,0);
+  $('wdStart').value=t.toISOString().slice(0,10);
+  $('wdEnd').value=eom.toISOString().slice(0,10);
+})();
+['wdStart','wdEnd'].forEach(id=>$(id).addEventListener('input',calcWorkdays));
+
 calcSalary();
+// calcWorkdays runs after calcSalary sets lastNet
+calcWorkdays();
 </script>
 </body>
 </html>
