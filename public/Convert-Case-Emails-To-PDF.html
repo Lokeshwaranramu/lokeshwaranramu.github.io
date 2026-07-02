@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convert Case Emails to PDF — Instructions | Lokeshwaran Ramu</title>
+<meta name="description" content="Step-by-step instructions to schedule, run, convert a single case, and manage the Convert Case Emails to PDF batch job in Salesforce.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://www.lokeshwaranramu.com/Convert-Case-Emails-To-PDF.html">
+<link href="assets/img/profile-image.jpg" rel="icon">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lokeshwaranramu.com/Convert-Case-Emails-To-PDF.html">
+<meta property="og:title" content="Convert Case Emails to PDF — Instructions">
+<meta property="og:description" content="Step-by-step instructions to schedule, run, convert a single case, and manage the Convert Case Emails to PDF batch job in Salesforce.">
+<meta property="og:image" content="https://www.lokeshwaranramu.com/assets/img/COCETPIMAGE.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N5V9X2G4PX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-N5V9X2G4PX');
+</script>
+
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --accent-primary: #0284c7;
+    --accent-secondary: #4f46e5;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: rgba(15, 23, 42, 0.08);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 999px;
+    --container: 1100px;
+  }
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--accent-primary); text-decoration: none; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; vertical-align: middle; }
+
+  /* Nav */
+  .page-nav {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.85);
+    border-bottom: 1px solid var(--border);
+  }
+  .page-nav-inner {
+    max-width: var(--container); margin: 0 auto; padding: 0.8rem 2rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .page-nav-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); }
+  .page-nav-back:hover { color: var(--accent-primary); }
+  .page-nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+  .page-nav-logo .dot { color: var(--accent-primary); }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.5rem; background: var(--accent-primary); color: #fff;
+    border-radius: var(--radius-full); font-size: 0.92rem; font-weight: 600;
+    border: none; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #0369a1; color: #fff; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.5rem; background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.85);
+    border-radius: var(--radius-full); font-size: 0.92rem; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.16); color: #fff; }
+
+  /* Hero */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 50%, #0f2a40 100%);
+    padding: 5rem 0 4rem;
+  }
+  .hero-blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; pointer-events: none; }
+  .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(2,132,199,0.5), transparent 70%); top: -150px; left: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(79,70,229,0.4), transparent 70%); bottom: -100px; right: 5%; }
+  .hero-content { position: relative; z-index: 1; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.28rem 0.8rem; border-radius: var(--radius-full);
+    font-size: 0.73rem; font-weight: 500;
+  }
+  .badge-sf { background: rgba(1,131,199,0.2); color: #38bdf8; border: 1px solid rgba(1,131,199,0.3); }
+  .badge-free { background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
+  .badge-cat { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .hero h1 .accent { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p.sub { font-size: 1.02rem; color: rgba(255,255,255,0.65); max-width: 680px; line-height: 1.7; margin-bottom: 1.75rem; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  /* Sections */
+  .section { padding: 4.5rem 0; }
+  .section-alt { background: var(--bg-secondary); }
+  .section-head { text-align: center; margin-bottom: 2.75rem; }
+  .section-head h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-primary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .section-head p { color: var(--text-secondary); font-size: 0.98rem; max-width: 560px; margin: 0 auto; }
+
+  .overview-text p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.1rem; font-size: 0.97rem; }
+  .overview-text strong { color: var(--text-primary); }
+
+  /* Instruction steps */
+  .steps { display: flex; flex-direction: column; gap: 2rem; }
+  .step-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.75rem 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .step-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; }
+  .step-num {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgba(2,132,199,0.12), rgba(79,70,229,0.12));
+    border: 1px solid rgba(2,132,199,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--accent-primary); font-family: 'Space Grotesk', sans-serif;
+  }
+  .step-head h3 { font-size: 1.1rem; font-weight: 600; }
+  .step-card p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.75rem; }
+  .step-card .note { background: rgba(2,132,199,0.06); border: 1px solid rgba(2,132,199,0.12); border-radius: var(--radius-sm); padding: 0.65rem 0.9rem; font-size: 0.85rem; color: var(--text-secondary); }
+  .step-card .note strong { color: var(--accent-primary); }
+  .step-shot { margin-top: 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); max-width: 640px; }
+  .step-card ol.sub-list, .step-card ul.sub-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+  .step-card .sub-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.92rem; color: var(--text-secondary); }
+  .step-card .sub-list .material-symbols-outlined { font-size: 1.1rem; color: var(--accent-primary); margin-top: 0.1rem; flex-shrink: 0; }
+
+  /* Pros / Cons */
+  .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .proscons-col { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+  .proscons-head { display: flex; align-items: center; gap: 0.6rem; font-size: 1.05rem; font-weight: 600; margin-bottom: 1.25rem; }
+  .pros-head .material-symbols-outlined { color: #16a34a; }
+  .cons-head .material-symbols-outlined { color: #0284c7; }
+  .plist { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .plist li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+  .plist .material-symbols-outlined { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .pros .material-symbols-outlined { color: #16a34a; }
+  .cons .material-symbols-outlined { color: #0284c7; }
+
+  /* CTA */
+  .cta-section { padding: 4.5rem 0; background: var(--bg-secondary); }
+  .cta-card {
+    max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 3rem 2.5rem; box-shadow: var(--shadow-lg); text-align: center;
+  }
+  .cta-icon {
+    width: 64px; height: 64px; margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(2,132,199,0.1), rgba(79,70,229,0.1));
+    border: 1px solid rgba(2,132,199,0.15); border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cta-icon .material-symbols-outlined { font-size: 2rem; color: var(--accent-primary); }
+  .cta-card h2 {
+    font-size: 1.7rem; margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-primary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .cta-card > p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
+  .cta-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .cta-btns .btn-secondary { background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border); }
+  .cta-btns .btn-secondary:hover { background: var(--border); }
+
+  /* Footer */
+  .page-footer { padding: 2rem 0; background: #0f172a; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
+  .page-footer a { color: rgba(255,255,255,0.6); }
+  .page-footer a:hover { color: #38bdf8; }
+
+  @media (max-width: 700px) {
+    .proscons { grid-template-columns: 1fr; }
+    .hero { padding: 6.5rem 0 3rem; }
+    .step-card { padding: 1.4rem; }
+  }
+</style>
+</head>
+
+<body>
+
+  <nav class="page-nav">
+    <div class="page-nav-inner">
+      <a class="page-nav-back" href="https://www.lokeshwaranramu.com/">
+        <span class="material-symbols-outlined" style="font-size:1.1rem">arrow_back</span>
+        Back to Portfolio
+      </a>
+      <span class="page-nav-logo">Lokeshwaran<span class="dot">.</span></span>
+      <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HSbdNUAT" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding:0.5rem 1.2rem; font-size:0.85rem;">
+        <span class="material-symbols-outlined" style="font-size:0.95rem">open_in_new</span>
+        Get It Free
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="container hero-content">
+      <div class="badge-row">
+        <span class="badge badge-sf"><span class="material-symbols-outlined" style="font-size:0.85rem">menu_book</span>Instruction Guide</span>
+        <span class="badge badge-free"><span class="material-symbols-outlined" style="font-size:0.85rem">sell</span>Free · Never requires payment</span>
+        <span class="badge badge-cat">Memory Solution</span>
+      </div>
+      <h1>Convert Case Emails<br><span class="accent">to PDF</span></h1>
+      <p class="sub">
+        A step-by-step guide to scheduling the batch job, converting emails for a single case, and managing
+        the job from the Salesforce UI — so you can free up data storage without losing any email history.
+      </p>
+      <div class="hero-btns">
+        <a href="Convert Case Email To PDF.pdf" download class="btn-primary">
+          <span class="material-symbols-outlined">download</span>
+          Download the PDF Guide
+        </a>
+        <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HSbdNUAT" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          Install on AppExchange
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why Convert Case Emails to PDF?</h2>
+        <p>The storage problem every Salesforce org faces — and how this app solves it.</p>
+      </div>
+      <div class="overview-text" style="max-width:760px; margin:0 auto;">
+        <p>
+          Storage in Salesforce is split into <strong>Data Storage</strong> and <strong>File Storage</strong>.
+          Case email messages make up a large share of data storage, and regulations often require organisations
+          to retain them for years — meaning storage needs only grow over time.
+        </p>
+        <p>
+          <strong>Convert Case Emails to PDF</strong> converts the email messages on your cases into compact PDFs
+          and attaches them back to the case record, freeing up data storage while keeping every communication
+          accessible inside Salesforce — no external tools required.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructions -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Steps to Schedule the Batch Job from the UI</h2>
+        <p>Run this once to have case emails converted to PDF automatically, every hour.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-head">
+            <span class="step-num">1</span>
+            <h3>Open the app</h3>
+          </div>
+          <p>Click the App Launcher <strong>(&#9638;&#9638;&#9638;)</strong>, then search for and select <strong>'Convert Case Email Messages'</strong>.</p>
+          <a class="step-shot" href="assets/img/CCETP-schedule-app.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/img/CCETP-schedule-app.png" alt="Convert Case Email Messages app in the App Launcher">
+          </a>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <span class="step-num">2</span>
+            <h3>Enter the number of days and submit</h3>
+          </div>
+          <p>Enter the number of days in the text box and click <strong>Submit</strong>.</p>
+          <div class="note"><strong>Note:</strong> "Days" is how many days old the case emails must be before they are converted to PDF and the original email messages are deleted.</div>
+          <a class="step-shot" href="assets/img/CCETP-schedule-running.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/img/CCETP-schedule-running.png" alt="Schedule job running confirmation showing 90 days">
+          </a>
+          <p style="margin-top:1rem;">This scheduled job runs every hour in your org, converting case emails to PDF and deleting the original email messages based on the number of days entered. A total of <strong>10 batches</strong> are processed on every run.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <span class="step-num">3</span>
+            <h3>Convert emails for a single case (optional)</h3>
+          </div>
+          <p>On the same page, use the <strong>'Please provide case number if you wish to convert emails of that particular case to PDF'</strong> field to convert just one case on demand.</p>
+          <ul class="sub-list">
+            <li><span class="material-symbols-outlined">check_circle</span>Enter the Case Number you want to process.</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Click <strong>Convert</strong>.</li>
+            <li><span class="material-symbols-outlined">check_circle</span>The email messages on that case are converted to a PDF and attached to the Case — visible under the case's <strong>Attachments</strong> related list.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Steps to Delete the Batch Job from the UI</h2>
+        <p>Stop the scheduled job at any time from Setup.</p>
+      </div>
+      <div class="steps">
+        <div class="step-card">
+          <ul class="sub-list">
+            <li><span class="material-symbols-outlined">looks_one</span>Go to <strong>Setup</strong> and in the Quick Find box search for <strong>'Scheduled Jobs'</strong>.</li>
+            <li><span class="material-symbols-outlined">looks_two</span>Search for the job <strong>'Batch_Convert_caseEmailtoPDF'</strong> and click <strong>Del</strong> to delete it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pros & Cons -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Honest Assessment</h2>
+        <p>What works well and what to know before installing.</p>
+      </div>
+      <div class="proscons">
+        <div class="proscons-col pros">
+          <div class="proscons-head pros-head"><span class="material-symbols-outlined">thumb_up</span>Advantages</div>
+          <ul class="plist">
+            <li><span class="material-symbols-outlined">check_circle</span>Frees up data storage without losing any email history</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Fully automated batch job — no manual intervention once scheduled</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Works across all major Salesforce editions</li>
+            <li><span class="material-symbols-outlined">check_circle</span>PDFs generated at minimum file size for maximum efficiency</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Generated PDFs attach directly to the respective Case record</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Lightning Ready, mobile-compatible managed package — free on AppExchange</li>
+          </ul>
+        </div>
+        <div class="proscons-col cons">
+          <div class="proscons-head cons-head"><span class="material-symbols-outlined">info</span>Considerations</div>
+          <ul class="plist">
+            <li><span class="material-symbols-outlined">info</span>Only processes closed cases (isClosed = true)</li>
+            <li><span class="material-symbols-outlined">info</span>Requires Email-to-Case to be configured on the org</li>
+            <li><span class="material-symbols-outlined">info</span>Requires a Service Cloud license</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-icon"><span class="material-symbols-outlined">picture_as_pdf</span></div>
+        <h2>Ready to Save Storage?</h2>
+        <p>Install for free from the Salesforce AppExchange. No payment, no trial period — fully featured from day one.</p>
+        <div class="cta-btns">
+          <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HSbdNUAT" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <span class="material-symbols-outlined">download</span>
+            Get It Now — Free
+          </a>
+          <a href="https://www.lokeshwaranramu.com/" class="btn-secondary">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p>Built by <a href="https://www.lokeshwaranramu.com" target="_blank" rel="noopener noreferrer">Lokeshwaran Ramu</a> · Adelaide, Australia</p>
+    </div>
+  </footer>
+
+</body>
+</html>
