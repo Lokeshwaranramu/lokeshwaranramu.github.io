@@ -9,7 +9,7 @@ export const personalInfo = {
   careerStart: '2017-10-01',
   education: 'Bachelor of Information Technology',
   resumeUrl: 'Lokeshwaran_Ramu_Resume.pdf',
-  profileImage: '/assets/img/new_profile_img.png',
+  profileImage: '/assets/img/profile-photo.jpg',
   avatarImage: '/assets/img/Avatar.png',
   social: {
     linkedin: 'https://www.linkedin.com/in/lokeshwaranramu',
