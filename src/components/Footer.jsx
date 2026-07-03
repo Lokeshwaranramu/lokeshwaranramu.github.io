@@ -34,6 +34,7 @@ export default function Footer() {
             <a href={personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>
             <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href={personalInfo.social.trailblazer} target="_blank" rel="noopener noreferrer">Trailblazer</a>
           </motion.div>
 
           <motion.div className="footer-col" variants={fadeUp}>

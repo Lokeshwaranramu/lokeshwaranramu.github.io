@@ -14,7 +14,7 @@ export const personalInfo = {
   social: {
     linkedin: 'https://www.linkedin.com/in/lokeshwaranramu',
     github: 'https://github.com/Lokeshwaranramu',
-    trailblazer: 'https://trailblazer.me/id/lokeshwaranramu',
+    trailblazer: 'https://www.salesforce.com/trailblazer/lokeshwaranramu',
     twitter: 'https://twitter.com/lokeshwaranramu',
     facebook: 'https://www.facebook.com/Lokeshwaran16',
     instagram: 'https://www.instagram.com/lokeshwaran_ramu',
