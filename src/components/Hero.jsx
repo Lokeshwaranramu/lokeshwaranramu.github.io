@@ -247,7 +247,7 @@ export default function Hero() {
           <TypewriterRoles roles={personalInfo.roles} />
         </motion.div>
         <motion.p className="hero-desc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }}>
-          6x Salesforce Certified Architect & Developer crafting enterprise CRM solutions from Adelaide, Australia
+          6x Salesforce Certified Architect & Developer crafting enterprise CRM solutions from Melbourne, Australia
         </motion.p>
         <motion.div className="hero-buttons" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, type: 'spring' }}>
           <MagneticButton href="#contact" className="btn btn-primary btn-glow">

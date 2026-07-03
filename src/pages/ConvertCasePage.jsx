@@ -146,7 +146,7 @@ function PageFooter() {
           <a href="https://www.lokeshwaranramu.com" target="_blank" rel="noopener noreferrer">
             Lokeshwaran Ramu
           </a>{' '}
-          · Troppo Solutions · Adelaide, Australia
+          · Troppo Solutions · Melbourne, Australia
         </p>
         <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
           Listed{' '}

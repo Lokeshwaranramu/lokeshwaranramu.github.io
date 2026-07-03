@@ -4,7 +4,7 @@ export const personalInfo = {
   roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior Ssalesforce Developer', 'Data Architect', 'Salesforce Security Architect'],
   email: 'lokeshramu16@gmail.com',
   phone: '+61 410 076 060',
-  location: 'Adelaide, Australia',
+  location: 'Melbourne, Australia',
   birthDate: '1996-05-16',
   careerStart: '2017-10-01',
   education: 'Bachelor of Information Technology',
@@ -306,7 +306,7 @@ export const experience = [
   {
     title: 'Senior Salesforce Developer',
     company: 'OurMoneyMarket',
-    location: 'Adelaide, Australia',
+    location: 'Melbourne, Australia',
     startDate: '2025-08-01',
     endDate: null,
     desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender — owning end-to-end solution design across case management, automation, and customer service operations.',
