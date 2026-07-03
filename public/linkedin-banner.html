@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1584">
+  <title>LinkedIn Banner – Lokeshwaran Ramu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1584px;
+      height: 396px;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    /* ── Banner shell ── */
+    .banner {
+      width: 1584px;
+      height: 396px;
+      background: #ffffff;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Top accent stripe ── */
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #00A1E0 0%, #032D60 60%, #00A1E0 100%);
+      z-index: 10;
+    }
+
+    /* ── Subtle background grid dots ── */
+    .banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    /* ══════════════════════════════
+       LEFT — Identity
+    ══════════════════════════════ */
+    .left {
+      width: 560px;
+      flex-shrink: 0;
+      padding: 42px 52px 38px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.92);
+    }
+
+    /* Salesforce cloud wordmark row */
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .sf-cloud {
+      width: 28px;
+      height: 20px;
+    }
+
+    .brand-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #00A1E0;
+    }
+
+    .name {
+      font-size: 34px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.0;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      white-space: nowrap;
+    }
+
+    .name em {
+      font-style: normal;
+      color: #00A1E0;
+    }
+
+    .role {
+      font-size: 13px;
+      font-weight: 500;
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    .avail-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+    }
+
+    .meta-icon {
+      width: 13px;
+      height: 13px;
+      fill: #94a3b8;
+      flex-shrink: 0;
+    }
+
+    /* ── Vertical divider ── */
+    .divider {
+      width: 1px;
+      align-self: stretch;
+      background: linear-gradient(to bottom, transparent 5%, #e2e8f0 25%, #e2e8f0 75%, transparent 95%);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ══════════════════════════════
+       RIGHT — Certifications
+    ══════════════════════════════ */
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 48px;
+      position: relative;
+      z-index: 2;
+      gap: 18px;
+    }
+
+    /* Row label above badges */
+    .cert-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      align-self: stretch;
+    }
+
+    .cert-heading-line {
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .cert-heading-text {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    /* Badge grid */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 75px);
+      gap: 0 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-wrap img {
+      height: 80px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.10));
+    }
+
+    /* Bottom stat strip */
+    .stat-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      align-self: stretch;
+      justify-content: center;
+    }
+
+    .stat-pill {
+      background: #032D60;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+
+    .stat-pill span {
+      color: #7dd3fc;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    /* Watermark */
+    .watermark {
+      position: absolute;
+      bottom: 8px;
+      right: 14px;
+      font-size: 10px;
+      color: #cbd5e1;
+      letter-spacing: 0.3px;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+<div class="banner">
+
+  <!-- LEFT: Identity -->
+  <div class="left">
+
+    <div class="brand-row">
+      <!-- Salesforce cloud SVG -->
+      <svg class="sf-cloud" viewBox="0 0 48 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.9 4.3A12 12 0 0128.8 0a12.1 12.1 0 019.1 4.2 8.2 8.2 0 013.6-.8A8.5 8.5 0 0148 12a8.5 8.5 0 01-1.8 5.3 7 7 0 011 3.6A7.1 7.1 0 0140.1 28a7 7 0 01-2.3-.4A9.4 9.4 0 0121.3 31a9.4 9.4 0 01-7.9-4.2 7.7 7.7 0 01-3.6.9A7.8 7.8 0 011.7 19.7 7.8 7.8 0 016 12.9a9.8 9.8 0 01-.8-3.8A9.9 9.9 0 0119.9 4.3z" fill="#00A1E0"/>
+      </svg>
+      <span class="brand-text">Salesforce</span>
+    </div>
+
+    <div class="name">Lokeshwaran <em>Ramu</em></div>
+
+    <div class="role">
+      Senior Salesforce Developer &amp; Solution Architect<br>
+      Agentforce Specialist · Data Architect
+    </div>
+
+    <div class="meta">
+      <div class="meta-item">
+        <div class="avail-dot"></div>
+        Open to new opportunities
+      </div>
+      <div class="meta-item">
+        <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Melbourne, Victoria · Australia
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RIGHT: Certifications -->
+  <div class="right">
+
+    <div class="cert-heading">
+      <div class="cert-heading-line"></div>
+      <div class="cert-heading-text">Salesforce Certifications</div>
+      <div class="cert-heading-line"></div>
+    </div>
+
+    <div class="badge-grid">
+      <div class="badge-wrap">
+        <img src="assets/img/Data.Architect.png" alt="Data Architect">
+      </div>
+      <div class="badge-wrap">
+        <img src="assets/img/Platform.Developer.II.png" alt="Platform Developer II">
+      </div>
+      <div class="badge-wrap">
+        <img src="assets/img/Programmer.I.png" alt="Platform Developer I">
+      </div>
+      <div class="badge-wrap">
+        <img src="assets/img/Service.Consultant.png" alt="Service Cloud Consultant">
+      </div>
+      <div class="badge-wrap">
+        <img src="assets/img/App.Builder.png" alt="App Builder">
+      </div>
+      <div class="badge-wrap">
+        <img src="assets/img/Administrator.png" alt="Administrator">
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat-pill"><span>6×</span> Salesforce Certified Professional</div>
+      <div class="stat-sub">· Melbourne, AU · lokeshwaranramu.com</div>
+    </div>
+
+  </div>
+
+  <div class="watermark">lokeshwaranramu.com</div>
+
+</div>
+</body>
+</html>
