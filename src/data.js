@@ -72,6 +72,7 @@ export const projects = [
   { title: 'Einstein for Retail', desc: 'Implemented Einstein for Country Road Group to enhance retail customer insights and automation.', icon: 'psychology', gradient: ['#0ea5e9', '#ef4444'] },
   { title: 'Loyalty Solution', desc: 'Built a Loyalty solution for Country Road Group, integrated with Service Cloud for seamless customer experiences.', icon: 'military_tech', gradient: ['#f97316', '#22c55e'] },
   { title: 'Braze Integration', desc: 'Integrated Braze marketing solution with Service Cloud for Country Road Group, improving customer engagement.', icon: 'campaign', gradient: ['#ef4444', '#eab308'] },
+  { title: 'CPQ Implementation — 5GN Brand', desc: 'Architected and delivered a full CPQ (Configure, Price, Quote) solution for the 5GN brand at Webcentral Group — built from scratch as sole developer, covering end-to-end quoting, pricing, and contract processes, integrated with Xero for automated invoice generation.', icon: 'request_quote', gradient: ['#8b5cf6', '#0ea5e9'] },
   { title: 'Storage Optimization', desc: 'Developed an AppExchange solution to convert case emails to PDFs automatically, optimizing storage across Salesforce clouds.', icon: 'picture_as_pdf', gradient: ['#6366f1', '#0ea5e9'] },
   { title: 'Bulk Email Solution', desc: 'Created an AppExchange solution for bulk customer case emails in Service Cloud, primarily for Webcentral Group.', icon: 'mail', gradient: ['#22c55e', '#eab308'] },
   { title: 'User Access Management', desc: 'Modernized user access management on Service Cloud using LWC and VF pages at ISSQUARED Inc.', icon: 'manage_accounts', gradient: ['#0ea5e9', '#f97316'] },
@@ -183,7 +184,7 @@ export const caseStudies = [
     title: 'Webcentral Group & Netregistry Org Merger',
     icon: 'cloud_sync',
     challenge: 'Webcentral Group needed to consolidate two Salesforce orgs into a single unified instance while simultaneously building out Sales Cloud with Xero financial integration, PQC processes, and a full Service Cloud omni-channel contact centre — all without disrupting live customer service operations.',
-    solution: 'Led the technical execution of the full org merge with phased data migration using custom Apex batch jobs and Data Loader. Architected and delivered the Sales Cloud implementation including Xero integration for automated invoice generation and PQC (Price, Quote and Contract) processes. Delivered the complete Service Cloud implementation integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent. Developed custom LWC components for user access management and implemented SLA tracking.',
+    solution: 'Led the technical execution of the full org merge with phased data migration using custom Apex batch jobs and Data Loader. Architected and delivered the Sales Cloud implementation for the 5GN brand including a full CPQ (Configure, Price, Quote) implementation built from scratch as sole developer, integrated with Xero for automated invoice generation. Delivered the complete Service Cloud implementation integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent. Developed custom LWC components for user access management and implemented SLA tracking.',
     tech: ['Apex Batch Jobs', 'Data Loader', 'LWC', 'Service Cloud', 'Sales Cloud', 'Amazon Connect', 'Slack', 'Xero', 'SLA Milestones', 'AI Chatbot'],
     results: [
       { value: '2M+', label: 'Records Migrated' },
@@ -346,7 +347,7 @@ export const experience = [
     endDate: '2023-02-28',
     desc: 'Led the technical execution of a complex org merge — consolidating Sales Cloud and Service Cloud instances across cross-functional teams with full accountability for custom solution development and data integrity.',
     achievements: [
-      'Architected and delivered the Salesforce Sales Cloud implementation — including a Xero integration for automated invoice generation and PQC (Price, Quote and Contract) processes, enabling seamless financial data flow between CRM and accounting.',
+      'Architected and delivered the Salesforce Sales Cloud implementation for the 5GN brand — including a full CPQ (Configure, Price, Quote) implementation built from scratch as sole developer, covering end-to-end quoting, pricing, and contract processes, integrated with Xero for automated invoice generation to enable seamless financial data flow between CRM and accounting.',
       'Architected and delivered the complete Service Cloud implementation — integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent for intelligent omni-channel customer service.',
       'Designed and implemented custom Salesforce solutions including automated workflows, Apex customisations, Visualforce pages, custom objects, and SOQL-driven logic aligned to enterprise business requirements.',
       'Acted as trusted technical advisor to the customer experience team — providing strategic recommendations to streamline processes, enhance productivity, and scale Salesforce operations using platform best practices.',
