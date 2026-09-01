@@ -309,7 +309,7 @@ export const experience = [
     company: 'OurMoneyMarket',
     location: 'Melbourne, Australia',
     startDate: '2025-08-01',
-    endDate: null,
+    endDate: '2026-07-31',
     desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender — owning end-to-end solution design across case management, automation, and customer service operations.',
     achievements: [
       'Pioneered Agentforce production integrations — architecting and implementing an AI-driven service agent connected to a custom customer portal, enabling real-time responsiveness for loan applicants at scale.',
