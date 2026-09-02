@@ -78,7 +78,8 @@ function ParticleCanvas() {
     const init = () => {
       resize()
       const w = canvas.offsetWidth, h = canvas.offsetHeight
-      particles = Array.from({ length: 100 }, () => new Particle(w, h))
+      const count = w < 600 ? 35 : w < 1024 ? 60 : 100
+      particles = Array.from({ length: count }, () => new Particle(w, h))
     }
 
     const drawConnections = () => {
