@@ -174,7 +174,7 @@ function TypewriterRoles({ roles }) {
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-      <motion.span className="cursor" animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8, ease: 'easeInOut' }}>|</motion.span>
+      <span className="cursor" aria-hidden="true" />
     </span>
   )
 }

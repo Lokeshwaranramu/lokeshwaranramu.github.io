@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: 'Lokeshwaran Ramu',
   title: 'Senior Salesforce Developer | Consultant | Solution Architect',
-  roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior Ssalesforce Developer', 'Data Architect', 'Salesforce Security Architect'],
+  roles: ['Solution Architect', 'Agentforce & AI Specialist', 'Senior Salesforce Developer', 'Data Architect', 'Salesforce Security Architect'],
   email: 'lokeshramu16@gmail.com',
   phone: '+61 410 076 060',
   location: 'Melbourne, Australia',
