@@ -180,8 +180,8 @@ public class EinsteinService {
         transition={{ type: 'spring', stiffness: 200, damping: 25 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="project-modal-close" onClick={onClose}>
-          <span className="material-symbols-outlined">close</span>
+        <button className="project-modal-close" onClick={onClose} aria-label="Close details">
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
         </button>
 
         <div
