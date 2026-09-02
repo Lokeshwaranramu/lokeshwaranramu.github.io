@@ -11,6 +11,7 @@ function ParticleCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const ctx = canvas.getContext('2d')
     let animId
     let particles = []
@@ -201,6 +202,7 @@ function InteractiveAvatar() {
   const mouse = useMouseParallax(0.01)
   const rotate = useMotionValue(0)
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let frame, deg = 0
     const spin = () => { deg += 0.3; rotate.set(deg); frame = requestAnimationFrame(spin) }
     spin()

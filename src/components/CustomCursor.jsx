@@ -8,6 +8,7 @@ export default function CustomCursor() {
   useEffect(() => {
     const outer = outerRef.current, inner = innerRef.current
     if (!outer || !inner) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let ox = 0, oy = 0, ix = 0, iy = 0, mx = 0, my = 0
 
     const move = (e) => { mx = e.clientX; my = e.clientY }
