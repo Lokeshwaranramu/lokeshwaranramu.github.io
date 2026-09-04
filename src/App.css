@@ -30,13 +30,13 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   cursor: none;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -216,7 +216,8 @@ section { padding: var(--section-gap) 0; position: relative; }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  z-index: 0; overflow: hidden;
+  z-index: 0; overflow: clip;
+  pointer-events: none;
 }
 .hero-gradient {
   position: absolute; border-radius: 50%;
