@@ -5,7 +5,7 @@ import { useMagnetic } from '../hooks/useMotion'
 
 const navLinks = [
   { href: '#about', label: 'About' },
-  { href: '#features', label: 'Features' },
+  { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
   { href: '#experience', label: 'Experience' },
   { href: '#certifications', label: 'Certifications' },

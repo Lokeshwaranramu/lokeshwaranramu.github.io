@@ -21,8 +21,8 @@ function ProjectCard({ project, index, onSelect }) {
     const rect = el.getBoundingClientRect()
     const px = (e.clientX - rect.left) / rect.width
     const py = (e.clientY - rect.top) / rect.height
-    rotateX.set((py - 0.5) * -20)
-    rotateY.set((px - 0.5) * 20)
+    rotateX.set((py - 0.5) * -10)
+    rotateY.set((px - 0.5) * 10)
     glowX.set(px * 100)
     glowY.set(py * 100)
   }
@@ -201,6 +201,13 @@ public class EinsteinService {
 
         <div className="project-modal-body">
           <p className="project-modal-desc">{project.desc}</p>
+          
+          {project.impact && (
+            <div className="project-modal-impact">
+              <h4>Impact & Results</h4>
+              <p>{project.impact}</p>
+            </div>
+          )}
 
           <div className="project-modal-code">
             <div className="code-header">

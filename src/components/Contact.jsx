@@ -13,16 +13,19 @@ function FormField({ type, name, placeholder, rows }) {
       className={`form-group ${focused ? 'form-group-focus' : ''}`}
       animate={focused ? { borderColor: 'rgba(14,165,233,0.6)' } : { borderColor: 'rgba(148,163,184,0.1)' }}
     >
+      <label htmlFor={name} className="form-label">{placeholder}</label>
       <motion.div
         className="form-group-glow"
         animate={focused ? { opacity: 0.15, scale: 1 } : { opacity: 0, scale: 0.95 }}
       />
       <Tag
+        id={name}
         type={type}
         name={name}
         placeholder={placeholder}
         rows={rows}
         required
+        aria-label={placeholder}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />

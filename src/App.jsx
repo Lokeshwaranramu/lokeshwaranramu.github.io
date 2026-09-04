@@ -3,9 +3,11 @@ import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import ExecutiveSummary from './components/ExecutiveSummary'
 import About from './components/About'
 import Features from './components/Features'
 import Skills from './components/Skills'
+import SkillLegend from './components/SkillLegend'
 import Projects from './components/Projects'
 import Stats from './components/Stats'
 import CaseStudies from './components/CaseStudies'
@@ -27,9 +29,11 @@ function Portfolio() {
       <Header />
       <main>
         <Hero />
+        <ExecutiveSummary />
         <About />
         <Features />
         <Skills />
+        <SkillLegend />
         <Projects />
         <Stats />
         <CaseStudies />

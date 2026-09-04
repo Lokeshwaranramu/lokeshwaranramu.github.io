@@ -18,8 +18,8 @@ function SkillNode({ skill, index, total }) {
     const rect = el.getBoundingClientRect()
     const px = (e.clientX - rect.left) / rect.width
     const py = (e.clientY - rect.top) / rect.height
-    rotateX.set((py - 0.5) * -15)
-    rotateY.set((px - 0.5) * 15)
+    rotateX.set((py - 0.5) * -8)
+    rotateY.set((px - 0.5) * 8)
   }
   const handleLeave = () => { rotateX.set(0); rotateY.set(0); setHovered(false) }
 
