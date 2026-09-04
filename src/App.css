@@ -183,6 +183,18 @@ section { padding: var(--section-gap) 0; position: relative; }
   flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 4px;
 }
+.mobile-resume {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
 .mobile-toggle span {
   display: block; width: 24px; height: 2px;
   background: var(--text-primary);
@@ -196,6 +208,11 @@ section { padding: var(--section-gap) 0; position: relative; }
 .mobile-nav-link {
   color: var(--text-secondary);
   padding: 0.5rem 0; font-size: 1rem;
+}
+.mobile-nav-resume {
+  margin-top: 0.5rem;
+  justify-content: center;
+  width: 100%;
 }
 
 /* ════════════════════════════════════════
@@ -1280,6 +1297,7 @@ section { padding: var(--section-gap) 0; position: relative; }
   .header-nav { display: none; }
   .header-cta { display: none; }
   .mobile-toggle { display: flex; }
+  .mobile-resume { display: inline-flex; }
 
   .about-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
@@ -1296,12 +1314,18 @@ section { padding: var(--section-gap) 0; position: relative; }
 @media (max-width: 600px) {
   :root { --section-gap: 5rem; }
   .container { padding: 0 1rem; }
+  section { overflow-x: clip; }
   .projects-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .certs-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: 2.2rem; }
   .hero-buttons { flex-direction: column; align-items: center; }
+  .hero { padding: 5rem 0 3rem; }
+  .hero-bg { transform: scale(0.9); transform-origin: center; }
+  .hero-gradient-1 { width: 420px; height: 420px; top: -120px; left: -180px; }
+  .hero-gradient-2 { width: 360px; height: 360px; bottom: -120px; right: -140px; }
+  .hero-gradient-3 { width: 220px; height: 220px; top: 45%; right: 10%; }
   .feature-card { grid-template-columns: 1fr; }
   .feature-card-reverse { direction: ltr; }
 }
