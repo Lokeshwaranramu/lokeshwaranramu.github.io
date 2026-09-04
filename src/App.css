@@ -183,6 +183,18 @@ section { padding: var(--section-gap) 0; position: relative; }
   flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 4px;
 }
+.mobile-resume {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
 .mobile-toggle span {
   display: block; width: 24px; height: 2px;
   background: var(--text-primary);
@@ -1285,6 +1297,7 @@ section { padding: var(--section-gap) 0; position: relative; }
   .header-nav { display: none; }
   .header-cta { display: none; }
   .mobile-toggle { display: flex; }
+  .mobile-resume { display: inline-flex; }
 
   .about-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }

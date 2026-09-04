@@ -96,6 +96,17 @@ export default function Header() {
           <motion.span animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} />
           <motion.span animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} />
         </motion.button>
+
+        <motion.a
+          href={personalInfo.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mobile-resume"
+          aria-label="Download resume"
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="material-symbols-outlined" aria-hidden="true">download</span>
+        </motion.a>
       </div>
 
       <AnimatePresence>
