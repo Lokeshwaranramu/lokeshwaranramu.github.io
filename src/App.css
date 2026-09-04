@@ -197,6 +197,11 @@ section { padding: var(--section-gap) 0; position: relative; }
   color: var(--text-secondary);
   padding: 0.5rem 0; font-size: 1rem;
 }
+.mobile-nav-resume {
+  margin-top: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
 
 /* ════════════════════════════════════════
    HERO

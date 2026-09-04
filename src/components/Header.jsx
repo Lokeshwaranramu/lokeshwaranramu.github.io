@@ -120,6 +120,18 @@ export default function Header() {
                 {l.label}
               </motion.a>
             ))}
+            <motion.a
+              href={personalInfo.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary mobile-nav-resume"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: navLinks.length * 0.05 }}
+            >
+              <span className="material-symbols-outlined" aria-hidden="true">download</span>
+              Resume
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
