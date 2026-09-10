@@ -167,7 +167,7 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Hover to interact — Technologies and platforms I specialize in
+            Hover to interact with the technologies and platforms I specialize in
           </motion.p>
         </motion.div>
 

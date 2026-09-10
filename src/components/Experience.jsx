@@ -59,7 +59,7 @@ function ExperienceCard({ job, index }) {
       >
         <div className="timeline-date-badge">
           <span className="material-symbols-outlined">calendar_month</span>
-          {formatDate(job.startDate)} — {formatDate(job.endDate)}
+          {formatDate(job.startDate)} to {formatDate(job.endDate)}
           <span className="timeline-duration">{calcDuration(job.startDate, job.endDate)}</span>
         </div>
 

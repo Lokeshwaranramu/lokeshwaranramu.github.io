@@ -246,7 +246,7 @@ export default function AppExchange() {
                 How It Works
               </h3>
               <p className="ax-body-section-desc">
-                The app automatically processes all closed Salesforce cases, converts each email message into a compact PDF, and attaches it directly to the case record — freeing up significant data storage without losing a single email.
+                The app automatically processes all closed Salesforce cases, converts each email message into a compact PDF, and attaches it directly to the case record, freeing up significant data storage without losing a single email.
               </p>
             </motion.div>
 

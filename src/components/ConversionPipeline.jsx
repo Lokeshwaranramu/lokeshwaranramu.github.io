@@ -152,7 +152,7 @@ export default function ConversionPipeline({ emails, storageStats }) {
   return (
     <div className="pipeline-wrapper" ref={ref}>
       <div className="pipeline-grid">
-        {/* Left — Email column */}
+        {/* Left: Email column */}
         <div className="pipeline-col">
           <motion.div
             className="pipeline-col-header"
@@ -176,7 +176,7 @@ export default function ConversionPipeline({ emails, storageStats }) {
           ))}
         </div>
 
-        {/* Center — arrows + processor */}
+        {/* Center: arrows + processor */}
         <div className="pipeline-center-col">
           <div className="pipeline-center-grid">
             <FlowArrows side="left" inView={inView} />
@@ -185,7 +185,7 @@ export default function ConversionPipeline({ emails, storageStats }) {
           </div>
         </div>
 
-        {/* Right — PDF column */}
+        {/* Right: PDF column */}
         <div className="pipeline-col">
           <motion.div
             className="pipeline-col-header pipeline-col-header-green"

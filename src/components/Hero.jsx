@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react'
 import { personalInfo } from '../data'
-import { useMagnetic, useMouseParallax, splitText, charReveal, staggerContainer } from '../hooks/useMotion'
+import { useMouseParallax, splitText, charReveal, staggerContainer } from '../hooks/useMotion'
+import { useTypewriter } from '../hooks/useTypewriter'
 
 /* ─── Interactive Particle Constellation ─── */
 function ParticleCanvas() {
@@ -52,6 +53,7 @@ function ParticleCanvas() {
           this.r += (this.baseR - this.r) * 0.05
         }
         this.vx *= 0.98; this.vy *= 0.98
+        this.vx = Math.max(-4, Math.min(4, this.vx))
         this.x += this.vx; this.y += this.vy
         if (this.x < 0) this.x = this.w
         if (this.x > this.w) this.x = 0
@@ -122,11 +124,29 @@ function ParticleCanvas() {
     }
     const onLeave = () => { mouseRef.current = { x: -1000, y: -1000 } }
 
+    // Horizontal mouse-scrub: drifting the cursor sideways pushes a "wind" impulse
+    // through the whole field, echoing the video-scrub interaction without a video.
+    let prevX = null
+    const SENSITIVITY = 0.8
+    const onWindowMouseMove = (e) => {
+      if (prevX !== null) {
+        const delta = e.clientX - prevX
+        const wind = (delta / window.innerWidth) * SENSITIVITY * 20
+        particles.forEach(p => { p.vx += wind })
+      }
+      prevX = e.clientX
+    }
+
     init(); animate()
     window.addEventListener('resize', init)
+    window.addEventListener('mousemove', onWindowMouseMove)
     canvas.addEventListener('mousemove', onMouse)
     canvas.addEventListener('mouseleave', onLeave)
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', init) }
+    return () => {
+      cancelAnimationFrame(animId)
+      window.removeEventListener('resize', init)
+      window.removeEventListener('mousemove', onWindowMouseMove)
+    }
   }, [])
 
   return <canvas ref={canvasRef} className="particle-canvas" />
@@ -181,10 +201,53 @@ function TypewriterRoles({ roles }) {
   )
 }
 
-function MagneticButton({ children, className, ...props }) {
-  const mag = useMagnetic(0.4)
+function HeroTagline() {
+  const { displayed, done } = useTypewriter(
+    "Glad you stopped by. I help enterprises turn Salesforce into an AI-powered service platform. What are we architecting?",
+    38,
+    600
+  )
   return (
-    <motion.a ref={mag.ref} style={mag.style} className={className} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} {...props}>{children}</motion.a>
+    <p className="hero-tagline">
+      {displayed}
+      {!done && <span className="typewriter-cursor" aria-hidden="true" />}
+    </p>
+  )
+}
+
+function ActionPills() {
+  const [visible, setVisible] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 400)
+    return () => clearTimeout(t)
+  }, [])
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(personalInfo.email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  return (
+    <div className={`hero-pills ${visible ? 'visible' : ''}`}>
+      <a href="#projects" className="pill">See my projects</a>
+      <a href="#experience" className="pill">View my experience</a>
+      <a href="#certifications" className="pill">Read my certifications</a>
+      <a href={personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer" className="pill">Download résumé</a>
+      <button type="button" className="pill pill-outline" onClick={copyEmail}>
+        {copied ? 'Copied!' : (
+          <>
+            Reach me: <span className="pill-email">{personalInfo.email}</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1" />
+              <path d="M3.5 2.5H10a0.5 0.5 0 0 1 0.5 0.5v6.5" stroke="currentColor" strokeWidth="1" fill="none" />
+            </svg>
+          </>
+        )}
+      </button>
+    </div>
   )
 }
 
@@ -249,19 +312,10 @@ export default function Hero() {
         <motion.div className="hero-roles" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
           <TypewriterRoles roles={personalInfo.roles} />
         </motion.div>
-        <motion.p className="hero-desc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }}>
-          6x Salesforce Certified Architect & Developer crafting enterprise CRM solutions from Melbourne, Australia
-        </motion.p>
-        <motion.div className="hero-buttons" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, type: 'spring' }}>
-          <MagneticButton href="#contact" className="btn btn-primary btn-glow">
-            <span className="material-symbols-outlined">chat</span>
-            Get in Touch
-          </MagneticButton>
-          <MagneticButton href="#projects" className="btn btn-secondary">
-            <span className="material-symbols-outlined">arrow_downward</span>
-            View Work
-          </MagneticButton>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }}>
+          <HeroTagline />
         </motion.div>
+        <ActionPills />
       </motion.div>
 
     </section>

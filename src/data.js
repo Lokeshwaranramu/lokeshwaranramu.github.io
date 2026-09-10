@@ -22,9 +22,9 @@ export const personalInfo = {
 }
 
 export const aboutParagraphs = [
-  'I am a Salesforce Solution Architect with {years}+ years of enterprise delivery experience across financial services, retail, and technology sectors — owning end-to-end architecture and delivery across Service Cloud, Sales Cloud, Experience Cloud, and Agentforce. I have pioneered one of the earliest Agentforce production implementations in Australian fintech, building both customer-facing and employee-facing AI service agents that operate at scale.',
-  'My work spans complex integration ecosystems — Amazon Connect for omni-channel contact centres, Braze for real-time marketing automation, Slack, REST/SOAP APIs, and event-driven middleware. I have led enterprise-scale org merges and de-mergers, architected Master Data Management solutions, designed loyalty platforms, and delivered comprehensive enterprise security frameworks — including remediating live security breach risk across integrated Salesforce platforms.',
-  'What sets me apart is a rare combination of hands-on technical execution and strategic architectural thinking, underpinned by an Identity & Access Management (IAM) background that shapes every security and integration decision. Former Developer Success Engineer at Salesforce. 6 Salesforce certifications including Certified Data Architect and Platform Developer II. Australian Permanent Resident — no sponsorship required.',
+  'I\'m a Salesforce Solution Architect with {years}+ years of enterprise delivery experience across financial services, retail, and technology. I own end-to-end architecture and delivery across Service Cloud, Sales Cloud, Experience Cloud, and Agentforce, and I built one of the earliest Agentforce implementations to go live in Australian fintech, including both customer-facing and employee-facing AI service agents running at scale.',
+  'My work spans complex integration ecosystems, including Amazon Connect for omni-channel contact centres, Braze for real-time marketing automation, Slack, REST/SOAP APIs, and event-driven middleware. I\'ve led enterprise-scale org merges and de-mergers, architected Master Data Management solutions, designed loyalty platforms, and delivered comprehensive enterprise security frameworks, including remediating a live security breach risk across integrated Salesforce platforms.',
+  'What sets me apart is the combination of hands-on technical execution and strategic architectural thinking, shaped by a background in Identity & Access Management (IAM) that informs every security and integration decision I make. I\'m a former Developer Success Engineer at Salesforce and hold six Salesforce certifications, including Certified Data Architect and Platform Developer II. I\'m also an Australian Permanent Resident, so no visa sponsorship is required.',
 ]
 
 export const aboutHighlights = [
@@ -56,12 +56,12 @@ export const skills = [
 ]
 
 export const features = [
-  { title: 'Agentforce & AI Service Agents', desc: 'Pioneered one of the earliest Agentforce production implementations in Australian fintech — architecting both customer-facing and employee-facing AI service agents that deliver real-time responsiveness and reduce manual case handling overhead at scale.', icon: 'smart_toy' },
-  { title: 'Enterprise Security Architecture', desc: 'Led enterprise security architecture design — identifying platform vulnerabilities, engineering comprehensive security models to remediate breach risk, and overseeing end-to-end implementation across all integrated systems. IAM background informs every platform design decision.', icon: 'security' },
-  { title: 'Org Mergers & De-mergers', desc: 'Expert in merging and de-merging Salesforce orgs at enterprise scale — from Webcentral Group consolidation to Country Road Group / David Jones de-merger — ensuring data integrity, business continuity, and zero downtime.', icon: 'cloud_sync' },
-  { title: 'Amazon Connect & Omni-Channel', desc: 'Architected and delivered omni-channel contact centre solutions integrating Amazon Connect for telephony with Salesforce Service Cloud — enabling seamless voice, messaging, and digital service experiences across enterprise retail and fintech clients.', icon: 'headset_mic' },
+  { title: 'Agentforce & AI Service Agents', desc: 'Pioneered one of the earliest Agentforce production implementations in Australian fintech, architecting both customer-facing and employee-facing AI service agents that deliver real-time responsiveness and reduce manual case handling overhead at scale.', icon: 'smart_toy' },
+  { title: 'Enterprise Security Architecture', desc: 'Led enterprise security architecture design, identifying platform vulnerabilities, engineering comprehensive security models to remediate breach risk, and overseeing end-to-end implementation across all integrated systems. My IAM background informs every platform design decision.', icon: 'security' },
+  { title: 'Org Mergers & De-mergers', desc: 'Expert in merging and de-merging Salesforce orgs at enterprise scale, from the Webcentral Group consolidation to the Country Road Group and David Jones de-merger, ensuring data integrity, business continuity, and zero downtime.', icon: 'cloud_sync' },
+  { title: 'Amazon Connect & Omni-Channel', desc: 'Architected and delivered omni-channel contact centre solutions integrating Amazon Connect for telephony with Salesforce Service Cloud, enabling seamless voice, messaging, and digital service experiences across enterprise retail and fintech clients.', icon: 'headset_mic' },
   { title: 'Data Architecture & MDM', desc: 'Certified Data Architect with expertise in designing scalable data models, implementing Master Data Management (MDM) solutions, and establishing single-source-of-truth customer data across multi-brand enterprise environments.', icon: 'storage' },
-  { title: 'REST API & Integration Architecture', desc: 'Designed and built complex REST API integrations with external systems via middleware and webhooks — including Braze, lending platforms, loyalty systems, and Amazon Connect — ensuring secure, reliable, and auditable data flows.', icon: 'integration_instructions' },
+  { title: 'REST API & Integration Architecture', desc: 'Designed and built complex REST API integrations with external systems via middleware and webhooks, including Braze, lending platforms, loyalty systems, and Amazon Connect, ensuring secure, reliable, and auditable data flows.', icon: 'integration_instructions' },
 ]
 
 export const projects = [
@@ -72,20 +72,20 @@ export const projects = [
   { title: 'Einstein for Retail', desc: 'Implemented Einstein for Country Road Group to enhance retail customer insights and automation.', icon: 'psychology', gradient: ['#0ea5e9', '#ef4444'] },
   { title: 'Loyalty Solution', desc: 'Built a Loyalty solution for Country Road Group, integrated with Service Cloud for seamless customer experiences.', icon: 'military_tech', gradient: ['#f97316', '#22c55e'] },
   { title: 'Braze Integration', desc: 'Integrated Braze marketing solution with Service Cloud for Country Road Group, improving customer engagement.', icon: 'campaign', gradient: ['#ef4444', '#eab308'] },
-  { title: 'CPQ Implementation — 5GN Brand', desc: 'Architected and delivered a full CPQ (Configure, Price, Quote) solution for the 5GN brand at Webcentral Group — built from scratch as sole developer, covering end-to-end quoting, pricing, and contract processes, integrated with Xero for automated invoice generation.', icon: 'request_quote', gradient: ['#8b5cf6', '#0ea5e9'] },
+  { title: 'CPQ Implementation for the 5GN Brand', desc: 'Architected and delivered a full CPQ (Configure, Price, Quote) solution for the 5GN brand at Webcentral Group, built from scratch as the sole developer, covering end-to-end quoting, pricing, and contract processes, and integrated with Xero for automated invoice generation.', icon: 'request_quote', gradient: ['#8b5cf6', '#0ea5e9'] },
   { title: 'Storage Optimization', desc: 'Developed an AppExchange solution to convert case emails to PDFs automatically, optimizing storage across Salesforce clouds.', icon: 'picture_as_pdf', gradient: ['#6366f1', '#0ea5e9'] },
   { title: 'Bulk Email Solution', desc: 'Created an AppExchange solution for bulk customer case emails in Service Cloud, primarily for Webcentral Group.', icon: 'mail', gradient: ['#22c55e', '#eab308'] },
   { title: 'User Access Management', desc: 'Modernized user access management on Service Cloud using LWC and VF pages at ISSQUARED Inc.', icon: 'manage_accounts', gradient: ['#0ea5e9', '#f97316'] },
   { title: 'Data Encryption', desc: 'Implemented encryption for customer data in integrations and sandboxes for enhanced security.', icon: 'lock', gradient: ['#ef4444', '#6366f1'] },
   { title: 'Master Data Management', desc: 'Implementing MDM solutions for customer data in Service Cloud for Country Road Group.', icon: 'dns', gradient: ['#eab308', '#22c55e'] },
-  { title: 'Agentforce AI Service Agent', desc: 'Pioneered one of Australia\'s first Agentforce production implementations at OurMoneyMarket — architecting an AI-driven service agent connected to a custom customer portal for real-time responsiveness for loan applicants at scale.', icon: 'smart_toy', gradient: ['#6366f1', '#22c55e'] },
+  { title: 'Agentforce AI Service Agent', desc: 'Pioneered one of Australia\'s first Agentforce production implementations at OurMoneyMarket, architecting an AI-driven service agent connected to a custom customer portal for real-time responsiveness for loan applicants at scale.', icon: 'smart_toy', gradient: ['#6366f1', '#22c55e'] },
   { title: 'Sales Process & DocuSign Integration', desc: 'Architected and implemented the end-to-end sales process within Service Cloud at OurMoneyMarket, encompassing lead management with DocuSign integration for digital document execution and a configurable approval management framework for broker and vendor onboarding.', icon: 'description', gradient: ['#0ea5e9', '#6366f1'] },
-  { title: 'Lead-to-Account Conversion', desc: 'Designed and delivered the lead-to-account conversion process for brokers and vendors at OurMoneyMarket — automating qualification, approval, and account creation to streamline partner onboarding and reduce manual processing overhead.', icon: 'account_tree', gradient: ['#f97316', '#ef4444'] },
-  { title: 'Enterprise Security Architecture', desc: 'Led enterprise security architecture at OurMoneyMarket — identifying platform vulnerabilities, designing a comprehensive security model to remediate breach risk, and overseeing end-to-end implementation across all integrated systems.', icon: 'security', gradient: ['#ef4444', '#0ea5e9'] },
+  { title: 'Lead-to-Account Conversion', desc: 'Designed and delivered the lead-to-account conversion process for brokers and vendors at OurMoneyMarket, automating qualification, approval, and account creation to streamline partner onboarding and reduce manual processing overhead.', icon: 'account_tree', gradient: ['#f97316', '#ef4444'] },
+  { title: 'Enterprise Security Architecture', desc: 'Led enterprise security architecture at OurMoneyMarket, identifying platform vulnerabilities, designing a comprehensive security model to remediate breach risk, and overseeing end-to-end implementation across all integrated systems.', icon: 'security', gradient: ['#ef4444', '#0ea5e9'] },
   { title: 'REST API Lending Integrations', desc: 'Designed and built complex REST API integrations with external lending systems via middleware and webhooks at OurMoneyMarket, ensuring secure, reliable, and auditable data flows across the platform.', icon: 'api', gradient: ['#22c55e', '#6366f1'] },
   { title: 'CI/CD Pipeline Framework', desc: 'Established CI/CD pipelines and automated testing frameworks at OurMoneyMarket, materially reducing deployment risk and improving release velocity across the Salesforce org.', icon: 'rocket_launch', gradient: ['#eab308', '#f97316'] },
   { title: 'Amazon Connect Omni-Channel', desc: 'Architected and delivered the end-to-end Salesforce Service Cloud implementation at Country Road Group integrating Amazon Connect for telephony and a messaging platform to enable omni-channel customer service at enterprise scale.', icon: 'headset_mic', gradient: ['#0ea5e9', '#22c55e'] },
-  { title: 'David Jones Sales Cloud', desc: 'As part of the org de-merger, architected and delivered the Salesforce Sales Cloud implementation for David Jones — designing the end-to-end sales process to support retail sales operations as a fully independent platform following separation from Country Road Group.', icon: 'storefront', gradient: ['#6366f1', '#ef4444'] },
+  { title: 'David Jones Sales Cloud', desc: 'As part of the org de-merger, architected and delivered the Salesforce Sales Cloud implementation for David Jones, designing the end-to-end sales process to support retail sales operations as a fully independent platform following separation from Country Road Group.', icon: 'storefront', gradient: ['#6366f1', '#ef4444'] },
 ]
 
 export const openSourceProjects = [
@@ -168,9 +168,9 @@ export const openSourceProjects = [
 
 export const caseStudies = [
   {
-    title: 'Full Salesforce Platform Delivery — OurMoneyMarket Fintech',
+    title: 'Full Salesforce Platform Delivery for OurMoneyMarket Fintech',
     icon: 'smart_toy',
-    challenge: 'OurMoneyMarket, a regulated Australian fintech lender, needed a complete Salesforce Service Cloud implementation from scratch — covering case management, an AI-driven Agentforce service agent, an end-to-end broker and vendor sales process with DocuSign, a Braze integration for real-time customer communications, REST API integrations with external lending systems, and enterprise security remediation across all integrated platforms.',
+    challenge: 'OurMoneyMarket, a regulated Australian fintech lender, needed a complete Salesforce Service Cloud implementation built from scratch, covering case management, an AI-driven Agentforce service agent, an end-to-end broker and vendor sales process with DocuSign, a Braze integration for real-time customer communications, REST API integrations with external lending systems, and enterprise security remediation across all integrated platforms.',
     solution: 'Owned end-to-end solution design and delivery: architected the complete Service Cloud implementation; pioneered Agentforce in production, connecting an AI service agent to a custom customer portal for real-time loan applicant responsiveness; designed the full sales process with lead management, DocuSign integration for digital document execution, and a configurable approval framework for broker and vendor onboarding; delivered the lead-to-account conversion automation; architected the Braze integration data flow; built complex REST API integrations with lending systems via middleware and webhooks; led enterprise security architecture to identify vulnerabilities and remediate breach risk; and established CI/CD pipelines and platform governance.',
     tech: ['Agentforce', 'Service Cloud', 'DocuSign', 'Braze', 'REST APIs', 'Webhooks', 'CI/CD', 'Enterprise Security', 'Middleware', 'Sales Cloud'],
     results: [
@@ -183,7 +183,7 @@ export const caseStudies = [
   {
     title: 'Webcentral Group & Netregistry Org Merger',
     icon: 'cloud_sync',
-    challenge: 'Webcentral Group needed to consolidate two Salesforce orgs into a single unified instance while simultaneously building out Sales Cloud with Xero financial integration, PQC processes, and a full Service Cloud omni-channel contact centre — all without disrupting live customer service operations.',
+    challenge: 'Webcentral Group needed to consolidate two Salesforce orgs into a single unified instance while simultaneously building out Sales Cloud with Xero financial integration, PQC processes, and a full Service Cloud omni-channel contact centre, all without disrupting live customer service operations.',
     solution: 'Led the technical execution of the full org merge with phased data migration using custom Apex batch jobs and Data Loader. Architected and delivered the Sales Cloud implementation for the 5GN brand including a full CPQ (Configure, Price, Quote) implementation built from scratch as sole developer, integrated with Xero for automated invoice generation. Delivered the complete Service Cloud implementation integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent. Developed custom LWC components for user access management and implemented SLA tracking.',
     tech: ['Apex Batch Jobs', 'Data Loader', 'LWC', 'Service Cloud', 'Sales Cloud', 'Amazon Connect', 'Slack', 'Xero', 'SLA Milestones', 'AI Chatbot'],
     results: [
@@ -196,7 +196,7 @@ export const caseStudies = [
   {
     title: 'Country Road Group Org De-Merger & Retail Platform',
     icon: 'call_split',
-    challenge: 'Country Road Group needed to de-merge their Salesforce org from David Jones and establish fully independent platforms for both entities — including a new Service Cloud omni-channel contact centre with Amazon Connect, a standalone Sales Cloud for David Jones, a customer loyalty platform, MDM architecture for a single source of truth, and a Braze marketing integration across retail brands.',
+    challenge: 'Country Road Group needed to de-merge their Salesforce org from David Jones and establish fully independent platforms for both entities, including a new Service Cloud omni-channel contact centre with Amazon Connect, a standalone Sales Cloud for David Jones, a customer loyalty platform, MDM architecture for a single source of truth, and a Braze marketing integration across retail brands.',
     solution: 'Led the complex org de-merger as lead technical architect across cross-functional teams with full accountability for data integrity and end-user training. Architected and delivered the Service Cloud implementation integrating Amazon Connect for telephony and a messaging platform for omni-channel service. Built the Salesforce Sales Cloud for David Jones post-separation to support independent retail operations. Architected the loyalty platform across retail brands, the Braze integration for personalised marketing automation, and the MDM architecture establishing a single source of truth for customer data across multiple brands and systems.',
     tech: ['Service Cloud', 'Sales Cloud', 'Amazon Connect', 'Braze', 'Loyalty Platform', 'MDM', 'LWC', 'Apex Batch', 'REST API'],
     results: [
@@ -239,13 +239,13 @@ export const appExchangeProducts = [
     languages: 18,
     icon: 'picture_as_pdf',
     description:
-      'Convert case email messages into PDFs and attach them back to the respective case records based on email created dates — dramatically reducing data storage usage while retaining every important communication inside your Salesforce org.',
+      'Convert case email messages into PDFs and attach them back to the respective case records based on email creation dates, dramatically reducing data storage usage while retaining every important communication inside your Salesforce org.',
     storageStats: { before: '~7.3 MB', beforePct: 100, after: '~0.3 MB', afterPct: 4, saved: '96%' },
     highlights: [
       {
         icon: 'storage',
         title: 'Maximize Storage',
-        desc: 'Unleash the power of Service Cloud — save precious storage space while retaining important case emails as PDFs. Orgs that use Service Cloud save up to 60% storage.',
+        desc: 'Unleash the power of Service Cloud and save precious storage space while retaining important case emails as PDFs. Orgs using Service Cloud save up to 60% on storage.',
         color: '#0284c7',
       },
       {
@@ -257,7 +257,7 @@ export const appExchangeProducts = [
       {
         icon: 'lock',
         title: 'Stay Inside Salesforce',
-        desc: 'Email messages are retained inside your Salesforce org rather than buying new external storage — keeping all your data in one secure, compliant place.',
+        desc: 'Email messages stay inside your Salesforce org instead of moving to new external storage, keeping all your data in one secure, compliant place.',
         color: '#16a34a',
       },
     ],
@@ -275,7 +275,7 @@ export const appExchangeProducts = [
     salesforceEditions: ['Professional', 'Enterprise', 'Unlimited', 'Force.com', 'Developer', 'Essentials'],
     pros: [
       'Frees up data storage without losing email history',
-      'Fully automated — no manual intervention required',
+      'Fully automated, with no manual intervention required',
       'Works across all major Salesforce editions',
       'PDFs created at minimum file size for efficiency',
       'Attachments stored directly on case records',
@@ -310,16 +310,16 @@ export const experience = [
     location: 'Melbourne, Australia',
     startDate: '2025-08-01',
     endDate: '2026-07-31',
-    desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender — owning end-to-end solution design across case management, automation, and customer service operations.',
+    desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender, owning end-to-end solution design across case management, automation, and customer service operations.',
     achievements: [
-      'Pioneered Agentforce production integrations — architecting and implementing an AI-driven service agent connected to a custom customer portal, enabling real-time responsiveness for loan applicants at scale.',
-      'Architected and implemented the end-to-end sales process within Service Cloud — encompassing lead management with DocuSign integration for digital document execution and a configurable approval management framework to govern broker and vendor onboarding workflows.',
-      'Designed and delivered the lead-to-account conversion process for brokers and vendors — automating the qualification, approval, and account creation lifecycle to streamline partner onboarding and reduce manual processing overhead.',
-      'Designed and delivered a Braze integration with Salesforce — architecting the full customer engagement data flow to enable personalised, real-time communications across the lending platform.',
-      'Led enterprise security architecture — identified platform vulnerabilities, designed a comprehensive security model to remediate breach risk, and oversaw end-to-end implementation across all integrated systems.',
+      'Pioneered Agentforce production integrations, architecting and implementing an AI-driven service agent connected to a custom customer portal, enabling real-time responsiveness for loan applicants at scale.',
+      'Architected and implemented the end-to-end sales process within Service Cloud, encompassing lead management with DocuSign integration for digital document execution and a configurable approval management framework to govern broker and vendor onboarding workflows.',
+      'Designed and delivered the lead-to-account conversion process for brokers and vendors, automating the qualification, approval, and account creation lifecycle to streamline partner onboarding and reduce manual processing overhead.',
+      'Designed and delivered a Braze integration with Salesforce, architecting the full customer engagement data flow to enable personalised, real-time communications across the lending platform.',
+      'Led enterprise security architecture, identifying platform vulnerabilities, designing a comprehensive security model to remediate breach risk, and overseeing end-to-end implementation across all integrated systems.',
       'Designed and built complex REST API integrations with external lending systems via middleware and webhooks, ensuring secure, reliable, and auditable data flows across the platform.',
       'Established CI/CD pipelines and automated testing frameworks, materially reducing deployment risk and improving release velocity across the Salesforce org.',
-      'Led platform governance — owning technical documentation, sandbox management, and enterprise design pattern adherence to ensure long-term scalability, data integrity, and regulatory compliance.',
+      'Led platform governance, owning technical documentation, sandbox management, and enterprise design pattern adherence to ensure long-term scalability, data integrity, and regulatory compliance.',
     ],
   },
   {
@@ -328,14 +328,14 @@ export const experience = [
     location: 'Melbourne, Australia',
     startDate: '2023-02-01',
     endDate: '2025-05-31',
-    desc: 'Played a lead technical role in the successful de-merging of Country Road Group\u2019s Salesforce orgs — a high-stakes, complex initiative spanning cross-functional teams, data integrity assurance, custom solution development, and end-user training delivery.',
+    desc: 'Played a lead technical role in the successful de-merging of Country Road Group\u2019s Salesforce orgs, a high-stakes, complex initiative spanning cross-functional teams, data integrity assurance, custom solution development, and end-user training delivery.',
     achievements: [
-      'Architected and delivered the end-to-end Service Cloud implementation — integrating Amazon Connect for telephony and a messaging platform to enable omni-channel customer service at enterprise scale.',
-      'As part of the org de-merger, architected and delivered the Salesforce Sales Cloud implementation for David Jones — designing the end-to-end sales process to support retail sales operations as a fully independent platform following separation from Country Road Group.',
-      'Architected and implemented the organisation\u2019s loyalty platform on Salesforce — designing the data model, integration layer, and automation framework to power the customer loyalty programme across retail brands.',
-      'Architected and implemented the Braze marketing solution integrated with Salesforce — enabling data-driven, personalised customer engagement across the group\u2019s retail customer base.',
-      'Designed and delivered the Master Data Management (MDM) architecture — establishing a single source of truth for customer data across multiple brands and systems within the group.',
-      'Served as internal Salesforce consultant to business unit stakeholders — translating competing requirements into prioritised delivery backlogs, defining timelines, and providing executive-level progress visibility.',
+      'Architected and delivered the end-to-end Service Cloud implementation, integrating Amazon Connect for telephony and a messaging platform to enable omni-channel customer service at enterprise scale.',
+      'As part of the org de-merger, architected and delivered the Salesforce Sales Cloud implementation for David Jones, designing the end-to-end sales process to support retail sales operations as a fully independent platform following separation from Country Road Group.',
+      'Architected and implemented the organisation\u2019s loyalty platform on Salesforce, designing the data model, integration layer, and automation framework to power the customer loyalty programme across retail brands.',
+      'Architected and implemented the Braze marketing solution integrated with Salesforce, enabling data-driven, personalised customer engagement across the group\u2019s retail customer base.',
+      'Designed and delivered the Master Data Management (MDM) architecture, establishing a single source of truth for customer data across multiple brands and systems within the group.',
+      'Served as internal Salesforce consultant to business unit stakeholders, translating competing requirements into prioritised delivery backlogs, defining timelines, and providing executive-level progress visibility.',
       'Collaborated with external Salesforce partners and vendors to implement integrations and platform enhancements, maintaining alignment with enterprise architecture principles.',
     ],
   },
@@ -345,13 +345,13 @@ export const experience = [
     location: 'Melbourne, Australia',
     startDate: '2021-12-01',
     endDate: '2023-02-28',
-    desc: 'Led the technical execution of a complex org merge — consolidating Sales Cloud and Service Cloud instances across cross-functional teams with full accountability for custom solution development and data integrity.',
+    desc: 'Led the technical execution of a complex org merge, consolidating Sales Cloud and Service Cloud instances across cross-functional teams with full accountability for custom solution development and data integrity.',
     achievements: [
-      'Architected and delivered the Salesforce Sales Cloud implementation for the 5GN brand — including a full CPQ (Configure, Price, Quote) implementation built from scratch as sole developer, covering end-to-end quoting, pricing, and contract processes, integrated with Xero for automated invoice generation to enable seamless financial data flow between CRM and accounting.',
-      'Architected and delivered the complete Service Cloud implementation — integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent for intelligent omni-channel customer service.',
+      'Architected and delivered the Salesforce Sales Cloud implementation for the 5GN brand, including a full CPQ (Configure, Price, Quote) implementation built from scratch as the sole developer, covering end-to-end quoting, pricing, and contract processes, and integrated with Xero for automated invoice generation to enable seamless financial data flow between CRM and accounting.',
+      'Architected and delivered the complete Service Cloud implementation, integrating Amazon Connect for telephony, Slack for internal collaboration, and an AI-powered chatbot agent for intelligent omni-channel customer service.',
       'Designed and implemented custom Salesforce solutions including automated workflows, Apex customisations, Visualforce pages, custom objects, and SOQL-driven logic aligned to enterprise business requirements.',
-      'Acted as trusted technical advisor to the customer experience team — providing strategic recommendations to streamline processes, enhance productivity, and scale Salesforce operations using platform best practices.',
-      'Delivered comprehensive technical support across Sales Cloud, Service Cloud, and Community Cloud — resolving production defects, implementing enhancements, and improving system performance and UX.',
+      'Acted as a trusted technical advisor to the customer experience team, providing strategic recommendations to streamline processes, enhance productivity, and scale Salesforce operations using platform best practices.',
+      'Delivered comprehensive technical support across Sales Cloud, Service Cloud, and Community Cloud, resolving production defects, implementing enhancements, and improving system performance and UX.',
     ],
   },
   {
@@ -360,24 +360,24 @@ export const experience = [
     location: 'Hyderabad, India',
     startDate: '2020-10-01',
     endDate: '2021-11-30',
-    desc: 'Worked within Salesforce\u2019s product organisation — developing Apex customisations, workflows, Visualforce pages, and SOQL queries to address complex enterprise customer requirements across Sales, Service, and Community Cloud.',
+    desc: 'Worked within Salesforce\u2019s product organisation, developing Apex customisations, workflows, Visualforce pages, and SOQL queries to address complex enterprise customer requirements across Sales, Service, and Community Cloud.',
     achievements: [
       'Developed custom workflows, Visualforce pages, Apex customisations, custom objects and fields, formulas, and SOQL queries to address complex enterprise customer requirements and business specifications.',
-      'Provided expert-level technical troubleshooting and end-user support across Sales, Service, and Community Cloud — resolving platform defects and implementing targeted enhancements.',
+      'Provided expert-level technical troubleshooting and end-user support across Sales, Service, and Community Cloud, resolving platform defects and implementing targeted enhancements.',
       'Reviewed test protocols for applications prior to user acceptance testing, ensuring quality and alignment with business requirements.',
       'Consulted directly with enterprise customers to evaluate platform usage and deliver actionable recommendations to improve process efficiency, scalability, and adoption.',
     ],
   },
   {
-    title: 'Software Engineer — Identity & Access Management',
+    title: 'Software Engineer, Identity & Access Management',
     company: 'ISSQUARED INC',
     location: 'Hyderabad, India',
     startDate: '2017-11-01',
     endDate: '2020-09-30',
-    desc: 'Built IAM provisioning solutions using IBM Security Identity Manager (ISIM), Tivoli Directory Integrator (TDI), and EIMS — automating user access lifecycle governance across enterprise systems.',
+    desc: 'Built IAM provisioning solutions using IBM Security Identity Manager (ISIM), Tivoli Directory Integrator (TDI), and EIMS, automating user access lifecycle governance across enterprise systems.',
     achievements: [
       'Wrote provisioning code with the Java team to automate user access lifecycle using ISIM (IBM Security Identity Manager), TDI (Tivoli Directory Integrator), and EIMS.',
-      'Integrated Salesforce.com and various internal back-end systems with ISIM — building connectors and web pages using JavaScript, Java, Apex, and Visualforce to meet enterprise access requirements.',
+      'Integrated Salesforce.com and various internal back-end systems with ISIM, building connectors and web pages using JavaScript, Java, Apex, and Visualforce to meet enterprise access requirements.',
       'Performed unit and functional testing using HP ALM (Application Lifecycle Management) to validate provisioning workflows and integration reliability.',
       'Gathered data on integration issues and vulnerabilities, reporting all findings and improvement recommendations to engineering and security leadership teams.',
     ],

@@ -124,7 +124,7 @@ export default function CaseStudies() {
             Success Stories
           </motion.h2>
           <motion.p className="section-subtitle" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            Click to expand — Real-world challenges and solutions
+            Click to expand for real-world challenges and solutions
           </motion.p>
         </motion.div>
 
