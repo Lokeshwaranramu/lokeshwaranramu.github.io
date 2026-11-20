@@ -305,14 +305,29 @@ export const stats = [
 
 export const experience = [
   {
+    title: 'Salesforce Developer (Contract)',
+    company: 'Xero',
+    location: 'Melbourne / Remote',
+    startDate: '2026-09-01',
+    endDate: null,
+    desc: 'Embedded Salesforce engineer in Xero’s Signals pod, owning design, delivery, and platform support across Xero’s Salesforce platform and connected systems.',
+    achievements: [
+      'Deliver technical design, solution design, and estimation for engineering work across the Signals pod’s remit, aligned to Xero’s quarterly roadmap.',
+      'Carry out hands-on development, configuration, and integration across Salesforce and connected systems.',
+      'Provide platform support, maintenance, defect resolution, and technical debt reduction across Xero’s Salesforce platform.',
+      'Own release management, environment management, and deployment activity across Xero’s Salesforce environments.',
+      'Collaborate with external consulting and delivery partners, and contribute to the pod’s planning, refinement, code review, documentation, and knowledge sharing practices.',
+    ],
+  },
+  {
     title: 'Senior Salesforce Developer',
     company: 'OurMoneyMarket',
     location: 'Melbourne, Australia',
     startDate: '2025-08-01',
     endDate: '2026-07-31',
-    desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender, owning end-to-end solution design across case management, automation, and customer service operations.',
+    desc: 'Architected and delivered the complete Salesforce Service Cloud implementation for a regulated fintech lender, built on the Q2 Cloud Lending (Symphonix) managed package with Skuid as the front-end UI layer, owning end-to-end solution design across case management, automation, and customer service operations.',
     achievements: [
-      'Pioneered Agentforce production integrations, architecting and implementing an AI-driven service agent connected to a custom customer portal, enabling real-time responsiveness for loan applicants at scale.',
+      'Pioneered and delivered Agentforce in production, architecting and implementing an AI-driven service agent connected to a custom customer portal, enabling real-time responsiveness for loan applicants at scale.',
       'Architected and implemented the end-to-end sales process within Service Cloud, encompassing lead management with DocuSign integration for digital document execution and a configurable approval management framework to govern broker and vendor onboarding workflows.',
       'Designed and delivered the lead-to-account conversion process for brokers and vendors, automating the qualification, approval, and account creation lifecycle to streamline partner onboarding and reduce manual processing overhead.',
       'Designed and delivered a Braze integration with Salesforce, architecting the full customer engagement data flow to enable personalised, real-time communications across the lending platform.',
